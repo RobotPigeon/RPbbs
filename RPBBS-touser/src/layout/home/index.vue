@@ -1,7 +1,7 @@
 <template>
         <div class="flex h-full">
             <Sidebar></Sidebar>
-            <Content class="min-w-max"></Content>
+            <Content></Content>
             <Rightbar></Rightbar>
         </div>
 </template>
@@ -20,12 +20,12 @@ import Rightbar from './Rightbar/index.vue'
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(13deg, #7bcfeb 14%, #e685d3 64%);
+    background: linear-gradient(13deg, #180909 14%, #837a81 64%);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(13deg, #c7ceff 14%, #f9d4ff 64%);
+    background: linear-gradient(13deg, #000000 14%, #737174 64%);
 }
 
 ::-webkit-scrollbar-track {
