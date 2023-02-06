@@ -1,7 +1,7 @@
 <template>
         <div class="flex h-full">
             <Sidebar></Sidebar>
-            <Content></Content>
+            <Content class="min-w-max"></Content>
             <Rightbar></Rightbar>
         </div>
 </template>

@@ -3,12 +3,14 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             <Header></Header>
             <router-view></router-view>
+            <Footer class="flex justify-between items-center bg-blue-300 p-4"></Footer>
         </div>
     </div>
 </template>
     
 <script setup lang='ts'>
 import Header from './home/header/index.vue'
+import Footer from './home/footer/index.vue'
 import { ref, reactive } from 'vue'
 </script>
     
