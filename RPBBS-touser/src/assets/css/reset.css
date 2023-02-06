@@ -1,4 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind styled;
 /* 默认样式去除 */
+
 body,
 dl,
 dt,
