@@ -1,15 +1,16 @@
 <template>
-    <div class="flex h-screen bg-green-300">
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <Header></Header>
-            <router-view></router-view>
+        <div class="flex h-full">
+            <Sidebar></Sidebar>
+            <Content></Content>
+            <Rightbar></Rightbar>
         </div>
-    </div>
 </template>
     
 <script setup lang='ts'>
-import Header from './header/index.vue'
 import { ref, reactive } from 'vue'
+import Content from './content/index.vue'
+import Sidebar from './Sidebar/index.vue'
+import Rightbar from './Rightbar/index.vue'
 </script>
     
 <style scoped lang='less'>
