@@ -8,7 +8,7 @@
 </template>
     
 <script setup lang='ts'>
-import Header from './header/index.vue'
+import Header from './home/header/index.vue'
 import { ref, reactive } from 'vue'
 </script>
     
