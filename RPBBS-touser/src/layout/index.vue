@@ -1,7 +1,7 @@
 <template>
     <div class="flex h-screen">
         <div class="flex-1 flex flex-col overflow-hidden">
-            <Header class="z-50 bg-gray-600"></Header>
+            <Header class="z-50 shadow-2xl"></Header>
             <router-view></router-view>
         </div>
     </div>
