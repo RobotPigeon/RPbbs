@@ -6,6 +6,7 @@ import router from './router'
 import '@/assets/css/reset.css'
 import 'uno.css'
 import '@kidonng/daisyui/index.css'
+import '../node_modules/tailwindcss/tailwind.css'
 const app = createApp(App)
 
 app.use(createPinia())
