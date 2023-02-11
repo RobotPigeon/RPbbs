@@ -53,11 +53,10 @@
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                     <div class="w-10 rounded-full">
-                        <img src="https://lain.bgm.tv/r/400/pic/cover/l/1a/22/284157_zgv97.jpg" />
+                        <img :src="avatar" />
                     </div>
                 </label>
-                <ul tabindex="0"
-                    class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary-focus">
                     <li>
                         <a class="justify-between">
                             个人中心
@@ -85,16 +84,17 @@ const handleChangeTheme = () => {
         html.dataset.theme = 'dark'
     }
 }
+const avatar: string = 'https://lain.bgm.tv/r/400/pic/cover/l/1a/22/284157_zgv97.jpg';
 </script>
     
 <style scoped lang='less'>
 @media (max-width: 720px) {
 
-.hidden-search {
+    .hidden-search {
 
-    display: none;
+        display: none;
 
-}
+    }
 
 }
 </style>
