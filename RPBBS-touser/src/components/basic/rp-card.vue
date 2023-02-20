@@ -13,7 +13,7 @@
                         <span class="card-title">{{ props.username }}</span>
                     </div>
                 </div>
-                <h2 class="card-title">{{props.title}}</h2>
+                <h2 class="card-title">{{ props.title }}</h2>
                 <div v-html="props.richtext"></div>
             </div>
             <rpCarousel :list="props.piclist"></rpCarousel>
@@ -31,7 +31,7 @@
                                 xmlns="http://www.w3.org/2000/svg" p-id="1935" width="36" height="36">
                                 <path
                                     d="M171.712 571.648l0.352 0.32 287.904 252.8a64 64 0 0 0 82.912 1.344l296.832-244.544a215.584 215.584 0 1 0-301.824-300.576L512 316.672l-25.888-35.616a215.584 215.584 0 1 0-314.4 290.624zM32 407.584a279.584 279.584 0 0 1 480-194.944 279.584 279.584 0 0 1 480 194.944 278.144 278.144 0 0 1-113.024 224.512l-295.36 243.392a128 128 0 0 1-165.888-2.592L129.984 620.16A278.976 278.976 0 0 1 32 407.584z"
-                                    fill="#000000" p-id="1936"></path>
+                                    p-id="1936"></path>
                             </svg>
 
                             <!-- volume off icon -->
@@ -42,7 +42,7 @@
                                     fill="#d81e06" p-id="1494"></path>
                             </svg>
                         </label>
-                        <div class="text-xl">{{props.likeNum}}</div>
+                        <div class="text-xl">{{ props.likeNum }}</div>
                     </div>
 
                     <div class="text-center flex justify-around items-center">
@@ -63,11 +63,11 @@
                         <label class="swap" @click="handleclog">
                             <svg t="1676885181613" class="swap-off fill-current" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="5020" width="36" height="36">
-                                <path d="M224 512m-80 0a80 80 0 1 0 160 0 80 80 0 1 0-160 0Z" fill="#000000" p-id="5021">
+                                <path d="M224 512m-80 0a80 80 0 1 0 160 0 80 80 0 1 0-160 0Z" p-id="5021">
                                 </path>
-                                <path d="M512 512m-80 0a80 80 0 1 0 160 0 80 80 0 1 0-160 0Z" fill="#000000" p-id="5022">
+                                <path d="M512 512m-80 0a80 80 0 1 0 160 0 80 80 0 1 0-160 0Z" p-id="5022">
                                 </path>
-                                <path d="M800 512m-80 0a80 80 0 1 0 160 0 80 80 0 1 0-160 0Z" fill="#000000" p-id="5023">
+                                <path d="M800 512m-80 0a80 80 0 1 0 160 0 80 80 0 1 0-160 0Z" p-id="5023">
                                 </path>
                             </svg>
                         </label>
@@ -95,15 +95,15 @@ const bigImg = () => {
 
 
 interface Props {
-    title:string
-    piclist:Array<string>
-    username: string 
-    useravatar:string
+    title: string
+    piclist: Array<string>
+    username: string
+    useravatar: string
     richtext: string
-    rank:number
-    liked:boolean
-    likeNum:number
-    commentNum:number
+    rank: number
+    liked: boolean
+    likeNum: number
+    commentNum: number
 }
 const props = withDefaults(defineProps<Props>(), {
 })
