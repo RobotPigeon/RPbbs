@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <footer class="footer footer-center h-100 p-10 bg-primary text-primary-content b-1">
+        <footer class="footer footer-center h-100 p-10 b-1 bg-base-100">
                     <div>
                         <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                             fill-rule="evenodd" clip-rule="evenodd" class="inline-block fill-current">

@@ -1,5 +1,5 @@
 <template>
-    <ul class="menu bg-base-100 w-56 p-2 h-a mx-auto rounded-box b-1 float-right">
+    <ul class="menu bg-base-100 w-56 p-2 h-a mx-auto rounded-box b-1 float-right bg-base-100">
         <li v-for="(item, index) in props.tablist" :key="index">
             <a>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"

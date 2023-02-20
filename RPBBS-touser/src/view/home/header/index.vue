@@ -56,7 +56,7 @@
                         <img :src="avatar" />
                     </div>
                 </label>
-                <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary-focus">
+                <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
                     <li>
                         <a class="justify-between">
                             个人中心
