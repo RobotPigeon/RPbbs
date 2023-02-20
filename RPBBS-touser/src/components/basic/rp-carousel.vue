@@ -5,14 +5,12 @@
         :imgSrc="imgSrc"
         class="img-big"
     ></rpImg2big>
-    <div class="overflow-hidden w-a h-a my-a mx-8 rounded-box">
-        <div  class=" relative w-full">
-            <img :src="pinimg" class="w-a h-a mx-a" alt="item" @click="bigScale(pinimg)"/>
-    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        <a  class="btn btn-circle" @click='leftchange()'>❮</a> 
-        <a  class="btn btn-circle" @click='rightchange()'>❯</a>
-    </div>
-</div>
+    <div class="overflow-hidden xl:h-md md:h-md sm:h-sm cellphone mx-8 rounded-box bg-black relative">
+            <img :src="pinimg" class="xl:h-md md:h-md sm:h-sm cellphone w-a m-a" alt="item" @click="bigScale(pinimg)"/>
+        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a  class="btn btn-circle" @click='leftchange()'>❮</a> 
+            <a  class="btn btn-circle" @click='rightchange()'>❯</a>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
@@ -67,6 +65,13 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
 })
 </script>
-<style lang="">
-    
+<style lang="less">
+    @media (max-width: 640px) {
+
+.cellphone{
+    height: 24rem;
+}
+
+}
+
 </style>

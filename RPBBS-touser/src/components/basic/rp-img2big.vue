@@ -6,7 +6,8 @@
                 <!-- 遮罩层 -->
                 <div class="mask position-fixed z-999 top-0 left-0 w-full h-full overflow-hidden"></div>
                 <div class="max-w-full display-block position-fixed  top-50% left-50% transform z1000">
-                    <img class="min-w-sm min-h-sm" :src="props.imgSrc">
+                    <img class="sm:min-w-80vw xl:min-w-xl 2xl:min-w-2xl h-a cellphone"
+                        :src="props.imgSrc">
                 </div>
             </div>
         </transition>
@@ -34,9 +35,10 @@ const props = withDefaults(defineProps<Props>(), {
 })
 </script>
 <style lang="less" scoped>
-.mask{
-    background-color:rgba(184, 178, 178, 0.9);
+.mask {
+    background-color: rgba(184, 178, 178, 0.9);
 }
+
 .transform {
     transform: translate(-50%, -50%);
 }
@@ -54,4 +56,11 @@ const props = withDefaults(defineProps<Props>(), {
         transform: translate3d(100%, 0, 0);
     }
 }
-</style>
+
+@media (max-width: 640px) {
+
+    .cellphone {
+        min-width: 100vw;
+    }
+
+}</style>
