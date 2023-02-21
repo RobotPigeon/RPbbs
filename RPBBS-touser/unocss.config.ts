@@ -39,6 +39,6 @@ export default defineConfig({
             'warning-content': 'hsla(var(--wac))',
             error: 'hsla(var(--er))',
             'error-content': 'hsla(var(--erc))',
-          },
+        },
     },
 })

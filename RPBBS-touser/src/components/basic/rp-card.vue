@@ -13,10 +13,12 @@
                         <span class="card-title">{{ props.username }}</span>
                     </div>
                 </div>
-                <h2 class="card-title">{{ props.title }}</h2>
+                <h2 class="card-title pt4 text-3xl">{{ props.title }}</h2>
                 <div v-html="props.richtext"></div>
             </div>
-            <rpCarousel :list="props.piclist"></rpCarousel>
+            <!-- <rpCarousel :list="props.piclist"></rpCarousel> -->
+            <rpPicgroup :list="props.piclist"></rpPicgroup>
+
             <div class="divider px-8"></div>
             <div class="stats stats-vertical lg:stats-horizontal px-8 pb-4">
                 <div class="flex justify-around">
@@ -89,6 +91,7 @@
 </template>
 <script lang="ts" setup>
 import rpCarousel from '@/components/basic/rp-carousel.vue';
+import rpPicgroup from '@/components/basic/rp-picgroup.vue';
 import { ref, reactive } from 'vue';
 import type { Ref } from 'vue';
 
