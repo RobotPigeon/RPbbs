@@ -1,7 +1,7 @@
 <template>
     <div class="flex h-full">
         <Sidebar class="hidden-sider"></Sidebar>
-        <Content class="max-w-3xl min-w-sm"></Content>
+        <router-view class="max-w-3xl min-w-sm"></router-view>
         <Rightbar class="hidden-Rightbar"></Rightbar>
     </div>
 </template>
