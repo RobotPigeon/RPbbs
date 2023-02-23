@@ -1,7 +1,7 @@
 <template>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn btn-ghost normal-case text-xl">RPBBS</a>
+            <a class="btn btn-ghost normal-case text-xl" href="/">RPBBS</a>
             <!-- 图标 -->
             <div class="flex justify-center my-10">
                 <label class="swap swap-rotate">
@@ -27,17 +27,17 @@
 
         </div>
         <div class="navbar-end">
-            <div class="form-control">
+            <!-- <div class="form-control">
                 <input type="text" placeholder="Search" class="input input-bordered hidden-search" />
-            </div>
+            </div> -->
             <!-- 搜索栏 -->
-            <button class="btn btn-ghost btn-circle hidden-search">
+            <!-- <button class="btn btn-ghost btn-circle hidden-search">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-            </button>
+            </button> -->
             <!-- 搜索按钮 -->
             <button class="btn btn-ghost btn-circle">
                 <div class="indicator">
@@ -58,12 +58,12 @@
                 </label>
                 <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
                     <li>
-                        <a class="justify-between">
-                            个人中心
+                        <a class="justify-between" href="/login">
+                            登录账号
                             <!-- <span class="badge">New</span> -->
                         </a>
                     </li>
-                    <li><a>登出</a></li>
+                    <li><a>注册账号</a></li>
                 </ul>
             </div>
             <!-- 用户头像下拉框 -->

@@ -3,7 +3,7 @@ import Layout from '@/layout/index.vue'
 import Home from '@/view/home/index.vue'
 import Login from '@/view/login/index.vue'
 import content from '@/view/home/content/index.vue'
-import Partition from '@/view/home/partition/index.vue'
+import Partition from '@/view/home/Partition/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

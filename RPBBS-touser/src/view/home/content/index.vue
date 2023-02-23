@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box content">
+  <main class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box content min-h-100vh">
     <div class="flex w-full mx-auto px-0 py-0">
       <div class="flex flex-col w-full h-full">
         <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
