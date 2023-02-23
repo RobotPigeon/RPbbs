@@ -20,7 +20,7 @@
             <img  class="absolute top-0 bottom-0 m-a" :src="props.list[1]" @click="bigScale(props.list[1])" alt="" >
         </div>
         <div class=" h-full sm:w-30% min-w-25% mx-1 bg-#666666 rounded-box relative overflow-hidden my-1">
-            <div class="title items-center sm:text-4xl xl:text-6xl flex h-100% w-50% m-a cellphone">+{{props.list.length-2}}</div>
+            <div class="title items-center sm:text-6xl xl:text-6xl flex h-100% w-50% m-a cellphone">+{{props.list.length-2}}</div>
         </div>
     </div>
 </template>
