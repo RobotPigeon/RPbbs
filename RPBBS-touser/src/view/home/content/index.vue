@@ -3,15 +3,15 @@
     <div class="flex w-full mx-auto px-0 py-0">
       <div class="flex flex-col w-full h-full">
         <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title"></rpCard>
+          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
         <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title"></rpCard>
+          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
         <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title"></rpCard>
+          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
         <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title"></rpCard>
+          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
         <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title"></rpCard>
+          :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
       </div>
     </div>
 
@@ -29,6 +29,7 @@ const title: string = '如何评价首先是然后再是'
 const useravatar: string = 'https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg'
 const rank: number = 99
 const text: string = '<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p><p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>'
+const block:string = '逆天板块'
 
 //监听滚动方法
 function scrollHandle() {

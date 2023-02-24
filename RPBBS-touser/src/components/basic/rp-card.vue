@@ -15,10 +15,9 @@
                 </div>
                 <h2 class="card-title pt4 text-3xl">{{ props.title }}</h2>
                 <div v-html="props.richtext"></div>
+                <div class="badge badge-lg">{{ props.block }}</div>
             </div>
-            <!-- <rpCarousel :list="props.piclist"></rpCarousel> -->
             <rpPicgroup :list="props.piclist"></rpPicgroup>
-
             <div class="divider px-8"></div>
             <div class="stats stats-vertical lg:stats-horizontal px-8 pb-4">
                 <div class="flex justify-around">
@@ -67,7 +66,7 @@
                         <div class="text-xl">{{ props.likeNum }}</div>
                     </div>
 
-                    
+
                     <div class=" text-center flex justify-around items-center">
                         <label class="swap" @click="handleclog">
                             <svg t="1676885181613" class="swap-off fill-current" viewBox="0 0 1024 1024" version="1.1"
@@ -110,6 +109,7 @@ interface Props {
     username: string
     useravatar: string
     richtext: string
+    block:string
     rank: number
     liked: boolean
     likeNum: number

@@ -431,10 +431,10 @@
   "resolved" "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.191.tgz"
   "version" "4.14.191"
 
-"@types/node@*", "@types/node@^16.11.56", "@types/node@>= 14":
-  "integrity" "sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA=="
-  "resolved" "https://registry.npmmirror.com/@types/node/-/node-16.18.11.tgz"
-  "version" "16.18.11"
+"@types/node@*", "@types/node@>= 14":
+  "integrity" "sha512-vzLe5NaNMjIE3mcddFVGlAXN1LEWueUsMsOJWaT6wWMJGyljHAWHznqfnKUQWGzu7TLPrGvWdNAsvQYW+C0xtw=="
+  "resolved" "https://registry.npmmirror.com/@types/node/-/node-16.18.12.tgz"
+  "version" "16.18.12"
 
 "@types/web-bluetooth@^0.0.16":
   "integrity" "sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ=="
@@ -1631,6 +1631,11 @@
   "integrity" "sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg=="
   "resolved" "https://registry.npmmirror.com/json5/-/json5-2.2.3.tgz"
   "version" "2.2.3"
+
+"jwt-decode@^3.1.2":
+  "integrity" "sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A=="
+  "resolved" "https://registry.npmmirror.com/jwt-decode/-/jwt-decode-3.1.2.tgz"
+  "version" "3.1.2"
 
 "kolorist@^1.6.0":
   "integrity" "sha512-ymToLHqL02udwVdbkowNpzjFd6UzozMtshPQKVi5k1EjKRqKqBrOnE9QbLEb0/pV76SAiIT13hdL8R6suc+f3g=="

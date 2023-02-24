@@ -85,7 +85,7 @@ const handleChangeTheme = () => {
         html.dataset.theme = 'dark'
     }
 }
-const avatar: string = 'https://lain.bgm.tv/r/400/pic/cover/l/1a/22/284157_zgv97.jpg';
+const avatar: string = 'https://lain.bgm.tv/pic/cover/l/51/0b/278949_zTV4y.jpg';
 </script>
     
 <style scoped lang='less'>

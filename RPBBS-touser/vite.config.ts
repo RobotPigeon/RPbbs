@@ -18,7 +18,9 @@ export default defineConfig({
       presetIcons(),
       presetDaisy()
     ],
-  }),]
+  }),
+
+]
   ,
   resolve: {
     alias: {

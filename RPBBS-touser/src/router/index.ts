@@ -4,6 +4,7 @@ import Home from '@/view/home/index.vue'
 import Login from '@/view/login/index.vue'
 import content from '@/view/home/content/index.vue'
 import Partition from '@/view/home/Partition/index.vue'
+import Error from '@/view/error/error.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,10 @@ const router = createRouter({
         },
         {
           path: '/login', component: Login, name: 'login',
+          //children:[{}]   也可以继续添加children嵌套
+        },
+        {
+          path: '/error', component: Error, name: 'error',
           //children:[{}]   也可以继续添加children嵌套
         },
       ]
