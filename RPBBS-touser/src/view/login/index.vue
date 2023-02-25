@@ -9,18 +9,18 @@
         <div class="card-body">
             <div class="form-control">
             <label class="label">
-                <span class="label-text">电子邮箱or用户名</span>
+                <span class="label-text">电子邮箱</span>
             </label>
-            <rp-input type="text" errorValue='请输入正确的用户名' :required="true"></rp-input>
+            <rp-input type="text" errorValue='请输入正确的邮箱' :required="true" :pattern='/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' @change="handleInputChange"></rp-input>
             </div>
             <div class="form-control">
             <label class="label">
                 <span class="label-text">密码</span>
             </label>
                 <!-- 如果showPwd为true，则显示type为text的输入框 -->
-                <rp-input v-if="showPwd" type="text" errorValue='请输入正确的密码' :required="true"></rp-input>
+                <rp-input v-if="showPwd" type="text" errorValue='请输入正确的密码' :required="true" :pattern='/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/' @change="handleInputChange"></rp-input>
                 <!-- 如果showPwd为false，则显示type为password的输入框 -->
-                <rp-input v-else type="password" errorValue='请输入正确的密码' :required="true"></rp-input>
+                <rp-input v-else type="password" errorValue='请输入正确的密码' :required="true" :pattern='/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/' @change="handleInputChange"></rp-input>
                 <!-- 点击眼睛图标切换showPwd变量 -->
                 <i class="eye-icon" @click="toggleShowPwd"></i>
             <label class="label">
@@ -44,6 +44,7 @@ import rpInput from '@/components/basic/rp-input.vue';
 
 // 定义响应式变量
 const showPwd = ref(false) // 控制密码显示与隐藏
+const errorValue = ref(false)
 
 // 定义方法
 const toggleShowPwd = () => {
@@ -59,10 +60,15 @@ const loginForm = reactive({
     password: ''
 })
 const Login = async () => {
-    const data = await login(loginForm)
-    console.log(data);
+    if (errorValue.value) {
+        const data = await login(loginForm)
+        console.log(data);
+    }
 }
 
+function handleInputChange(error: boolean) {
+    errorValue.value = error
+} 
 </script>
 <style lang="less">
 .login {

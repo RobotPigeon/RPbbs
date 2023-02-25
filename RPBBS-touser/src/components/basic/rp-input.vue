@@ -1,6 +1,7 @@
 <template>
-    <div class="">
-        <input id="input" :type="type" v-model="inputvalue" @input="handleChange" :class="{ 'border-red-500': error } "
+    <div>
+        <input id="input" :type="type" v-model="inputvalue" @blur="handleChange" @input="handleChange"
+            :class="{ 'border-red-500': error }"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 input input-bordered">
         <span v-if="error" class="mt-2 text-sm text-red-600">{{ error }}</span>
     </div>
@@ -17,18 +18,22 @@ function handleChange(e: Event) {
     inputvalue.value = value
     // If the input is empty and required, set the error message
     if (!value && props.required) {
-        error.value = props.errorValue || '此项为必填项'
+        error.value = '此条不能为空'
         return
     }
     // If the input is not empty and does not match the pattern, set the error message
     if (value && props.pattern && !props.pattern.test(value)) {
         error.value = props.errorValue || '请输入有效的格式'
+        emit('change', false)
         return
     }
     // Otherwise, clear the error message
     error.value = ''
+    emit('change', true)
+
 }
 
+const emit = defineEmits(['change'])
 
 interface Props {
     type: string,
