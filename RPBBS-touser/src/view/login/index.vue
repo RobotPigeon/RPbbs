@@ -36,11 +36,14 @@
 </div>
 </template>
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
+import { ref, reactive,inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { login } from '@/api/login'
 import rpInput from '@/components/basic/rp-input.vue';
-// 导入vue
+//全局alert组件的使用
+import useAlertStore from '@/stores/alert';
+
+
 
 // 定义响应式变量
 const showPwd = ref(false) // 控制密码显示与隐藏
@@ -59,10 +62,18 @@ const loginForm = reactive({
     username: '',
     password: ''
 })
+
+// 注入showAlert方法
+const showAlert = inject("showAlert") as Function;
+
 const Login = async () => {
     if (errorValue.value) {
         const data = await login(loginForm)
         console.log(data);
+    } else {
+        //使用showAlert方法
+        const showAlert = inject("showAlert") as Function;
+        useAlertStore().setAlert({ message: "请检查账号密码", type: "error" });
     }
 }
 

@@ -1,6 +1,8 @@
 import router from '@/router';
 import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
-import { ElMessage } from 'element-plus'
+import { inject } from "vue";
+import useAlertStore from '@/stores/alert';
+const showAlert = inject("showAlert") as Function;
 // 数据返回的接口
 // 定义请求响应参数，不含data
 interface Result {
@@ -49,7 +51,7 @@ class RequestHttp {
                 return config
             },
             (error: AxiosError) => {
-                // 请求报错
+                useAlertStore().setAlert({ message: "请求报错", type: "error" });
                 Promise.reject(error)
             }
         )
@@ -71,7 +73,7 @@ class RequestHttp {
                 }
                 // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
                 if (data.code && data.code !== RequestEnums.SUCCESS) {
-                    ElMessage.error(data); // 此处也可以使用组件提示报错信息
+                    useAlertStore().setAlert({ message: data, type: "error" });
                     return Promise.reject(data)
                 }
                 return data;
@@ -82,12 +84,11 @@ class RequestHttp {
                     this.handleCode(response.status)
                 }
                 if (!window.navigator.onLine) {
-                    // ElMessage.error('网络连接失败');
+                    useAlertStore().setAlert({ message: "网络连接失败", type: "error" });
                     // 可以跳转到错误页面，也可以不做操作
-                    /* Redirecting to the 404 page. */
-                    return router.replace({
-                      path: '/error'
-                    });
+                    // return router.replace({
+                    //   path: '/error'
+                    // });
                 }
             }
         )
@@ -95,10 +96,10 @@ class RequestHttp {
     handleCode(code: number): void {
         switch (code) {
             case 401:
-                ElMessage.error('登录失败，请重新登录');
+                useAlertStore().setAlert({ message: "登录失败，请重新登录", type: "error" });
                 break;
             default:
-                ElMessage.error('请求失败');
+                useAlertStore().setAlert({ message: "请求失败", type: "error" });
                 break;
         }
     }

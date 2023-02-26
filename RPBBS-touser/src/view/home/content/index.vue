@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="card card-side bg-base-100 b-4 shadow-xl w-full my1 px2 h-10vh">
-      <figure>
-        <div class=" items-center">
+    <div class="flex  bg-base-100 b-4 shadow-xl  w-full my1 px2  rounded-box">
+      <figure class="">
+        <div class="avatar p--10 h-40 overflow-hidden items-center rounded">
           <img :src="useravatar" />
         </div>
       </figure>
       <div class="card-body w-80%">
         <h2 class="card-title">{{ title }}</h2>
-        <div class="card-actions justify-end">
+        <div class="justify-end">
           <button class="btn">发帖</button>
         </div>
       </div>
     </div>
     <div>
-      <rp-editor class="h-10vh"></rp-editor>
+      <rp-editor class="min-h-30"></rp-editor>
     </div>
     <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box content max-h-85vh">
       <div class="flex w-full mx-auto px-0 py-0">
@@ -75,4 +75,5 @@ onUnmounted(() => {
 
 </script>
 
-<style scoped lang='less'></style>
+<style scoped lang='less'>
+</style>

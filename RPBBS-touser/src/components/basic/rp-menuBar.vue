@@ -1,13 +1,13 @@
 <template>
     <div>
         <template v-for="(item, index) in items">
-            <div class="divider" v-if="item.type === 'divider'" :key="`divider${index}`" />
-            <menu-item v-else :key="index" v-bind="item" />
+            <!-- <div class="divider" v-if="item.type === 'divider'" :key="`divider${index}`" /> -->
+            <menu-item v-bind=item />
         </template>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import MenuItem from './rp-menuItem.vue'
 import { ref, reactive } from 'vue'
 export default {
@@ -42,9 +42,6 @@ export default {
                 isActive: () => props.editor.isActive('code')
             },
             {
-                type: 'divider'
-            },
-            {
                 icon: 'paragraph',
                 title: 'Paragraph',
                 action: () => props.editor.chain().focus().setParagraph().run(),
@@ -56,9 +53,7 @@ export default {
                 action: () => props.editor.chain().focus().toggleCodeBlock().run(),
                 isActive: () => props.editor.isActive('codeBlock')
             },
-            {
-                type: 'divider'
-            },
+
             {
                 icon: 'double-quotes-l',
                 title: 'Blockquote',
@@ -70,16 +65,11 @@ export default {
                 title: 'Horizontal Rule',
                 action: () => props.editor.chain().focus().setHorizontalRule().run()
             },
-            {
-                type: 'divider'
-            },
+
             {
                 icon: 'text-wrap',
                 title: 'Hard Break',
                 action: () => props.editor.chain().focus().setHardBreak().run()
-            },
-            {
-                type: 'divider'
             },
             {
                 icon: 'arrow-go-back-line',
