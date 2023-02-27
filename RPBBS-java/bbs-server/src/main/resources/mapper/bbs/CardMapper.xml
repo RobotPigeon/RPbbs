@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.CardMapper">
+    
+    <resultMap type="Card" id="CardResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="message"    column="message"    />
+        <result property="createById"    column="create_by_id"    />
+        <result property="blockId"    column="block_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectCardVo">
+        select id, title, message, create_by_id, block_id, create_time, update_time, status from card
+    </sql>
+
+    <select id="selectCardList" parameterType="Card" resultMap="CardResult">
+        <include refid="selectCardVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="message != null  and message != ''"> and message = #{message}</if>
+            <if test="createById != null  and createById != ''"> and create_by_id = #{createById}</if>
+            <if test="blockId != null  and blockId != ''"> and block_id = #{blockId}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectCardById" parameterType="Long" resultMap="CardResult">
+        <include refid="selectCardVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCard" parameterType="Card" useGeneratedKeys="true" keyProperty="id">
+        insert into card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="message != null">message,</if>
+            <if test="createById != null and createById != ''">create_by_id,</if>
+            <if test="blockId != null">block_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="message != null">#{message},</if>
+            <if test="createById != null and createById != ''">#{createById},</if>
+            <if test="blockId != null">#{blockId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCard" parameterType="Card">
+        update card
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="createById != null and createById != ''">create_by_id = #{createById},</if>
+            <if test="blockId != null">block_id = #{blockId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCardById" parameterType="Long">
+        delete from card where id = #{id}
+    </delete>
+
+    <delete id="deleteCardByIds" parameterType="String">
+        delete from card where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
