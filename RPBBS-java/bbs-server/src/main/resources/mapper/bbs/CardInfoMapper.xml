@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.CardInfoMapper">
+    
+    <resultMap type="CardInfo" id="CardInfoResult">
+        <result property="id"    column="id"    />
+        <result property="cardId"    column="card_id"    />
+        <result property="cardTypeId"    column="card_type_id"    />
+        <result property="likeNum"    column="like_num"    />
+        <result property="richtext"    column="richtext"    />
+        <result property="sourcePath"    column="source_path"    />
+    </resultMap>
+
+    <sql id="selectCardInfoVo">
+        select id, card_id, card_type_id, like_num, richtext, source_path from card_info
+    </sql>
+
+    <select id="selectCardInfoList" parameterType="CardInfo" resultMap="CardInfoResult">
+        <include refid="selectCardInfoVo"/>
+        <where>  
+            <if test="cardId != null  and cardId != ''"> and card_id = #{cardId}</if>
+            <if test="cardTypeId != null  and cardTypeId != ''"> and card_type_id = #{cardTypeId}</if>
+            <if test="likeNum != null "> and like_num = #{likeNum}</if>
+            <if test="richtext != null  and richtext != ''"> and richtext = #{richtext}</if>
+            <if test="sourcePath != null  and sourcePath != ''"> and source_path = #{sourcePath}</if>
+        </where>
+    </select>
+    
+    <select id="selectCardInfoById" parameterType="Long" resultMap="CardInfoResult">
+        <include refid="selectCardInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCardInfo" parameterType="CardInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into card_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cardId != null and cardId != ''">card_id,</if>
+            <if test="cardTypeId != null and cardTypeId != ''">card_type_id,</if>
+            <if test="likeNum != null">like_num,</if>
+            <if test="richtext != null">richtext,</if>
+            <if test="sourcePath != null">source_path,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cardId != null and cardId != ''">#{cardId},</if>
+            <if test="cardTypeId != null and cardTypeId != ''">#{cardTypeId},</if>
+            <if test="likeNum != null">#{likeNum},</if>
+            <if test="richtext != null">#{richtext},</if>
+            <if test="sourcePath != null">#{sourcePath},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCardInfo" parameterType="CardInfo">
+        update card_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cardId != null and cardId != ''">card_id = #{cardId},</if>
+            <if test="cardTypeId != null and cardTypeId != ''">card_type_id = #{cardTypeId},</if>
+            <if test="likeNum != null">like_num = #{likeNum},</if>
+            <if test="richtext != null">richtext = #{richtext},</if>
+            <if test="sourcePath != null">source_path = #{sourcePath},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCardInfoById" parameterType="Long">
+        delete from card_info where id = #{id}
+    </delete>
+
+    <delete id="deleteCardInfoByIds" parameterType="String">
+        delete from card_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

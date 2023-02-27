@@ -196,6 +196,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>bbs-server</module>
     </modules>
     <packaging>pom</packaging>
 
