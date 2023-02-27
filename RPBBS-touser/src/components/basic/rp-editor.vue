@@ -1,13 +1,12 @@
-
 <template>
     <div class="editor input-bordered w-full b-3 bg-base-100" v-if="editor" :style="{ width }">
         <MenuBar class="editor-header" :editor="editor" />
-        <editor-content class="editor-content" :editor="editor"/>
+        <editor-content class="editor-content" :editor="editor" />
     </div>
 </template>
 
 <script lang="ts">
-import { useEditor, EditorContent } from '@tiptap/vue-3'
+import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { defineComponent } from 'vue'
 import MenuBar from './rp-menuBar.vue'
@@ -23,17 +22,24 @@ export default defineComponent({
             default: '100%'
         }
     },
-    setup() {
-        const editor = useEditor({
+    emits: ['contentChanged'], // declare the event here
+    setup(props, { emit }) {
+        const editor = new Editor({
             content: '<p>在此编辑内容 🎉</p>',
             extensions: [
                 StarterKit
-            ]
+            ],
+            onUpdate() {
+                const html = editor.getHTML()
+                // trigger the event here with the new content as an argument
+                emit('contentChanged', html)
+            }
         })
         return {
             editor
         }
     }
+
 })
 </script>
 

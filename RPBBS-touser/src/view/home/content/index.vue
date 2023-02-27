@@ -16,7 +16,7 @@
     <div>
       <rp-editor class="min-h-30"></rp-editor>
     </div>
-    <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box content max-h-85vh">
+    <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent max-h-85vh">
       <div class="flex w-full mx-auto px-0 py-0">
         <div class="flex flex-col w-full h-full">
           <rpCard :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
@@ -51,10 +51,10 @@ const block: string = '逆天板块'
 
 //监听滚动方法
 function scrollHandle() {
-  const content = document.getElementsByClassName('content')[0];
-  const scrollHeight = content.scrollHeight
-  const scrollTop = content.scrollTop
-  const clientHeight = content.clientHeight;
+  const postcontent = document.getElementsByClassName('postcontent')[0];
+  const scrollHeight = postcontent.scrollHeight
+  const scrollTop = postcontent.scrollTop
+  const clientHeight = postcontent.clientHeight;
   const distance = scrollHeight - scrollTop - clientHeight;
   if (distance <= 200) {
     console.log(distance);
@@ -64,13 +64,13 @@ function scrollHandle() {
 
 onMounted(() => {
   //组件挂载时，添加scroll监听
-  const content = document.getElementsByClassName('content')[0];
-  content.addEventListener("scroll", scrollHandle, true);
+  const postcontent = document.getElementsByClassName('postcontent')[0];
+  postcontent.addEventListener("scroll", scrollHandle, true);
 });
 onUnmounted(() => {
   //组件卸载时，停止监听
-  const content = document.getElementsByClassName('content')[0];
-  content.removeEventListener("scroll", scrollHandle, false);
+  const postcontent = document.getElementsByClassName('postcontent')[0];
+  postcontent.removeEventListener("scroll", scrollHandle, false);
 });
 
 </script>
