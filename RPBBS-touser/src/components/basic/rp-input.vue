@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input id="input" :type="type" v-model="inputvalue" @blur="handleChange" @input="handleChange"
+        <input :type="type" v-model="localValue" @blur="handleChange" @input="handleChange"
             :class="{ 'border-red-500': error }"
             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 input input-bordered">
         <span v-if="error" class="mt-2 text-sm text-red-600">{{ error }}</span>
@@ -9,13 +9,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-const inputvalue = ref('')
+const localValue = ref('')
 const error = ref('')
 
 // A function to handle input change event
 function handleChange(e: Event) {
     const value = (e.target as HTMLInputElement).value
-    inputvalue.value = value
+    localValue.value = value
     // If the input is empty and required, set the error message
     if (!value && props.required) {
         error.value = '此条不能为空'
@@ -30,14 +30,14 @@ function handleChange(e: Event) {
     // Otherwise, clear the error message
     error.value = ''
     emit('change', true)
-
+    emit('update:modelValue', (e.target as HTMLInputElement).value) // Emit an update event to sync with parent data
 }
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change', 'update:modelValue'])
 
 interface Props {
     type: string,
-    pattern: RegExp,
+    pattern?: RegExp,
     required: Boolean,
     errorValue: string,
 }
