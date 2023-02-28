@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <div class="flex  bg-base-100 b-4 shadow-xl  w-full my1 px2  rounded-box">
-            <div class="alert shadow-2xl bg-base-100 mt2">
+        <div class="flex b-1 shadow-xl  w-full rounded-box flex-col flex">
+            <div class="alert shadow-2xl  bg-base-100">
                 <div>
-                    <span class="card-title">贴文详情</span>
+                    <span class="card-title h-2vh">贴文详情</span>
                 </div>
             </div>
-        </div>
-        <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent max-h-80vh">
+        <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-90vh">
             <div class="flex w-full mx-auto px-0 py-0">
                 <div class="flex flex-col w-full h-full">
                     <rp-detailcard :username="username" :liked="true" :like-num="10000" :comment-num="10000"
