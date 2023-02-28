@@ -6,6 +6,7 @@ import content from '@/view/home/content/index.vue'
 import Partition from '@/view/home/Partition/index.vue'
 import Error from '@/view/error/error.vue'
 import posteditor from '@/view/home/posteditor/index.vue'
+import postDetail from '@/view/home/postDetail/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,12 +28,14 @@ const router = createRouter({
           path: '/home', component: Home, name: 'home',
           children: [{
             path: '/home/content', component: content, name: 'content',
-          },{
+          }, {
             path: '/home/Partition', component: Partition, name: 'Partition',
-          },{
+          }, {
             path: '/home/posteditor', component: posteditor, name: 'posteditor',
-          },
-        ]
+          },{
+            path: '/home/postDetail', component: postDetail, name: 'postDetail',
+          }
+          ]
         },
         {
           path: '/login', component: Login, name: 'login',
