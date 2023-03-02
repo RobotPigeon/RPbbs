@@ -12,9 +12,13 @@ interface Result {
 
 // 请求响应参数，包含data
 interface ResultData<T = any> extends Result {
+    img: string;
+    uuid: string;
+    captchaEnabled: undefined;
+    token: string;
     data?: T;
 }
-const URL: string|undefined =  import.meta.env.VITE_API
+const URL: string | undefined = import.meta.env.VITE_API
 enum RequestEnums {
     TIMEOUT = 20000,
     OVERDUE = 600, // 登录失效
@@ -27,7 +31,7 @@ const config = {
     // 设置超时时间
     timeout: RequestEnums.TIMEOUT as number,
     // 跨域时候允许携带凭证
-    withCredentials: true
+    withCredentials: true,
 }
 
 class RequestHttp {
@@ -47,7 +51,9 @@ class RequestHttp {
                 const token = localStorage.getItem('token') || '';
                 if (token) {
                     config.headers.set('Authorization', token)
+                    console.log(config);
                 }
+
                 return config
             },
             (error: AxiosError) => {
@@ -67,7 +73,7 @@ class RequestHttp {
                     // 登录信息失效，应跳转到登录页面，并清空本地的token
                     localStorage.setItem('token', '');
                     router.replace({
-                      path: '/login'
+                        path: '/login'
                     })
                     return Promise.reject(data);
                 }

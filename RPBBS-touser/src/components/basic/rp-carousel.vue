@@ -7,12 +7,6 @@
     ></rpImg2big>
     <div class="overflow-hidden xl:h-md md:h-md sm:h-sm cellphone mx-8 rounded-box bg-black relative">
             <img :src="pinimg" class="xl:h-md md:h-md sm:h-sm cellphone w-a m-a" alt="item" @click="bigScale(pinimg)"/>
-            <!-- <img v-for="item in props.list" class="xl:h-md md:h-md sm:h-sm cellphone w-a m-a" :src="item" alt=""> -->
-            <!-- <div class="carousel carousel-center">
-                <div id='carousel-item' class="carousel-item w-full bg-black mx-a" v-for="(item,index) in props.list">
-                    <img :src="item" class="xl:h-md md:h-md sm:h-sm cellphone w-a m-a" alt="item" @click="bigScale(item)"/>
-                </div> 
-            </div> -->
         <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <a  class="btn btn-circle" @click='leftchange()'>❮</a> 
             <a  class="btn btn-circle" @click='rightchange()'>❯</a>
@@ -66,7 +60,7 @@ function bigScale(item: string) {
 };
 
 interface Props {
-    list: Array<string>,
+    list: any,
 }
 const props = withDefaults(defineProps<Props>(), {
 })

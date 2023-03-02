@@ -17,7 +17,9 @@
                 <div v-html="props.richtext"></div>
                 <div class="badge badge-lg">{{ props.block }}</div>
             </div>
-            <rpPicgroup v-if="props.piclist!=undefined" :list="props.piclist"></rpPicgroup>
+            <rp-carousel :list="props.piclist"></rp-carousel>
+            <!-- <rpPicgroup v-if="props.piclist!=undefined" :list="props.piclist"></rpPicgroup> -->
+            <!-- <img class="p10" v-for="(item, index) in props.piclist" :key="index" :src="item" alt=""> -->
             <div class="divider px-8"></div>
             <div class="stats stats-vertical lg:stats-horizontal px-8 pb-4">
                 <div class="flex justify-around">
@@ -90,6 +92,7 @@
 <script lang="ts" setup>
 import rpCarousel from '@/components/basic/rp-carousel.vue';
 import rpPicgroup from '@/components/basic/rp-picgroup.vue';
+
 import { ref, reactive } from 'vue';
 import type { Ref } from 'vue';
 
@@ -100,6 +103,7 @@ const emit = defineEmits(['clickit'])
 const bigImg = () => {
     emit('clickit')
 }
+
 
 
 interface Props {

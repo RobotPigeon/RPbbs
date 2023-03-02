@@ -49,7 +49,7 @@ function bigScale(item: string) {
 };
 
 interface Props {
-    list: Array<string>,
+    list?: Array<string>,
 }
 const props = withDefaults(defineProps<Props>(), {
 })
