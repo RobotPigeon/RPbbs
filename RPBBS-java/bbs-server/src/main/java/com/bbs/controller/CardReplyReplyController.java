@@ -28,7 +28,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2023-02-27
  */
 @RestController
-@RequestMapping("/system/reply_reply")
+@RequestMapping("/bbs/reply_reply")
 public class CardReplyReplyController extends BaseController
 {
     @Autowired

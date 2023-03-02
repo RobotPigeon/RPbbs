@@ -2,6 +2,7 @@ package com.bbs.mapper;
 
 import java.util.List;
 import com.bbs.domain.CardType;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 帖子类型Mapper接口
@@ -9,6 +10,7 @@ import com.bbs.domain.CardType;
  * @author ruoyi
  * @date 2023-02-27
  */
+@Mapper
 public interface CardTypeMapper 
 {
     /**

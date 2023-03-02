@@ -2,6 +2,7 @@ package com.bbs.mapper;
 
 import java.util.List;
 import com.bbs.domain.User;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 用户Mapper接口
@@ -9,6 +10,7 @@ import com.bbs.domain.User;
  * @author ruoyi
  * @date 2023-02-27
  */
+@Mapper
 public interface UserMapper 
 {
     /**
