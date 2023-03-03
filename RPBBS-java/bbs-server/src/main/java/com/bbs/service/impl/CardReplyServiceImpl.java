@@ -1,7 +1,6 @@
 package com.bbs.service.impl;
 
 import java.util.List;
-import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.CardReplyMapper;
@@ -53,7 +52,6 @@ public class CardReplyServiceImpl implements ICardReplyService
     @Override
     public int insertCardReply(CardReply cardReply)
     {
-        cardReply.setCreateTime(DateUtils.getNowDate());
         return cardReplyMapper.insertCardReply(cardReply);
     }
 
@@ -66,7 +64,6 @@ public class CardReplyServiceImpl implements ICardReplyService
     @Override
     public int updateCardReply(CardReply cardReply)
     {
-        cardReply.setUpdateTime(DateUtils.getNowDate());
         return cardReplyMapper.updateCardReply(cardReply);
     }
 

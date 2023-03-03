@@ -1,7 +1,6 @@
 package com.bbs.service.impl;
 
 import java.util.List;
-import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.BlockMapper;
@@ -53,7 +52,6 @@ public class BlockServiceImpl implements IBlockService
     @Override
     public int insertBlock(Block block)
     {
-        block.setCreateTime(DateUtils.getNowDate());
         return blockMapper.insertBlock(block);
     }
 
@@ -66,7 +64,6 @@ public class BlockServiceImpl implements IBlockService
     @Override
     public int updateBlock(Block block)
     {
-        block.setUpdateTime(DateUtils.getNowDate());
         return blockMapper.updateBlock(block);
     }
 

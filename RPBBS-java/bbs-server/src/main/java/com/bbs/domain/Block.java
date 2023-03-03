@@ -1,10 +1,10 @@
 package com.bbs.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.util.Date;
+
 
 /**
  * 帖子板块对象 block
@@ -13,7 +13,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @date 2023-02-27
  */
 @Data
-public class Block extends BaseEntity
+public class Block
 {
     private static final long serialVersionUID = 1L;
 
@@ -21,15 +21,20 @@ public class Block extends BaseEntity
     private Long id;
 
     /** 板块名 */
-    @Excel(name = "板块名")
     private String blockName;
 
     /** 图片资源路径 */
-    @Excel(name = "图片资源路径")
     private String picPath;
 
     /** 状态 */
-    @Excel(name = "状态")
     private Long status;
+
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 
 }

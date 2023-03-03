@@ -1,7 +1,6 @@
 package com.bbs.service.impl;
 
 import java.util.List;
-import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.UserMapper;
@@ -53,7 +52,6 @@ public class UserServiceImpl implements IUserService
     @Override
     public int insertUser(User user)
     {
-        user.setCreateTime(DateUtils.getNowDate());
         return userMapper.insertUser(user);
     }
 
@@ -66,7 +64,6 @@ public class UserServiceImpl implements IUserService
     @Override
     public int updateUser(User user)
     {
-        user.setUpdateTime(DateUtils.getNowDate());
         return userMapper.updateUser(user);
     }
 

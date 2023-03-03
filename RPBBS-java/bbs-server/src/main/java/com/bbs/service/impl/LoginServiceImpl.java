@@ -7,6 +7,7 @@ import com.bbs.service.ITokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -24,10 +25,14 @@ public class LoginServiceImpl implements ILoginService {
         user.setUsername(username);
         user.setPassword(password);
 
-        List<User> userList = userMapper.selectUserList(user);
-
-        if (userList.get(0) != null) {
-            return tokenService.getToken(userList.get(0));
+        try {
+            List<User> userList = userMapper.selectUserList(user);
+            if (userList.get(0) != null) {
+                return tokenService.getToken(userList.get(0));
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            return null;
         }
 
         return null;

@@ -1,10 +1,9 @@
 package com.bbs.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.util.Date;
 
 /**
  * 用户对象 user
@@ -13,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @date 2023-02-27
  */
 @Data
-public class User extends BaseEntity
+public class User
 {
     private static final long serialVersionUID = 1L;
 
@@ -21,23 +20,26 @@ public class User extends BaseEntity
     private Long id;
 
     /** 用户名 */
-    @Excel(name = "用户名")
     private String username;
 
     /** 密码 */
-    @Excel(name = "密码")
     private String password;
 
     /** 邮箱 */
-    @Excel(name = "邮箱")
     private String email;
 
     /** 手机号码 */
-    @Excel(name = "手机号码")
     private String phone;
 
+    /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
     /** 状态 */
-    @Excel(name = "状态")
     private Long status;
 
 }
