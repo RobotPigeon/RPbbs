@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bbs.mapper.CardReplyMapper">
+    
+    <resultMap type="CardReply" id="CardReplyResult">
+        <result property="id"    column="id"    />
+        <result property="message"    column="message"    />
+        <result property="createById"    column="create_by_id"    />
+        <result property="cardId"    column="card_id"    />
+        <result property="rank"    column="rank"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectCardReplyVo">
+        select id, message, create_by_id, card_id, rank, create_time, update_time, status from card_reply
+    </sql>
+
+    <select id="selectCardReplyList" parameterType="CardReply" resultMap="CardReplyResult">
+        <include refid="selectCardReplyVo"/>
+        <where>  
+            <if test="message != null  and message != ''"> and message = #{message}</if>
+            <if test="createById != null  and createById != ''"> and create_by_id = #{createById}</if>
+            <if test="cardId != null  and cardId != ''"> and card_id = #{cardId}</if>
+            <if test="rank != null "> and rank = #{rank}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectCardReplyById" parameterType="Long" resultMap="CardReplyResult">
+        <include refid="selectCardReplyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCardReply" parameterType="CardReply" useGeneratedKeys="true" keyProperty="id">
+        insert into card_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="message != null">message,</if>
+            <if test="createById != null and createById != ''">create_by_id,</if>
+            <if test="cardId != null and cardId != ''">card_id,</if>
+            <if test="rank != null">rank,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="message != null">#{message},</if>
+            <if test="createById != null and createById != ''">#{createById},</if>
+            <if test="cardId != null and cardId != ''">#{cardId},</if>
+            <if test="rank != null">#{rank},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCardReply" parameterType="CardReply">
+        update card_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="message != null">message = #{message},</if>
+            <if test="createById != null and createById != ''">create_by_id = #{createById},</if>
+            <if test="cardId != null and cardId != ''">card_id = #{cardId},</if>
+            <if test="rank != null">rank = #{rank},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCardReplyById" parameterType="Long">
+        delete from card_reply where id = #{id}
+    </delete>
+
+    <delete id="deleteCardReplyByIds" parameterType="String">
+        delete from card_reply where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

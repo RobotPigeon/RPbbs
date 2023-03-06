@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bbs.mapper.BlockMapper">
+    
+    <resultMap type="Block" id="BlockResult">
+        <result property="id"    column="id"    />
+        <result property="blockName"    column="block_name"    />
+        <result property="picPath"    column="pic_path"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectBlockVo">
+        select id, block_name, pic_path, create_time, update_time, status from block
+    </sql>
+
+    <select id="selectBlockList" parameterType="Block" resultMap="BlockResult">
+        <include refid="selectBlockVo"/>
+        <where>  
+            <if test="blockName != null  and blockName != ''"> and block_name like concat('%', #{blockName}, '%')</if>
+            <if test="picPath != null  and picPath != ''"> and pic_path = #{picPath}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlockById" parameterType="Long" resultMap="BlockResult">
+        <include refid="selectBlockVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBlock" parameterType="Block" useGeneratedKeys="true" keyProperty="id">
+        insert into block
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blockName != null and blockName != ''">block_name,</if>
+            <if test="picPath != null">pic_path,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blockName != null and blockName != ''">#{blockName},</if>
+            <if test="picPath != null">#{picPath},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlock" parameterType="Block">
+        update block
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="blockName != null and blockName != ''">block_name = #{blockName},</if>
+            <if test="picPath != null">pic_path = #{picPath},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlockById" parameterType="Long">
+        delete from block where id = #{id}
+    </delete>
+
+    <delete id="deleteBlockByIds" parameterType="String">
+        delete from block where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
