@@ -7,7 +7,6 @@ import com.bbs.service.ITokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -32,7 +31,6 @@ public class LoginServiceImpl implements ILoginService {
             }
         }catch (Exception e){
             System.out.println(e);
-            return null;
         }
 
         return null;
