@@ -83,6 +83,32 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
+  },
+  {
+    path: '/bbs',
+    component: Layout,
+    hidden: false,
+    meta: { title: '论坛管理' },
+    children: [
+      {
+        path: 'card',
+        component: () => import('@/views/bbs/card/index'),
+        name: 'Card',
+        meta: { title: '帖子管理' }
+      },
+      {
+        path: 'block',
+        component: () => import('@/views/bbs/block/index'),
+        name: 'Block',
+        meta: { title: '板块管理' }
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/bbs/user/index'),
+        name: 'User',
+        meta: { title: '用户管理' }
+      }
+    ]
   }
 ]
 
