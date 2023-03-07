@@ -23,5 +23,5 @@ export const login = (params: Login.LoginReqForm) => {
 }
 // 获取验证码
 export function getCodeImg() {
-    return axios.get<Login.LoginCode>('/captchImage')
+    return axios.get<Login.LoginCode>('/login/kaptcha')
 }
