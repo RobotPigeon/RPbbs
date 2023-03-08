@@ -5,17 +5,20 @@ import com.bbs.service.ILoginService;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 
 /**
@@ -52,11 +55,37 @@ public class LoginController {
         BufferedImage image = kaptchaProducer.createImage(text);
         UUID uuid = UUID.randomUUID();
 
+        // 转换流信息写出
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        try
+        {
+            ImageIO.write(image, "png", os);
+        }
+        catch (IOException e)
+        {
+            Logger.getLogger("com.bbs.LoginController").warning(e.getMessage());
+        }
+
+        Logger.getLogger("com.bbs.LoginController").info("text:" + text + " uuid:" + uuid);
         // 存入redis缓存
 
 
+
+        byte[] bytes = os.toByteArray();
+        BASE64Encoder encoder = new BASE64Encoder();
+        String image_base64 = encoder.encodeBuffer(bytes).trim();
+        String finalImage_base6 = image_base64.replaceAll("\n","").replaceAll("\r","");
+
+        Logger.getLogger("com.bbs.LoginController").info("imageStr:" + finalImage_base6);
+
+//        错误方法
+//        return AjaxResult.success().put("data", new HashMap<String,Object>(){{
+//            put("image", Base64.getEncoder().encode(image.toString().getBytes(StandardCharsets.UTF_8)));
+//            put("uuid",uuid);
+//        }});
+
         return AjaxResult.success().put("data", new HashMap<String,Object>(){{
-            put("image", Base64.getEncoder().encode(image.toString().getBytes(StandardCharsets.UTF_8)));
+            put("image", finalImage_base6);
             put("uuid",uuid);
         }});
     }
