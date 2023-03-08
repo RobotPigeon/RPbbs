@@ -25,7 +25,6 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.textproducer.char.length", "6");
         properties.setProperty("kaptcha.textproducer.font.names", "Arial,Arial Narrow,Serif,Helvetica,Tahoma,Times New Roman,Verdana");
         properties.setProperty("kaptcha.textproducer.font.size", "38");
-
         properties.setProperty("kaptcha.background.clear.from", "white");
         properties.setProperty("kaptcha.background.clear.to", "white");
 

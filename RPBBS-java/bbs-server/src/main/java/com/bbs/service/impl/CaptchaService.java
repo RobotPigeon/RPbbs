@@ -27,8 +27,4 @@ public class CaptchaService implements ICaptchaService {
         return false;
     }
 
-    public static void main(String[] args) {
-        ICaptchaService service = new CaptchaService();
-        System.out.println(service.createCaptcha());
-    }
 }

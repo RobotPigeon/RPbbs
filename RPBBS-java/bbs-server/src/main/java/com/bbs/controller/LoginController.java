@@ -4,13 +4,14 @@ import com.bbs.domain.msg.AjaxResult;
 import com.bbs.service.ILoginService;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/bbs/login")
+@CrossOrigin
 public class LoginController {
     @Autowired
     ILoginService loginService;
@@ -59,4 +61,24 @@ public class LoginController {
         }});
     }
 
+    /**
+     * 流式传输 验证码
+     * @param response
+     * @param session
+     */
+    @RequestMapping("/getCaptImg")
+    public void  getCaptImg(HttpServletResponse response, HttpSession session){
+        // 生成验证码
+        String text = kaptchaProducer.createText();
+        BufferedImage image = kaptchaProducer.createImage(text);
+        UUID uuid = UUID.randomUUID();
+
+        try {
+            response.setContentType("image/png");
+            OutputStream os = response.getOutputStream();
+            ImageIO.write(image,"png",os);
+        } catch (IOException e) {
+            System.out.println("响应验证码失败"+e.getMessage());
+        }
+    }
 }
