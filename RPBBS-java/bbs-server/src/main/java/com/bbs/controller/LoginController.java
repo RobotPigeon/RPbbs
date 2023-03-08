@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.UUID;
@@ -63,26 +62,21 @@ public class LoginController {
         }
         catch (IOException e)
         {
-            Logger.getLogger("com.bbs.LoginController").warning(e.getMessage());
+            Logger.getLogger(this.getClass().getName()).warning(e.getMessage());
         }
 
-        Logger.getLogger("com.bbs.LoginController").info("text:" + text + " uuid:" + uuid);
+        Logger.getLogger(this.getClass().getName()).info("text:" + text + " uuid:" + uuid);
         // 存入redis缓存
 
 
 
         byte[] bytes = os.toByteArray();
-        BASE64Encoder encoder = new BASE64Encoder();
-        String image_base64 = encoder.encodeBuffer(bytes).trim();
-        String finalImage_base6 = image_base64.replaceAll("\n","").replaceAll("\r","");
+//        BASE64Encoder encoder = new BASE64Encoder();
+//        String image_base64 = encoder.encodeBuffer(bytes).trim();
+//        String finalImage_base6 = image_base64.replaceAll("\n","").replaceAll("\r","");
+        String finalImage_base6 = Base64.getEncoder().encodeToString(os.toByteArray());
 
-        Logger.getLogger("com.bbs.LoginController").info("imageStr:" + finalImage_base6);
-
-//        错误方法
-//        return AjaxResult.success().put("data", new HashMap<String,Object>(){{
-//            put("image", Base64.getEncoder().encode(image.toString().getBytes(StandardCharsets.UTF_8)));
-//            put("uuid",uuid);
-//        }});
+        Logger.getLogger(this.getClass().getName()).info("imageStr:" + finalImage_base6);
 
         return AjaxResult.success().put("data", new HashMap<String,Object>(){{
             put("image", finalImage_base6);
