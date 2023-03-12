@@ -84,7 +84,7 @@ function getCode() {
         captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled;
         if (captchaEnabled.value) {
             let data = res.data
-            let imgStr:string = data.image
+            let imgStr:string|undefined = data?.image
             codeUrl.value = "data:image/png;base64," + imgStr;
             loginForm.uuid = res.uuid;
         }

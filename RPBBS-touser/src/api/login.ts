@@ -9,7 +9,7 @@ namespace Login {
     }
     export interface LoginCode {
         uuid: string;
-        img: string;
+        image: string;
     }
     // 登录成功后返回的token
     export interface LoginResData {
