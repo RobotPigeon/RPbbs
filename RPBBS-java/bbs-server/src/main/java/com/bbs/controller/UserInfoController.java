@@ -52,7 +52,7 @@ public class UserInfoController
     /**
      * 新增用户信息
      */
-    @PostMapping
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody UserInfo userInfo)
     {
         return userInfoService.insertUserInfo(userInfo) > 0 ? AjaxResult.success() : AjaxResult.error();
@@ -61,7 +61,7 @@ public class UserInfoController
     /**
      * 修改用户信息
      */
-    @PutMapping
+    @PutMapping("/edit")
     public AjaxResult edit(@RequestBody UserInfo userInfo)
     {
         return userInfoService.updateUserInfo(userInfo) > 0 ? AjaxResult.success() : AjaxResult.error();

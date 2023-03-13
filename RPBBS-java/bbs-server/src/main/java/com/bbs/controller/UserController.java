@@ -1,7 +1,6 @@
 package com.bbs.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +51,7 @@ public class UserController
     /**
      * 新增用户
      */
-    @PostMapping
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody User user)
     {
         return userService.insertUser(user) > 0 ? AjaxResult.success() : AjaxResult.error();
@@ -61,7 +60,7 @@ public class UserController
     /**
      * 修改用户
      */
-    @PutMapping
+    @PutMapping("/edit")
     public AjaxResult edit(@RequestBody User user)
     {
         return userService.updateUser(user) > 0 ? AjaxResult.success() : AjaxResult.error();
