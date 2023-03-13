@@ -1,4 +1,15 @@
 <template>
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="rp-modal" class="modal-toggle" />
+    <div class="modal sm:modal-bottom modal-middle rounded-box">
+        <div class="modal-box rounded-box">
+            <h3 class="font-bold text-lg mb">回复</h3>
+            <textarea class="textarea w-full" placeholder="输入回复"></textarea>
+            <div class="modal-action">
+                <label for="rp-modal" class="btn btn-sm">发送</label>
+            </div>
+        </div>
+    </div>
     <div class="card w-full h-100% bg-base-100 b-1 p2 ">
         <div v-for="comment in comments" :key="comment.id" class="flex justify-start card w-full h-100% bg-base-100  mt2">
             <!-- 遍历评论数据 -->
@@ -8,7 +19,7 @@
                         <img :src="comment.avatar" alt='avatar' />
                     </div>
                 </label>
-                <div class="mt ml-2">
+                <div class=" ml-2">
                     <span class="badge badge-accent badge-outline">lv-{{ comment.rank }}</span>
                     <span class="card-title">{{ comment.author }}</span>
                 </div>
@@ -16,26 +27,39 @@
             <div class="content">
                 <p class="content m4">{{ comment.content }}</p> <!-- 显示评论内容 -->
                 <span class="date justify-end ml4">{{ comment.date }}</span>
-                <div v-if="comment.replies.length > 0" class="comments"> <!-- 如果有楼中楼回复，显示嵌套的评论组件 -->
-                    <div v-for="reply in comment.replies" :key="reply.id" class="comment card bg-base-200 ml-10 p2 b-1">
-                        <!-- 遍历楼中楼回复数据 -->
-                        <!-- <div class="divider"></div>  -->
-                        <div class=" flex justify-start">
-                            <label class="btn btn-ghost btn-circle avatar">
-                                <div class="w-12 rounded-full">
-                                    <img :src="reply.avatar" alt='avatar' />
-                                </div>
-                            </label>
-                            <div class="mt ml-2">
-                                <span class="badge badge-accent badge-outline">lv-{{ reply.rank }}</span>
-                                <span class="card-title">{{ reply.author }}</span>
-                            </div>
+                <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl">回复</label>
+                <div v-if="comment.replies.length > 0" class="comments ">
+                    <div class="collapse">
+                        <input type="checkbox" />
+                        <div class="collapse-title color-info justify-end font-medium">
+                            展开/收起{{ comment.replies.length }}条回复
                         </div>
-                        <div class="content">
-                            <p class="content m4"><a class="badge" v-if="reply.replyperson != undefined"
-                                    :href="reply.replyperson.id">@{{ reply.replyperson.username }}</a> {{ reply.content }}
-                            </p> <!-- 显示评论内容 -->
-                            <span class="date justify-end ml4">{{ reply.date }}</span>
+                        <div class="collapse-content">
+                            <!-- 如果有楼中楼回复，显示嵌套的评论组件 -->
+                            <div v-for="reply in comment.replies" :key="reply.id"
+                                class="comment card bg-base-200 ml-10 p2 b-1">
+                                <!-- 遍历楼中楼回复数据 -->
+                                <!-- <div class="divider"></div>  -->
+                                <div class=" flex justify-start">
+                                    <label class="btn btn-ghost btn-circle avatar">
+                                        <div class="w-12 rounded-full">
+                                            <img :src="reply.avatar" alt='avatar' />
+                                        </div>
+                                    </label>
+                                    <div class=" ml-2">
+                                        <span class="badge badge-accent badge-outline">lv-{{ reply.rank }}</span>
+                                        <span class="card-title">{{ reply.author }}</span>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <p class="content m4"><a class="badge" v-if="reply.replyperson != undefined"
+                                            :href="reply.replyperson.id">@{{ reply.replyperson.username }}</a> {{
+                                                reply.content }}
+                                    </p> <!-- 显示评论内容 -->
+                                    <span class="date justify-end ml4">{{ reply.date }}</span>
+                                    <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl">回复</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
