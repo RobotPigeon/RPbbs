@@ -18,7 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectUserInfoList" parameterType="UserInfo" resultMap="UserInfoResult">
         <include refid="selectUserInfoVo"/>
-        <where>  
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="level != null "> and level = #{level}</if>
             <if test="message != null  and message != ''"> and message = #{message}</if>
