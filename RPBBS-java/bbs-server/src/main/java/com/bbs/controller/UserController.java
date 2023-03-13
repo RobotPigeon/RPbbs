@@ -33,7 +33,7 @@ public class UserController
      * 查询用户列表
      */
     @GetMapping("/list")
-    public List list(User user)
+    public List list(@RequestBody User user)
     {
         List<User> list = userService.selectUserList(user);
         return list;

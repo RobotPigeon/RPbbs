@@ -1,7 +1,6 @@
 package com.bbs.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class UserInfoController
      * 查询用户信息列表
      */
     @GetMapping("/list")
-    public List list(UserInfo userInfo)
+    public List list(@RequestBody UserInfo userInfo)
     {
         List<UserInfo> list = userInfoService.selectUserInfoList(userInfo);
         return list;
