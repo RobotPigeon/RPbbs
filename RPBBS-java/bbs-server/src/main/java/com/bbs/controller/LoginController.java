@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 登录验证
@@ -82,9 +83,9 @@ public class LoginController {
 //        String finalImage_base6 = Base64.getEncoder().encodeToString(os.toByteArray());
 //
 //        Logger.getLogger(this.getClass().getName()).info("imageStr:" + finalImage_base6);
-        String data = captchaService.createCaptchaAndUuid();
+        Map data= captchaService.createCaptchaAndUuid();
 
-        return data!= null ? AjaxResult.success().put("data", data) : AjaxResult.error("验证码获取错误") ;
+        return !data.isEmpty() ? AjaxResult.success().put("data", data) : AjaxResult.error("验证码获取错误") ;
     }
 
 //    /**

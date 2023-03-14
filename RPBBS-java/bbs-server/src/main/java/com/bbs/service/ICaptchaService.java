@@ -1,6 +1,8 @@
 package com.bbs.service;
 
+import java.util.Map;
+
 public interface ICaptchaService {
-    public String createCaptchaAndUuid();
+    public Map createCaptchaAndUuid();
     public int verify(String uuid, String text);
 }
