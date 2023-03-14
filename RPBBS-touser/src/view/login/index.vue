@@ -28,7 +28,7 @@
                 验证码
                 </span>
             </label>
-            <rp-input type="text" errorValue='请输入验证码' v-model="loginForm.code" :required="true"></rp-input>
+            <rp-input class="w-50%" type="text" errorValue='请输入验证码' v-model="loginForm.code" :required="true"></rp-input>
             <div class="login-code">
             <img :src="codeUrl" @click="getCode" class="login-code-img"/>
             </div>
@@ -78,16 +78,16 @@ const loginForm = reactive({
 
 // 验证码开关
 const codeUrl = ref("");
-const captchaEnabled = ref(true);
 function getCode() {
     getCodeImg().then(res => {
-        captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled;
-        if (captchaEnabled.value) {
-            let data = res.data
-            let imgStr:string|undefined = data?.image
-            codeUrl.value = "data:image/png;base64," + imgStr;
-            loginForm.uuid = res.uuid;
-        }
+
+        let data = res.data
+        console.log(data?.image);
+        console.log(data);
+        let imgStr: string | undefined = data?.image
+        codeUrl.value = "data:image/png;base64," + imgStr;
+        loginForm.uuid = res.uuid;
+
     });
 }
 
@@ -105,13 +105,9 @@ const Login = async () => {
         }).catch(() => {
             loading.value = false;
             // 重新获取验证码
-            if (captchaEnabled.value) {
                 getCode();
-            }
         });
     } else {
-        //使用showAlert方法
-        const showAlert = inject("showAlert") as Function;
         useAlertStore().setAlert({ message: "请检查账号密码", type: "error" });
     }
 }
