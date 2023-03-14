@@ -35,8 +35,7 @@ public class UserInfoController
     @GetMapping("/list")
     public List list(@RequestBody UserInfo userInfo)
     {
-        List<UserInfo> list = userInfoService.selectUserInfoList(userInfo);
-        return list;
+        return userInfoService.selectUserInfoList(userInfo);
     }
 
     /**

@@ -28,13 +28,13 @@ public class JWTInterceptor implements HandlerInterceptor {
         }// 除了options跨域请求，都进入到jwt校验
         else {
             if (token == null) {
-                response.getWriter().write("没有token！");
+                response.getWriter().write("no token !");
                 return false;
             }
             // 校验接口传进来的token信息
             Claims userData = JJWTUtils.parseJWT(token);
             if (userData == null) {
-                response.getWriter().write("签名验签失败 !");
+                response.getWriter().write("token verify failure !");
                 return false;
             }
             return true;
