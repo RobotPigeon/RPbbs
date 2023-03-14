@@ -4,11 +4,7 @@ import com.bbs.domain.msg.AjaxResult;
 import com.bbs.domain.req.LoginReq;
 import com.bbs.service.ICaptchaService;
 import com.bbs.service.ILoginService;
-import com.bbs.service.impl.CaptchaService;
-import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -112,17 +108,17 @@ public class LoginController {
 //        }
 //    }
 
-    @PostMapping("/kaptcha/verify")
-    public AjaxResult verifyChaptcha(@RequestBody LoginReq loginReq){
-        int res = captchaService.verify(loginReq.getUuid(), loginReq.getCode());
-        switch (res) {
-            case 0:{
-                return AjaxResult.success();
-            }
-            case 1:{
-                return AjaxResult.error("验证码验证失败").put("chaptcha_err_type", res);
-            } default:{}
-        }
-        return AjaxResult.error("unknow err");
-    }
+//    @PostMapping("/kaptcha/verify")
+//    public AjaxResult verifyChaptcha(@RequestBody LoginReq loginReq){
+//        int res = captchaService.verify(loginReq.getUuid(), loginReq.getCode());
+//        switch (res) {
+//            case 0:{
+//                return AjaxResult.success();
+//            }
+//            case 1:{
+//                return AjaxResult.error("验证码验证失败").put("chaptcha_err_type", res);
+//            } default:{}
+//        }
+//        return AjaxResult.error("unknow err");
+//    }
 }

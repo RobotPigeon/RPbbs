@@ -2,6 +2,7 @@ package com.bbs.service.impl;
 
 import com.bbs.service.ICaptchaService;
 import com.google.code.kaptcha.Producer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -14,8 +15,8 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
+@Slf4j
 @Service
 public class CaptchaService implements ICaptchaService {
 
@@ -44,7 +45,7 @@ public class CaptchaService implements ICaptchaService {
         }
         catch (IOException e)
         {
-            Logger.getLogger(this.getClass().getName()).warning(e.getMessage());
+            log.error(e.getMessage());
         }
 
 //        Logger.getLogger(this.getClass().getName()).info("text:" + text + " uuid:" + uuid);
@@ -53,7 +54,8 @@ public class CaptchaService implements ICaptchaService {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         // 验证码过期时间为60s
         valueOperations.set(String.valueOf(uuid), text, 60, TimeUnit.SECONDS);
-        Logger.getLogger(this.getClass().getName()).info("{ uuid: "+uuid+" text: "+text+" }"+" --to save in redis");
+        log.info("create captcha: { uuid: "+uuid+"\ttext: "+text+" } and save in redis now.");
+//        Logger.getLogger(this.getClass().getName()).info("{ uuid: "+uuid+" text: "+text+" }"+" --to save in redis");
 
         // base64编码
         byte[] bytes = os.toByteArray();
@@ -73,8 +75,9 @@ public class CaptchaService implements ICaptchaService {
         ValueOperations valueOperations = redisTemplate.opsForValue();
         String textInRedis = (String) valueOperations.get(uuid);
 
-        Logger.getLogger(this.getClass().getName()).info("verify: the value of " + uuid+" get in redis is *"+textInRedis+"*");
+//        Logger.getLogger(this.getClass().getName()).info("verify: the value of " + uuid+" get in redis is *"+textInRedis+"*");
         if (textInRedis.equals(text)) {
+            log.info(uuid+" : verified pass.");
             return 0;
         }
         return 1;
