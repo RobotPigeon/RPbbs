@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -28,9 +30,10 @@ public class CaptchaService implements ICaptchaService {
 
 
     @Override
-    public String createCaptchaAndUuid() {
+    public Map createCaptchaAndUuid() {
         // 返回结果
-        String resultStr;
+        Map resultMap = new HashMap<String, String>();
+//        String resultStr;
 
         // 生成验证码
         String text = kaptchaProducer.createText();
@@ -65,9 +68,12 @@ public class CaptchaService implements ICaptchaService {
 //        String finalImage_base6 = Base64.getEncoder().encodeToString(os.toByteArray());
 //        Logger.getLogger(this.getClass().getName()).info("imageStr:" + finalImage_base6);
 
-        resultStr = "{uuid:"+uuid+",image:"+Base64.getEncoder().encodeToString(os.toByteArray())+"}";
+        resultMap.put("uuid", uuid);
+        resultMap.put("image", Base64.getEncoder().encodeToString(os.toByteArray()));
 
-        return resultStr;
+//        resultStr = "{uuid:"+uuid+",image:"+Base64.getEncoder().encodeToString(os.toByteArray())+"}";
+
+        return resultMap;
     }
 
     @Override
