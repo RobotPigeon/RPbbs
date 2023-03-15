@@ -1,12 +1,11 @@
 package com.bbs.controller;
 
+import com.bbs.domain.User;
 import com.bbs.domain.msg.AjaxResult;
+import com.bbs.service.ICaptchaService;
 import com.bbs.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/bbs/register")
@@ -15,8 +14,19 @@ public class RegisterController {
     @Autowired
     private IRegisterService registerService;
 
-    @PostMapping("/add_user")
-    public AjaxResult register(@RequestParam String message) {
-        return registerService.addUser(message) == true ? AjaxResult.success("注册成功！") : AjaxResult.error("register fail!");
+    @PostMapping("/register")
+    public AjaxResult register(@RequestBody User message) {
+        switch (registerService.addUser(message)) {
+            case 0: {
+                return AjaxResult.success("注册成功");
+            }
+            case 1: {
+                return AjaxResult.error("用户名重复");
+            }
+            default: {
+                return AjaxResult.error("注册失败，未知原因");
+            }
+        }
     }
+
 }
