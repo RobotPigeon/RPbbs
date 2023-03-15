@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 @Configuration
-public class JwtInterceptorConfig implements WebMvcConfigurer {
+public class InterceptorConfig implements WebMvcConfigurer {
 
     @Resource
     private JWTInterceptor jwtInterceptor;
@@ -19,6 +19,7 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/bbs/login/**"
+                                    , "/bbs/register/**"
                                     , "/swagger-ui/**"
                                     , "/v3/**"
                                     , "/swagger-resources/**"
