@@ -57,7 +57,7 @@ public class CaptchaService implements ICaptchaService {
         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
         // 验证码过期时间为60s
         valueOperations.set(String.valueOf(uuid), text, 60, TimeUnit.SECONDS);
-        log.info("create captcha: { uuid: "+uuid+"\ttext: "+text+" } and save in redis now.");
+        log.info("create captcha: { uuid: "+uuid+"\ttext: "+text+" } and save in redis and effective time: 60s .");
 //        Logger.getLogger(this.getClass().getName()).info("{ uuid: "+uuid+" text: "+text+" }"+" --to save in redis");
 
         // base64编码
@@ -76,10 +76,30 @@ public class CaptchaService implements ICaptchaService {
         return resultMap;
     }
 
+    public Map createText() {
+        Map map = new HashMap<>();
+        String text = kaptchaProducer.createText();
+        UUID uuid = UUID.randomUUID();
+
+        // 存入redis缓存
+        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        // 验证码过期时间为60s
+        valueOperations.set(String.valueOf(uuid), text, 5, TimeUnit.MINUTES);
+
+        log.info("create captcha: { uuid: "+uuid+"\ttext: "+text+" } and save in redis and effective time: 5min .");
+
+        map.put("text", text);
+        map.put("uuid", String.valueOf(uuid));
+
+        return map;
+    }
+
     @Override
     public int verify(String uuid, String text) {
         ValueOperations valueOperations = redisTemplate.opsForValue();
         String textInRedis = (String) valueOperations.get(uuid);
+
+
 
 //        Logger.getLogger(this.getClass().getName()).info("verify: the value of " + uuid+" get in redis is *"+textInRedis+"*");
         if (textInRedis.equals(text)) {

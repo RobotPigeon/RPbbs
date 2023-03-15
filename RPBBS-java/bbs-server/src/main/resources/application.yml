@@ -62,8 +62,8 @@ spring:
     basename: i18n/messages
 
   profiles: 
-    active: druid
-
+#    active: druid
+    active: dev
   # 文件上传
   servlet:
      multipart:
@@ -86,6 +86,20 @@ spring:
 #    database: 0
     # 密码
 #    password:
+  # mail配置
+  mail:
+    host: smtp.qq.com
+    username: 2038240310@qq.com
+    password: hntytxfuvihcdgjf
+    port: 587
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: false
+            required: false
+        debug: true
 
 
 # token配置

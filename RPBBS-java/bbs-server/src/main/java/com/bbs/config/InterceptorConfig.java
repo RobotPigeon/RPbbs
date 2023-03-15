@@ -14,6 +14,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Resource
     private JWTInterceptor jwtInterceptor;
 
+    /**
+     * 拦截器设置
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
