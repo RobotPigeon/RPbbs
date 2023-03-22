@@ -1,8 +1,9 @@
--- rpbbs.`user` definition
+-- rpbbs.`bbs_user` definition
 
 drop table if exists `user`;
+drop table if exists `bbs_user`;
 
-CREATE TABLE `user` (
+CREATE TABLE `bbs_user` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `username` varchar(24) NOT NULL COMMENT '用户名',
   `password` varchar(24) NOT NULL COMMENT '密码',
@@ -14,11 +15,12 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.user_info definition
+-- rpbbs.bbs_user_info definition
 
 drop table if exists `user_info`;
+drop table if exists `bbs_user_info`;
 
-CREATE TABLE `user_info` (
+CREATE TABLE `bbs_user_info` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `user_id` varchar(18) NOT NULL COMMENT '关联用户id',
   `level` int NOT NULL DEFAULT '0' COMMENT '用户等级',
@@ -27,11 +29,12 @@ CREATE TABLE `user_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.block definition
+-- rpbbs.bbs_block definition
 
 drop table if exists `block`;
+drop table if exists `bbs_block`;
 
-CREATE TABLE `block` (
+CREATE TABLE `bbs_block` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `block_name` varchar(12) NOT NULL COMMENT '板块名',
   `pic_path` varchar(100) DEFAULT NULL COMMENT '图片资源路径',
@@ -41,11 +44,12 @@ CREATE TABLE `block` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.card definition
+-- rpbbs.bbs_card definition
 
 drop table if exists `card`;
+drop table if exists `bbs_card`;
 
-CREATE TABLE `card` (
+CREATE TABLE `bbs_card` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `title` varchar(64) NOT NULL COMMENT '标题',
   `message` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '文本内容',
@@ -57,11 +61,12 @@ CREATE TABLE `card` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.card_reply definition
+-- rpbbs.bbs_card_reply definition
 
 drop table if exists `card_reply`;
+drop table if exists `bbs_card_reply`;
 
-CREATE TABLE `card_reply` (
+CREATE TABLE `bbs_card_reply` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `message` text COMMENT '文本内容',
   `create_by_id` varchar(18) NOT NULL COMMENT '创建者id',
@@ -74,11 +79,12 @@ CREATE TABLE `card_reply` (
   UNIQUE KEY `card_reply_un` (`rank`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.card_reply_reply definition
+-- rpbbs.bbs_card_reply_reply definition
 
 drop table if exists `card_reply_reply`;
+drop table if exists `bbs_card_reply_reply`;
 
-CREATE TABLE `card_reply_reply` (
+CREATE TABLE `bbs_card_reply_reply` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `message` text COMMENT '文本内容',
   `create_by_id` varchar(18) NOT NULL COMMENT '创建者id',
@@ -91,11 +97,12 @@ CREATE TABLE `card_reply_reply` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.card_info definition
+-- rpbbs.bbs_card_info definition
 
 drop table if exists `card_info`;
+drop table if exists `bbs_card_info`;
 
-CREATE TABLE `card_info` (
+CREATE TABLE `bbs_card_info` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `card_id` varchar(32) NOT NULL COMMENT '相关帖子id',
   `card_type_id` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '帖子类型',
@@ -105,11 +112,12 @@ CREATE TABLE `card_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- rpbbs.card_type definition
+-- rpbbs.bbs_card_type definition
 
 drop table if exists `card_type`;
+drop table if exists `bbs_card_type`;
 
-CREATE TABLE `card_type` (
+CREATE TABLE `bbs_card_type` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `type_name` varchar(16) NOT NULL DEFAULT ' ' COMMENT '类型名称',
   `create_time` datetime NOT NULL COMMENT '创建时间',
