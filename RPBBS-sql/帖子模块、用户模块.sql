@@ -6,7 +6,7 @@ drop table if exists `bbs_user`;
 CREATE TABLE `bbs_user` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
   `username` varchar(24) NOT NULL COMMENT '用户名',
-  `password` varchar(24) NOT NULL COMMENT '密码',
+  `password` varchar(32) NOT NULL COMMENT '密码',
   `email` varchar(32) DEFAULT NULL COMMENT '邮箱',
   `phone` varchar(12) DEFAULT NULL COMMENT '手机号码',
   `create_time` datetime NOT NULL COMMENT '创建时间',
