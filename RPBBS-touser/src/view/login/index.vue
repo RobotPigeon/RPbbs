@@ -153,7 +153,7 @@ const handleregister = async () => {
             //切换到登录界面
             logOreg.value = true;
             loading.value = false;
-            useAlertStore().setAlert({ message: "注册成功", type: "succee" });
+            useAlertStore().setAlert({ message: "注册成功", type: "success" });
         }).catch(() => {
             loading.value = false;
         });
