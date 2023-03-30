@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectUserVo">
-        select id, username, password, email, phone, create_time, update_time, status from user
+        select id, username, password, email, phone, create_time, update_time, status from bbs_user
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into user
+        insert into bbs_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="username != null and username != ''">username,</if>
             <if test="password != null and password != ''">password,</if>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateUser" parameterType="User">
-        update user
+        update bbs_user
         <trim prefix="SET" suffixOverrides=",">
             <if test="username != null and username != ''">username = #{username},</if>
             <if test="password != null and password != ''">password = #{password},</if>
@@ -73,11 +73,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteUserById" parameterType="Long">
-        delete from user where id = #{id}
+        delete from bbs_user where id = #{id}
     </delete>
 
     <delete id="deleteUserByIds" parameterType="String">
-        delete from user where id in 
+        delete from bbs_user where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
