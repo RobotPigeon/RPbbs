@@ -34,7 +34,8 @@ provide("showAlert", showAlert);
 
 // 获取alert store
 // 监听store中的alert变化
-watch(() => useAlertStore().alert, (newVal: any) => {
+
+watch(() => useAlertStore().alert, (newVal:any) => {
     // 如果有新的alert，就调用showAlert方法
     if (newVal) {
         showAlert(newVal.message, newVal.type);
