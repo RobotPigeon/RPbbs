@@ -18,7 +18,7 @@ function handleChange(e: Event) {
     localValue.value = value
     // If the input is empty and required, set the error message
     if (!value && props.required) {
-        error.value = '此条不能为空'
+        error.value = '请输入内容'
         return
     }
     // If the input is not empty and does not match the pattern, set the error message
