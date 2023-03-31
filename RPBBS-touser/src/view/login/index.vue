@@ -12,9 +12,9 @@
                     <span class="label-text">欢迎登录！</span>
             </label>
             <label class="label">
-                <span class="label-text">电子邮箱</span>
+                <span class="label-text">用户名</span>
             </label>
-            <rp-input type="text" errorValue='请输入正确的用户名' v-model="loginForm.username" :required="true"></rp-input>
+            <rp-input type="text" errorValue='请输入正确的用户名' v-model="loginForm.username" :pattern='/^[\w-]{4,16}$/' :required="true"></rp-input>
             </div>
             <div class="form-control">
             <label class="label">
@@ -53,9 +53,9 @@
                 <span class="label-text">欢迎注册</span>
             </label>
             <label class="label">
-                <span class="label-text">电子邮箱</span>
+                <span class="label-text">用户名</span>
             </label>
-            <rp-input type="text" errorValue='请输入正确的用户名' v-model="registerForm.username" :required="true"></rp-input>
+            <rp-input type="text" errorValue='请输入正确的用户名' v-model="registerForm.username" :pattern='/^[\w-]{4,16}$/' :required="true"></rp-input>
             </div>
             <div class="form-control">
             <label class="label">
