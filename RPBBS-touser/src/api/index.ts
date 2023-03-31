@@ -1,6 +1,8 @@
+import { login } from '@/api/login';
 import router from '@/router';
 import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
 import { inject } from "vue";
+import useuserStore from '@/stores/user';
 import useAlertStore from '@/stores/alert';
 const showAlert = inject("showAlert") as Function;
 // 数据返回的接口
@@ -48,7 +50,11 @@ class RequestHttp {
          */
         this.service.interceptors.request.use(
             (config: InternalAxiosRequestConfig) => {
-                const token = localStorage.getItem('token') || '';
+                //pinia获取token
+                // const token = useUserStore().token;
+                //getters使用
+                const userStore = useuserStore()
+                const token = localStorage.getItem('token') || '' || userStore.getToken;
                 if (token) {
                     config.headers.set('Authorization', token)
                     console.log(config);
@@ -70,11 +76,11 @@ class RequestHttp {
             (response: AxiosResponse) => {
                 const { data, config } = response; // 解构
                 if (data.code === RequestEnums.OVERDUE) {
-                    // 登录信息失效，应跳转到登录页面，并清空本地的token
+                    // 登录信息失效，应跳转到登录页面，并清空本地的token和id
                     localStorage.setItem('token', '');
-                    router.replace({
-                        path: '/login'
-                    })
+                    localStorage.setItem('id','');
+                    //跳转登录页面
+                    router.push('/login');
                     return Promise.reject(data);
                 }
                 // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
@@ -127,3 +133,7 @@ class RequestHttp {
 
 // 导出一个实例对象
 export default new RequestHttp(config);
+
+function useUserStore() {
+    throw new Error('Function not implemented.');
+}

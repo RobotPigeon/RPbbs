@@ -7,7 +7,7 @@
                 <label class="swap swap-rotate">
 
                     <!-- this hidden checkbox controls the state -->
-                    <input type="checkbox" data-toggle-theme="dark,light" data-act-class="ACTIVECLASS"/>
+                    <input type="checkbox" data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" />
 
                     <!-- sun icon -->
                     <svg class="swap-on fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -64,17 +64,17 @@
                             <!-- <span class="badge">New</span> -->
                         </a>
                     </li>
-                    <li><a>注册账号</a></li>
+                    <li><a @click="log()">注册账号</a></li>
                 </ul>
             </div>
             <!-- 用户头像下拉框 -->
         </div>
     </div>
-
 </template>
     
 <script setup lang='ts'>
 import { ref, reactive } from 'vue';
+import useuserStore from '@/stores/user'
 const handleChangeTheme = () => {
     const html = document.getElementsByTagName('html')[0]
     const darkTheme = html.dataset.theme
@@ -85,6 +85,12 @@ const handleChangeTheme = () => {
         html.dataset.theme = 'dark'
     }
 }
+//打印hello world
+function log() {
+    let i = useuserStore().getUser
+    console.log(i);
+}
+
 const avatar: string = 'https://lain.bgm.tv/pic/cover/l/51/0b/278949_zTV4y.jpg';
 </script>
     

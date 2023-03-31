@@ -133,7 +133,7 @@ const registerForm = reactive({
 const codeUrl = ref("");
 function getCode() {
     getCodeImg().then(res => {
-        let data = res.data
+        let data = res.data as any;
         let imgStr: string | undefined = data?.image
         codeUrl.value = "data:image/png;base64," + imgStr;
         //data可能为未定义，所以需要加上？
@@ -172,8 +172,6 @@ const Login = async () => {
         loading.value = true;
         console.log(loginForm);
         useUserStore().Login(loginForm).then(() => {
-            // router.push({ path: "/" });
-            useAlertStore().setAlert({ message: "登录成功", type: "succee" });
         }).catch(() => {
             loading.value = false;
             // 重新获取验证码
