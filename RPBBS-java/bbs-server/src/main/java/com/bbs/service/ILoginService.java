@@ -1,6 +1,6 @@
 package com.bbs.service;
 
-import com.bbs.domain.User;
+import java.util.Map;
 
 public interface ILoginService {
 
@@ -10,6 +10,6 @@ public interface ILoginService {
      * @param password
      * @return
      */
-    public String login(String username, String password);
+    public Map login(String username, String password);
 
 }
