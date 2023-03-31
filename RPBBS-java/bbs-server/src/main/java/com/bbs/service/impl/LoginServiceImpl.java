@@ -4,6 +4,7 @@ import com.bbs.domain.User;
 import com.bbs.mapper.UserMapper;
 import com.bbs.service.ILoginService;
 import com.bbs.service.ITokenService;
+import com.bbs.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class LoginServiceImpl implements ILoginService {
     public String login(String username, String password) {
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(MD5Utils.getHash(password));
 
         try {
             List<User> userList = userMapper.selectUserList(user);
