@@ -14,6 +14,7 @@ namespace Login {
     // 登录成功后返回的token
     export interface LoginResData {
         token: string;
+        user: any;
     }
 }
 // 用户登录
