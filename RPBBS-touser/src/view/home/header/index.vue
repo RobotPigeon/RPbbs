@@ -73,8 +73,9 @@
 </template>
     
 <script setup lang='ts'>
-import { ref, reactive } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import useuserStore from '@/stores/user'
+import { getUserInfo } from '@/api/user';
 const handleChangeTheme = () => {
     const html = document.getElementsByTagName('html')[0]
     const darkTheme = html.dataset.theme
@@ -85,6 +86,17 @@ const handleChangeTheme = () => {
         html.dataset.theme = 'dark'
     }
 }
+//navabar组件挂载时执行
+onMounted(() => {
+    //获取用户信息
+    let id = useuserStore().getUser
+    //如果id不为空则获取用户信息
+    if (id) {
+        getUserInfo(id).then(res => {
+            console.log(res);  
+        })
+    }
+})
 //打印hello world
 function log() {
     let i = useuserStore().getUser
@@ -92,6 +104,7 @@ function log() {
 }
 
 const avatar: string = 'https://lain.bgm.tv/pic/cover/l/51/0b/278949_zTV4y.jpg';
+
 </script>
     
 <style scoped lang='less'>
