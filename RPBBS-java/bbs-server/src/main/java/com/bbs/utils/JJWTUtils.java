@@ -50,11 +50,23 @@ public class JJWTUtils {
         return builder.compact();
     }
 
-    public static String createJWT(Map<String, Object> map) {
+    public static String createJWT(Map<String, Object> map, Long ttlMillis) {
         SecretKey secretKey = generalKey();
+
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+
+        if (ttlMillis == null) {
+            ttlMillis = JWT_TTL;
+        }
+
+        long expMillis = nowMillis + ttlMillis;
+        Date expDate = new Date(expMillis);
 
         JwtBuilder builder = Jwts.builder()
                 .setClaims(map)
+                .setIssuedAt(now)               // 设置签发日期
+                .setExpiration(expDate)         // 设置过期时间
                 .signWith(SignatureAlgorithm.HS256, secretKey);
 
         return  builder.compact();

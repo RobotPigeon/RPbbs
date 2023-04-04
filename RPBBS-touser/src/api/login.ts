@@ -14,12 +14,13 @@ namespace Login {
     // 登录成功后返回的token
     export interface LoginResData {
         token: string;
+        user: any;
     }
 }
 // 用户登录
 export const login = (params: Login.LoginReqForm) => {
     // 返回的数据格式可以和服务端约定
-    return axios.post<Login.LoginResData>('/login', params);
+    return axios.post<Login.LoginResData>('/login/check', params);
 }
 // 获取验证码
 export function getCodeImg() {

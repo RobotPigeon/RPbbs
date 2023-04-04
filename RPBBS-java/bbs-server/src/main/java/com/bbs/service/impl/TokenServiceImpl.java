@@ -15,6 +15,6 @@ public class TokenServiceImpl implements ITokenService {
         Map map = new HashMap<>();
         map.put("id",user.getId());
         map.put("name",user.getUsername());
-        return JJWTUtils.createJWT(map);
+        return JJWTUtils.createJWT(map,86400L);
     }
 }

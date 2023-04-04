@@ -1,41 +1,33 @@
-// user.ts
 import { defineStore } from 'pinia'
-import jwtDecode from 'jwt-decode'
 import { login } from '@/api/login'
-// import { getToken, setToken, removeToken } from '@/utils/auth'
-
-
-// 定义用户信息的接口
-interface User {
-    username: string
-    role: string
-    avatar: string
-    email: string
-}
+import router from '@/router';
 
 export default defineStore('user', {
     state: () => ({
-        token: '',
-        user: null as User | null // 使用类型断言
+        token: '' as any,
+        id: '' as any,
     }),
     actions: {
-        // 从本地存储中读取并解析token
         loadToken() {
             const token = localStorage.getItem('token') || ''
             this.token = token
-            if (token) {
-                this.user = jwtDecode(token) as User // 使用类型断言
-            }
+        },
+        loadUser() {
+            const id = localStorage.getItem('id') || ''
+            console.log(localStorage.getItem('id'));
+
+            this.id = id
         },
         Login(loginForm: Array<{ username: string, password: string, code: string, uuid: string }>[0]) {
-            const username = loginForm.username.trim()
-            const password = loginForm.password
-            const code = loginForm.code
-            const uuid = loginForm.uuid
             return new Promise((resolve, reject) => {
                 login(loginForm).then(res => {
-                    this.token = res.token
+                    this.token = res.data?.token
+                    this.id = res.data?.user.id
+                    localStorage.setItem('id', this.id)
                     localStorage.setItem('token', this.token)
+                    console.log(this.token);
+                    // 跳转到首页
+                    router.push("/");
                 }).catch(error => {
                     reject(error)
                 });
@@ -43,12 +35,14 @@ export default defineStore('user', {
         }
     },
     getters: {
-        // 返回token和用户信息
-        getToken(): string {
+        getToken(): string | null {
+            // 在返回token之前调用loadToken action
+            this.loadToken()
             return this.token
         },
-        getUser(): User | null {
-            return this.user
+        getUser(): any {
+            this.loadUser()
+            return this.id
         }
     }
 })

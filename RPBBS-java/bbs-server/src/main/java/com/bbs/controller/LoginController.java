@@ -4,10 +4,10 @@ import com.bbs.domain.msg.AjaxResult;
 import com.bbs.domain.req.LoginReq;
 import com.bbs.service.ICaptchaService;
 import com.bbs.service.ILoginService;
+import com.bbs.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,15 +24,24 @@ public class LoginController {
     @Autowired
     private ICaptchaService captchaService;
 
+    @Autowired
+    private IUserService userService;
+
 
     @PostMapping("/check")
     public AjaxResult login(@RequestBody LoginReq loginReq) {
         int res = captchaService.verify(loginReq.getUuid(), loginReq.getCode());
-        String token = loginService.login(loginReq.getUsername(), loginReq.getPassword());
+        Map loginResult = loginService.login(loginReq.getUsername(), loginReq.getPassword());
 
         switch (res){
             case 0:{
-                return token != null ? AjaxResult.success("登录成功", new HashMap<String, String>(){{put("token", token);}}) : AjaxResult.error("账号密码错误");
+//                return token != null ? AjaxResult.success("登录成功", new HashMap<String, String>(){{put("token", token);}}) : AjaxResult.error("账号密码错误");
+                if (loginResult.isEmpty()){
+                    return AjaxResult.error("账号密码错误");
+                }
+                else {
+                    return AjaxResult.success("登录成功", loginResult);
+                }
             }
             case 1:{
                 return AjaxResult.error("验证码验证失败");

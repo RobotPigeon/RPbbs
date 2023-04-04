@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectUserInfoVo">
-        select id, user_id, level, message, avatar_path from user_info
+        select id, user_id, level, message, avatar_path from bbs_user_info
     </sql>
 
     <select id="selectUserInfoList" parameterType="UserInfo" resultMap="UserInfoResult">
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertUserInfo" parameterType="UserInfo" useGeneratedKeys="true" keyProperty="id">
-        insert into user_info
+        insert into bbs_user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null and userId != ''">user_id,</if>
             <if test="level != null">level,</if>
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateUserInfo" parameterType="UserInfo">
-        update user_info
+        update bbs_user_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null and userId != ''">user_id = #{userId},</if>
             <if test="level != null">level = #{level},</if>
@@ -60,11 +60,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteUserInfoById" parameterType="Long">
-        delete from user_info where id = #{id}
+        delete from bbs_user_info where id = #{id}
     </delete>
 
     <delete id="deleteUserInfoByIds" parameterType="String">
-        delete from user_info where id in 
+        delete from bbs_user_info where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

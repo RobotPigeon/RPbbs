@@ -68,7 +68,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import { defineProps } from "vue";
 interface Comment {
     id: number; // 评论id
     avatar: string; // 评论者头像

@@ -2,7 +2,6 @@ package com.bbs.controller;
 
 import com.bbs.domain.User;
 import com.bbs.domain.msg.AjaxResult;
-import com.bbs.service.ICaptchaService;
 import com.bbs.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
