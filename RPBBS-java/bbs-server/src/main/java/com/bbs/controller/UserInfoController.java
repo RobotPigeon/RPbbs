@@ -47,6 +47,13 @@ public class UserInfoController
         return AjaxResult.success(userInfoService.selectUserInfoById(id));
     }
 
+    @GetMapping(value = "/userId/{userId}")
+    public AjaxResult getInfoByUserId(@PathVariable("userId")String userId) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(userId);
+        return AjaxResult.success(userInfoService.selectUserInfoList(userInfo));
+    }
+
     /**
      * 新增用户信息
      */
