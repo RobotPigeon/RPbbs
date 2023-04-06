@@ -1,8 +1,8 @@
 package com.bbs.controller;
 
 import java.util.List;
-import javax.servlet.http.HttpServletResponse;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +48,11 @@ public class  BlockController
     {
         return AjaxResult.success(blockService.selectBlockById(id));
     }
+
+    // page方法记得补全
+//    public AjaxResult page() {
+//        blockService.page();
+//    }
 
     /**
      * 新增帖子板块

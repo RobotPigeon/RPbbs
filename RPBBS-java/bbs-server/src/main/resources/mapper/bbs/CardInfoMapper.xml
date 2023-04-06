@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectCardInfoById" parameterType="Long" resultMap="CardInfoResult">
+    <select id="selectCardInfoById" parameterType="Long" resultType="CardInfo">
         <include refid="selectCardInfoVo"/>
         where id = #{id}
     </select>

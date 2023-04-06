@@ -2,7 +2,7 @@ package com.bbs.service;
 
 import java.util.List;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.bbs.domain.Block;
 
 /**
