@@ -1,6 +1,8 @@
 package com.bbs.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.IService;
 import com.bbs.domain.Block;
 
 /**
@@ -9,7 +11,7 @@ import com.bbs.domain.Block;
  * @author wws
  * @date 2023-02-27
  */
-public interface IBlockService 
+public interface IBlockService extends IService<Block>
 {
     /**
      * 查询帖子板块

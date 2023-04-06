@@ -1,6 +1,8 @@
 package com.bbs.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.IService;
 import com.bbs.domain.CardType;
 
 /**
@@ -9,7 +11,7 @@ import com.bbs.domain.CardType;
  * @author ruoyi
  * @date 2023-02-27
  */
-public interface ICardTypeService 
+public interface ICardTypeService extends IService<CardType>
 {
     /**
      * 查询帖子类型

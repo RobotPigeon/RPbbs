@@ -1,6 +1,8 @@
 package com.bbs.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.IService;
 import com.bbs.domain.User;
 
 /**
@@ -9,7 +11,7 @@ import com.bbs.domain.User;
  * @author ruoyi
  * @date 2023-02-27
  */
-public interface IUserService 
+public interface IUserService extends IService<User>
 {
     /**
      * 查询用户

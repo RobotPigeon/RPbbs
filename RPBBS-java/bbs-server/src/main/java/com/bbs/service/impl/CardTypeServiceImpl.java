@@ -1,6 +1,8 @@
 package com.bbs.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.CardTypeMapper;
@@ -14,7 +16,7 @@ import com.bbs.service.ICardTypeService;
  * @date 2023-02-27
  */
 @Service
-public class CardTypeServiceImpl implements ICardTypeService 
+public class CardTypeServiceImpl extends ServiceImpl<CardTypeMapper, CardType> implements ICardTypeService
 {
     @Autowired
     private CardTypeMapper cardTypeMapper;

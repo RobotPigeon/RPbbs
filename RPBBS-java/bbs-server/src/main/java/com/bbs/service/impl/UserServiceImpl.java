@@ -1,6 +1,8 @@
 package com.bbs.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.UserMapper;
@@ -14,7 +16,7 @@ import com.bbs.service.IUserService;
  * @date 2023-02-27
  */
 @Service
-public class UserServiceImpl implements IUserService 
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService
 {
     @Autowired
     private UserMapper userMapper;

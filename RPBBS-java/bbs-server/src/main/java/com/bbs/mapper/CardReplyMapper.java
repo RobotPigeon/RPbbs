@@ -1,6 +1,8 @@
 package com.bbs.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.bbs.domain.CardReply;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,7 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2023-02-27
  */
 @Mapper
-public interface CardReplyMapper 
+public interface CardReplyMapper extends BaseMapper<CardReply>
 {
     /**
      * 查询回复帖子

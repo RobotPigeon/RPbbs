@@ -1,6 +1,8 @@
 package com.bbs.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.IService;
 import com.bbs.domain.CardReply;
 
 /**
@@ -9,7 +11,7 @@ import com.bbs.domain.CardReply;
  * @author ruoyi
  * @date 2023-02-27
  */
-public interface ICardReplyService 
+public interface ICardReplyService extends IService<CardReply>
 {
     /**
      * 查询回复帖子

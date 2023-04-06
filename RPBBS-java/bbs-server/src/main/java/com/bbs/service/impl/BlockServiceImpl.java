@@ -1,6 +1,8 @@
 package com.bbs.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.BlockMapper;
@@ -14,7 +16,7 @@ import com.bbs.service.IBlockService;
  * @date 2023-02-27
  */
 @Service
-public class BlockServiceImpl implements IBlockService 
+public class BlockServiceImpl extends ServiceImpl<BlockMapper, Block> implements IBlockService
 {
     @Autowired
     private BlockMapper blockMapper;
