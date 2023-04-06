@@ -26,5 +26,16 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+//解决跨域
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8081/bbs',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })
+

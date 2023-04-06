@@ -20,7 +20,7 @@ interface ResultData<T = any> extends Result {
     token: string;
     data?: T;
 }
-const URL: string | undefined = import.meta.env.VITE_API
+const URL: string | undefined = '/api'
 enum RequestEnums {
     TIMEOUT = 20000,
     OVERDUE = 600, // 登录失效
