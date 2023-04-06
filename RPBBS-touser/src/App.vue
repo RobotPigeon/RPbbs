@@ -20,7 +20,6 @@ onMounted(() => {
 
 const pinia = createPinia();
 // 使用pinia
-provide('pinia', pinia);
 
 // 定义一个ref来获取Alert组件的实例
 const alert = ref();
@@ -30,12 +29,11 @@ const showAlert = (message: string, type: string) => {
     // 调用Alert组件的showAlert方法
     alert.value.showAlert(message, type);
 };
-provide("showAlert", showAlert);
 
 // 获取alert store
 // 监听store中的alert变化
 
-watch(() => useAlertStore().alert, (newVal:any) => {
+watch(() => useAlertStore().alert, (newVal: any) => {
     // 如果有新的alert，就调用showAlert方法
     if (newVal) {
         showAlert(newVal.message, newVal.type);

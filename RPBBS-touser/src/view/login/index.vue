@@ -162,10 +162,7 @@ const handleregister = async () => {
     }
 }
 
-
-// 注入showAlert方法
-const showAlert = inject("showAlert") as Function;
-
+// 定义响应式变量
 const loading = ref(false);
 const Login = async () => {
     if (errorValue.value) {

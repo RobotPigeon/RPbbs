@@ -4,7 +4,7 @@ import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig, type Ax
 import { inject } from "vue";
 import useuserStore from '@/stores/user';
 import useAlertStore from '@/stores/alert';
-const showAlert = inject("showAlert") as Function;
+
 // 数据返回的接口
 // 定义请求响应参数，不含data
 interface Result {
