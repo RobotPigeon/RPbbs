@@ -40,7 +40,7 @@
                 </svg>
             </button> -->
             <!-- 搜索按钮 -->
-            <button class="btn btn-ghost btn-circle">
+            <!-- <button class="btn btn-ghost btn-circle">
                 <div class="indicator">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -49,7 +49,7 @@
                     </svg>
                     <span class="badge badge-xs badge-primary indicator-item"></span>
                 </div>
-            </button>
+            </button> -->
             <!-- 通知按钮 -->
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle avatar">
@@ -57,14 +57,22 @@
                         <img :src="avatar" />
                     </div>
                 </label>
-                <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
+                <ul tabindex="0" v-if="useuserStore().getUser==''" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
                     <li>
                         <a class="justify-between" href="/login">
-                            登录账号
+                            登录/注册账号
                             <!-- <span class="badge">New</span> -->
                         </a>
                     </li>
-                    <li><a @click="log()">注册账号</a></li>
+                </ul>
+                <ul tabindex="0" v-else class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
+                    <li>
+                        <a class="justify-between" href="/login">
+                            用户中心
+                            <!-- <span class="badge">New</span> -->
+                        </a>
+                    </li>
+                    <li><a @click="log()">退出登录</a></li>
                 </ul>
             </div>
             <!-- 用户头像下拉框 -->
@@ -86,6 +94,13 @@ const handleChangeTheme = () => {
         html.dataset.theme = 'dark'
     }
 }
+//用户信息变数
+const user = reactive({
+    id: '',
+    name: '',
+    avatar: '',
+})
+
 //navabar组件挂载时执行
 onMounted(() => {
     //获取用户信息
@@ -93,7 +108,7 @@ onMounted(() => {
     //如果id不为空则获取用户信息
     if (id) {
         getUserInfo(id).then(res => {
-            console.log(res);  
+            avatar.value = res.data[0].avatarPath
         })
     }
 })
@@ -102,8 +117,8 @@ function log() {
     let i = useuserStore().getUser
     console.log(i);
 }
-
-const avatar: string = 'https://lain.bgm.tv/pic/cover/l/51/0b/278949_zTV4y.jpg';
+//  头像地址
+const avatar = ref('')
 
 </script>
     

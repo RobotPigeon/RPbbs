@@ -46,6 +46,19 @@
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue';
 import rpCard from '@/components/basic/rp-card.vue';
+//引入板块api
+import { getBlocklist } from '@/api/block';
+
+//获取板块列表
+const blocklist = reactive({
+    list: []
+})
+
+//获取板块列表
+getBlocklist().then((res: any) => {
+    blocklist.list = res.data;
+    console.log(blocklist.list);
+})
 const title: string = '如何评价首先是然后再是'
 const useravatar: string = 'https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg'
 const text: string = '啊啊啊啊啊啊啊啊啊啊啊啊啊啊'
