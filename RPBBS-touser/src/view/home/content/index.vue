@@ -1,11 +1,11 @@
 <template>
   <div class=" flex flex-col">
     <div class="flex  bg-base-100 b-4 ha shadow-xl  w-full my1 px2  rounded-box">
-        <div class="avatar p--10 h-30 overflow-hidden items-center rounded">
-          <img :src="useravatar" />
-        </div>
+      <div class="avatar p--10 h-30 overflow-hidden items-center rounded">
+        <img :src="blockimg" />
+      </div>
       <div class="card-body">
-        <h2 class="card-title">{{ title }}</h2>
+        <h2 class="card-title">{{ block }}</h2>
         <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg" @click="toEditor()">发帖</button>
       </div>
     </div>
@@ -34,6 +34,7 @@ import type { Ref } from 'vue';
 import rpCard from '@/components/basic/rp-card.vue';
 import rpEditor from '@/components/basic/rp-editor.vue';
 import router from '@/router';
+import { getBlockDetail } from '@/api/block';
 const loadflag: Ref<boolean> = ref(false);
 const piclist: Array<string> = ['https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg', 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg']
 const username: string = '猪逼巴巴'
@@ -41,7 +42,31 @@ const title: string = '如何评价首先是首先是首先是'
 const useravatar: string = 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg'
 const rank: number = 99
 const text: string = '<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p><p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>'
-const block: string = '逆天板块'
+
+//声明分区头图变数，分区名称变数
+const blockimg: Ref<string> = ref('https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg');
+const block: Ref<string> = ref('默认分区');
+//页面加载时执行
+onMounted(() => {
+  getPostList();
+});
+
+//进入页面后，获取链接参数，有参数获取分区帖子数据，无参数获取默认帖子分页
+function getPostList() {
+  const query = router.currentRoute.value.query;
+  if (query.block) {
+    //根据id获取分区详情
+    console.log(query.block);
+    getBlockDetail(query.block).then((res: any) => {
+      console.log(res.data);
+      blockimg.value = res.data.picPath;
+      block.value = res.data.blockName;
+    })
+  } else {
+    console.log('默认分区');
+  }
+}
+
 
 function toEditor() {
   router.push({ path: "/home/posteditor" });
