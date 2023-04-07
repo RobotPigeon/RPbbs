@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCardInfoVo">
-        select id, card_id, card_type_id, like_num, richtext, source_path from card_info
+        select id, card_id, card_type_id, like_num, richtext, source_path from bbs_card_info
     </sql>
 
     <select id="selectCardInfoList" parameterType="CardInfo" resultMap="CardInfoResult">
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertCardInfo" parameterType="CardInfo" useGeneratedKeys="true" keyProperty="id">
-        insert into card_info
+        insert into bbs_card_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="cardId != null and cardId != ''">card_id,</if>
             <if test="cardTypeId != null and cardTypeId != ''">card_type_id,</if>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateCardInfo" parameterType="CardInfo">
-        update card_info
+        update bbs_card_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="cardId != null and cardId != ''">card_id = #{cardId},</if>
             <if test="cardTypeId != null and cardTypeId != ''">card_type_id = #{cardTypeId},</if>
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteCardInfoById" parameterType="Long">
-        delete from card_info where id = #{id}
+        delete from bbs_card_info where id = #{id}
     </delete>
 
     <delete id="deleteCardInfoByIds" parameterType="String">

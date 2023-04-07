@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBlockVo">
-        select id, block_name, pic_path, create_time, update_time, status from block
+        select id, block_name, pic_path, create_time, update_time, status from bbs_block
     </sql>
 
     <select id="selectBlockList" parameterType="Block" resultMap="BlockResult">
@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertBlock" parameterType="Block" useGeneratedKeys="true" keyProperty="id">
-        insert into block
+        insert into bbs_block
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="blockName != null and blockName != ''">block_name,</if>
             <if test="picPath != null">pic_path,</if>
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateBlock" parameterType="Block">
-        update block
+        update bbs_block
         <trim prefix="SET" suffixOverrides=",">
             <if test="blockName != null and blockName != ''">block_name = #{blockName},</if>
             <if test="picPath != null">pic_path = #{picPath},</if>
@@ -62,11 +62,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteBlockById" parameterType="Long">
-        delete from block where id = #{id}
+        delete from bbs_block where id = #{id}
     </delete>
 
     <delete id="deleteBlockByIds" parameterType="String">
-        delete from block where id in 
+        delete from bbs_block where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

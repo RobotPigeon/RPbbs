@@ -1,5 +1,6 @@
 package com.bbs.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @date 2023-02-27
  */
 @Data
+@TableName(value = "bbs_card")
 public class Card
 {
     private static final long serialVersionUID = 1L;

@@ -3,6 +3,8 @@ package com.bbs.controller;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bbs.domain.CardReply;
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,10 +51,11 @@ public class  BlockController
         return AjaxResult.success(blockService.selectBlockById(id));
     }
 
-    // page方法记得补全
-//    public AjaxResult page() {
-//        blockService.page();
-//    }
+    @GetMapping(value = "/page")
+    public AjaxResult page(@RequestBody Page<Block> page) {
+        IPage data = blockService.page(page);
+        return AjaxResult.success(data);
+    }
 
     /**
      * 新增帖子板块

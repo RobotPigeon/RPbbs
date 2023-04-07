@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCardTypeVo">
-        select id, type_name, create_time, update_time, status from card_type
+        select id, type_name, create_time, update_time, status from bbs_card_type
     </sql>
 
     <select id="selectCardTypeList" parameterType="CardType" resultMap="CardTypeResult">
@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertCardType" parameterType="CardType" useGeneratedKeys="true" keyProperty="id">
-        insert into card_type
+        insert into bbs_card_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="typeName != null and typeName != ''">type_name,</if>
             <if test="createTime != null">create_time,</if>
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateCardType" parameterType="CardType">
-        update card_type
+        update bbs_card_type
         <trim prefix="SET" suffixOverrides=",">
             <if test="typeName != null and typeName != ''">type_name = #{typeName},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
@@ -57,11 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteCardTypeById" parameterType="Long">
-        delete from card_type where id = #{id}
+        delete from bbs_card_type where id = #{id}
     </delete>
 
     <delete id="deleteCardTypeByIds" parameterType="String">
-        delete from card_type where id in 
+        delete from bbs_card_type where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

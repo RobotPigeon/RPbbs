@@ -111,8 +111,8 @@ token:
     # 令牌有效期（默认30分钟）
     expireTime: 30
   
-# MyBatis配置
-mybatis:
+# MyBatisPlus配置
+mybatis-plus:
     # 搜索指定包别名
     typeAliasesPackage: com.bbs.**.domain
     # 配置mapper的扫描，找到所有的mapper.xml映射文件

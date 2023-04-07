@@ -2,6 +2,9 @@ package com.bbs.controller;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bbs.domain.Card;
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +50,12 @@ public class CardInfoController
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
         return AjaxResult.success(cardInfoService.selectCardInfoById(id));
+    }
+
+    @GetMapping(value = "/page")
+    public AjaxResult page(@RequestBody Page<CardInfo> page) {
+        IPage<CardInfo> data = cardInfoService.page(page);
+        return AjaxResult.success(data);
     }
 
     /**

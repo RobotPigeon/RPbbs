@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCardVo">
-        select id, title, message, create_by_id, block_id, create_time, update_time, status from card
+        select id, title, message, create_by_id, block_id, create_time, update_time, status from bbs_card
     </sql>
 
     <select id="selectCardList" parameterType="Card" resultMap="CardResult">
@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertCard" parameterType="Card" useGeneratedKeys="true" keyProperty="id">
-        insert into card
+        insert into bbs_card
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title != null and title != ''">title,</if>
             <if test="message != null">message,</if>
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateCard" parameterType="Card">
-        update card
+        update bbs_card
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null and title != ''">title = #{title},</if>
             <if test="message != null">message = #{message},</if>
@@ -72,11 +72,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteCardById" parameterType="Long">
-        delete from card where id = #{id}
+        delete from bbs_card where id = #{id}
     </delete>
 
     <delete id="deleteCardByIds" parameterType="String">
-        delete from card where id in 
+        delete from bbs_card where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

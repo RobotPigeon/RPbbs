@@ -1,5 +1,6 @@
 package com.bbs.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @date 2023-02-27
  */
 @Data
+@TableName(value = "bbs_user_info")
 public class UserInfo
 {
     private static final long serialVersionUID = 1L;

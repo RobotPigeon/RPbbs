@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCardReplyReplyVo">
-        select id, message, create_by_id, card_id, reply_id, reply_to_id, create_time, update_time, status from card_reply_reply
+        select id, message, create_by_id, card_id, reply_id, reply_to_id, create_time, update_time, status from bbs_card_reply_reply
     </sql>
 
     <select id="selectCardReplyReplyList" parameterType="CardReplyReply" resultMap="CardReplyReplyResult">
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertCardReplyReply" parameterType="CardReplyReply" useGeneratedKeys="true" keyProperty="id">
-        insert into card_reply_reply
+        insert into bbs_card_reply_reply
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="message != null">message,</if>
             <if test="createById != null and createById != ''">create_by_id,</if>
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateCardReplyReply" parameterType="CardReplyReply">
-        update card_reply_reply
+        update bbs_card_reply_reply
         <trim prefix="SET" suffixOverrides=",">
             <if test="message != null">message = #{message},</if>
             <if test="createById != null and createById != ''">create_by_id = #{createById},</if>
@@ -77,11 +77,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteCardReplyReplyById" parameterType="Long">
-        delete from card_reply_reply where id = #{id}
+        delete from bbs_card_reply_reply where id = #{id}
     </delete>
 
     <delete id="deleteCardReplyReplyByIds" parameterType="String">
-        delete from card_reply_reply where id in 
+        delete from bbs_card_reply_reply where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
