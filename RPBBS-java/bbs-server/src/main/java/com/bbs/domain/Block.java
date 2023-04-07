@@ -39,4 +39,14 @@ public class Block
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    public Block() {
+    }
+
+    public Block(Long id, String blockName, Long status, Date createTime, Date updateTime) {
+        this.id = id;
+        this.blockName = blockName;
+        this.status = status;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 }

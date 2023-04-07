@@ -44,4 +44,16 @@ public class Card
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    public Card() {
+    }
+
+    public Card(Long id, String title, String createById, String blockId, Long status, Date createTime, Date updateTime) {
+        this.id = id;
+        this.title = title;
+        this.createById = createById;
+        this.blockId = blockId;
+        this.status = status;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 }
