@@ -51,7 +51,7 @@ getBlocklist().then((res: any) => {
 
 function toPartition(id:string) {
 //跳转到分区，并且传递分区id
-    router.push({ path: '/home', query: { id: id } });
+    router.push({ path: '/home', query: { block: id } });
 }
 </script>
   
