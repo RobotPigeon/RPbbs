@@ -137,6 +137,19 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!-- 文件传输包 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!-- 图片处理 -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.19</version>
+        </dependency>
+
 <!--        &lt;!&ndash; ruoyi核心模块 &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>com.ruoyi</groupId>-->
