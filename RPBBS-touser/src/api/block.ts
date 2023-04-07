@@ -1,5 +1,9 @@
 import axios from './'
-//获取板块信息
+//获取板块列表
 export function getBlocklist() {
-    return axios.get<any>('/block/list')
+    return axios.get<any>('/block/page?page='+1+'&size='+100)
+}
+//获取板块详情
+export function getBlockDetail(id: string) {
+    return axios.get<any>('/block/' + id)
 }

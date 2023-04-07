@@ -7,33 +7,21 @@
                         <span class="card-title">全部分区</span>
                     </div>
                 </div>
-                <div class="card card-side bg-base-100 shadow-xl w-full my1 px2" @click="toPartition()">
+                <div v-for="item in blocklist.list" class="card card-side bg-base-100 shadow-xl w-full my1 px2">
                     <figure>
                         <div class="avatar items-center">
                             <div class="w-24  rounded ml1">
-                                <img :src="useravatar" />
+                                <img :src="item.picPath" />
                             </div>
                         </div>
                     </figure>
                     <div class="card-body w-80%">
-                        <h2 class="card-title">{{ title }}</h2>
-                        <p>{{ text }}</p>
+                        <h2 class="card-title">{{ item.blockName }}</h2>
+                        <!-- <p>{{ text }}</p> -->
                         <span class="stat-desc">发帖:1000/回复:10000</span>
-
-                    </div>
-                </div>
-                <div class="card card-side bg-base-100 shadow-xl w-full my1 px2">
-                    <figure>
-                        <div class="avatar items-center">
-                            <div class="w-24 rounded ml2">
-                                <img :src="useravatar" />
-                            </div>
+                        <div class="flex justify-end">
+                            <button class="btn btn-primary" @click="toPartition(item.id)">进入分区</button>
                         </div>
-                    </figure>
-                    <div class="card-body w-80%">
-                        <h2 class="card-title">New movie is released!</h2>
-                        <p>Click the button to watch on Jetflix app.</p>
-                        <span class="stat-desc">发帖:1000/回复:10000</span>
                     </div>
                 </div>
             </div>
@@ -48,24 +36,22 @@ import type { Ref } from 'vue';
 import rpCard from '@/components/basic/rp-card.vue';
 //引入板块api
 import { getBlocklist } from '@/api/block';
+import router from '@/router';
 
 //获取板块列表
 const blocklist = reactive({
     list: []
-})
+}) as any;
 
 //获取板块列表
 getBlocklist().then((res: any) => {
-    blocklist.list = res.data;
+    blocklist.list = res.data.records;
     console.log(blocklist.list);
 })
-const title: string = '如何评价首先是然后再是'
-const useravatar: string = 'https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg'
-const text: string = '啊啊啊啊啊啊啊啊啊啊啊啊啊啊'
 
-function toPartition(){
-    console.log('进入分区');
-    
+function toPartition(id:string) {
+//跳转到分区，并且传递分区id
+    router.push({ path: '/home', query: { id: id } });
 }
 </script>
   
