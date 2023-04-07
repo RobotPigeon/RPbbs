@@ -1,5 +1,6 @@
 package com.bbs.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -29,8 +30,13 @@ public class  BlockController
      * 查询帖子板块列表
      */
     @GetMapping("/list")
-    public List list(Block block)
+    public List list(@RequestParam Long id,
+                     @RequestParam String blockName,
+                     @RequestParam Long status,
+                     @RequestParam Date createTime,
+                     @RequestParam Date updateTime)
     {
+        Block block = new Block(id,blockName,status,createTime,updateTime);
         List<Block> list = blockService.selectBlockList(block);
         return list;
     }
@@ -45,8 +51,8 @@ public class  BlockController
     }
 
     @GetMapping(value = "/page")
-    public AjaxResult page(@RequestParam("current") Long current
-                            , @RequestParam("size") Long size) {
+    public AjaxResult page(@RequestParam("current") Long current,
+                           @RequestParam("size") Long size) {
         Page page = new Page<>(current, size);
         IPage data = blockService.page(page);
         return AjaxResult.success(data);

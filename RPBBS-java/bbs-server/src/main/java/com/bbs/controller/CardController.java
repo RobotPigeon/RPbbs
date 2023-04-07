@@ -1,5 +1,6 @@
 package com.bbs.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -29,8 +30,15 @@ public class CardController
      * 查询帖子列表
      */
     @GetMapping("/list")
-    public List list(Card card)
+    public List list(@RequestParam Long id,
+                     @RequestParam String title,
+                     @RequestParam String createById,
+                     @RequestParam String blockId,
+                     @RequestParam Long status,
+                     @RequestParam Date createTime,
+                     @RequestParam Date updateTime)
     {
+        Card card = new Card(id,title,createById,blockId,status,createTime,updateTime);
         List<Card> list = cardService.selectCardList(card);
         return list;
     }

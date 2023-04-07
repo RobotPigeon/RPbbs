@@ -4,17 +4,9 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.bbs.domain.CardReply;
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bbs.domain.UserInfo;
 import com.bbs.service.IUserInfoService;
@@ -36,8 +28,12 @@ public class UserInfoController
      * 查询用户信息列表
      */
     @GetMapping("/list")
-    public List list(@RequestBody UserInfo userInfo)
+    public List list(@RequestParam("id") Long id
+                    ,@RequestParam("userId") String userId
+                    ,@RequestParam("level") Long level
+                    ,@RequestParam("message") String message)
     {
+        UserInfo userInfo = new UserInfo(id, userId, level, message);
         return userInfoService.selectUserInfoList(userInfo);
     }
 
@@ -58,7 +54,8 @@ public class UserInfoController
     }
 
     @GetMapping(value = "/page")
-    public AjaxResult page(@RequestBody Page<UserInfo> page) {
+    public AjaxResult page(@RequestParam("current") Long current, @RequestParam("size") Long size) {
+        Page page = new Page<>(current, size);
         IPage data = userInfoService.page(page);
         return AjaxResult.success(data);
     }

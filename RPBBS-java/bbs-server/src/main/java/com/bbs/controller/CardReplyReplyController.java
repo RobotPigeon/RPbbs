@@ -8,14 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.CardReply;
 import com.bbs.domain.msg.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bbs.domain.CardReplyReply;
 import com.bbs.service.ICardReplyReplyService;
@@ -53,7 +46,8 @@ public class CardReplyReplyController
     }
 
     @GetMapping(value = "/page")
-    public AjaxResult page(@RequestBody Page<CardReplyReply> page) {
+    public AjaxResult page(@RequestParam Long current, @RequestParam Long size) {
+        Page page = new Page<>(current,size);
         IPage data = cardReplyReplyService.page(page);
         return AjaxResult.success(data);
     }
