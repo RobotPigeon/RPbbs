@@ -9,11 +9,13 @@ import com.bbs.service.ICardService;
 import com.bbs.service.ICardManageService;
 import com.bbs.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class CardManageServiceImpl implements ICardManageService {
     @Autowired
     private ICardService cardService;
