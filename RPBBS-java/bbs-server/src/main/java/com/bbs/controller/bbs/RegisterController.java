@@ -1,4 +1,4 @@
-package com.bbs.controller;
+package com.bbs.controller.bbs;
 
 import com.bbs.domain.User;
 import com.bbs.domain.msg.AjaxResult;

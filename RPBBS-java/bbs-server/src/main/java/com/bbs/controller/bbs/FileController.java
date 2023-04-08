@@ -1,6 +1,7 @@
-package com.bbs.controller;
+package com.bbs.controller.bbs;
 
 import com.bbs.domain.msg.AjaxResult;
+import com.bbs.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -20,43 +20,11 @@ public class FileController {
     //  D:\workspace_oneself\test_\files    File.separator等同于分隔符"\"
     public static Path filePath = Paths.get("D:"+File.separator+"workspace_oneself"+File.separator+"test_"+File.separator+"files");
 
+
     @PostMapping("/upload")
     public AjaxResult upload(@RequestParam("file") MultipartFile file) throws RuntimeException, IOException {
-        // 文件是否为空
-        if (file.isEmpty()) {
-            return AjaxResult.error("文件不能为空");
-        }
-
-        // 获取文件名
-        String fileName = file.getOriginalFilename();
-//        // 获取文件后缀
-//        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-
-        // 上传文件夹路径
-//        D:\workspace_oneself\test_
-        Path rootPath = FileController.filePath;
-
-        // 路径存在判断
-        if (!Files.exists(rootPath)) {
-            Files.createDirectories(rootPath);
-        }
-//        if (!dest.getParentFile().exists()) {
-//            dest.getParentFile().mkdirs();
-//        }
-
-        // 上传路径
-        Path path = Paths.get(rootPath+File.separator+fileName);
-
-        try {
-            file.transferTo(path);
-            log.info("上传成功后的文件路径未：" + path);
-            return AjaxResult.success(path);
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }  catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return AjaxResult.error("文件上传失败");
+        String filePath = FileUtils.upload(file);
+        return filePath == null ? AjaxResult.error("上传失败") : AjaxResult.success(filePath);
     }
 
     //文件下载相关代码
