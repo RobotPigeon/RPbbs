@@ -43,7 +43,7 @@
                     <div class=" text-center flex justify-around items-center">
                         <label class="swap">
                             <!-- this hidden checkbox controls the state -->
-                            <input type="checkbox" @click="handlelike()" />
+                            <input type="checkbox" @click="cardDetail()" />
                             <svg t="1676885015492" class="swap-off fill-current" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="4240" width="36" height="36">
                                 <path
@@ -92,6 +92,7 @@ import rpCarousel from '@/components/basic/rp-carousel.vue';
 import rpPicgroup from '@/components/basic/rp-picgroup.vue';
 import { ref, reactive } from 'vue';
 import type { Ref } from 'vue';
+import router from '@/router';
 
 const imgSrc: Ref<string> = ref('');
 
@@ -103,6 +104,7 @@ const bigImg = () => {
 
 
 interface Props {
+    id: number
     title: string
     piclist?: Array<string>
     username: string
@@ -124,7 +126,8 @@ function handlelike() {
     console.log('like');
 }
 function cardDetail() {
-    console.log('open card Detail');
+    //跳转帖子详情，携带帖子id
+    router.push({ name: 'postDetail', params: { id: props.id } })
 }
 </script>
 <style lang="less">

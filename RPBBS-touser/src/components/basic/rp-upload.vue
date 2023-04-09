@@ -25,12 +25,13 @@
 
 <script lang='ts' setup >
 import { ref } from "vue";
+import {postArticleFile}    from "@/api/post";
 
 const uploadFiles: any = ref([]);
 const uploading = ref(false);
 const message = ref("");
 const images: any = ref([]);
-
+// 上传文件
 const handleUpload = (event: any) => {
     let selectedFiles = event.target.files;
     if (!selectedFiles) {
@@ -39,35 +40,16 @@ const handleUpload = (event: any) => {
     uploading.value = true;
     for (let i = 0; i < selectedFiles.length; i++) {
         console.log(i, selectedFiles[i]);
-        // upload(i, selectedFiles[i]);
+        uploadFiles.value.push(selectedFiles[i]);
+        //调用上传api，@api/upload
+        postArticleFile(selectedFiles[i]).then((res: any) => {
+            console.log(res);
+            console.log(selectedFiles[i]);
+            if (res.data.code == 200) {
+                images.value.push(res.data.data);
+                message.value = "上传成功";
+            }
+        });
     }
 };
-
-// const upload = (idx: number, file: { name: any; }) => {
-//     let _progress = { name: file.name, progress: 0 };
-//     uploadFiles.value.push(_progress);
-
-//     let formData = new FormData();
-//     post("http://localhost:3000/upload", FormData, {
-//         headers: {
-//             "Content-Type": "multipart/form-data",
-//         },
-//         onUploadProgress: (event: { loaded: number; total: number; }) => {
-//             let progress = Math.round((event.loaded * 100) / event.total);
-//             uploadFiles.value[idx].progress = progress;
-//         },
-//     })
-//     .then((response: { data: any; }) => {
-//         let image = response.data;
-//         images.value.push(image);
-//         uploadFiles.value = [];
-//         message.value = "上传成功";
-//     })
-//     .catch((error: any) => {
-//         console.error(error);
-//         message.value = "上传失败";
-//     });
-// const uploading = computed(() => {
-//     return uploadFiles.value.some((item: { progress: number; }) => item.progress < 100);
-// });
 </script>
