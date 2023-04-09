@@ -9,7 +9,7 @@
 <div class="relative">
     <div class="overflow-hidden">
       <div class="flex transition-all duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * slideWidth}%)` }">
-        <div v-for="(slide, index) in props.list" :key="index" class="w-full flex-shrink-0 overflow-hidden xl:h-md md:h-md sm:h-sm cellphone rounded-box bg-black relative">
+        <div v-for="(slide, index) in props.list" :key="index" class="w-full flex-shrink-0 overflow-hidden xl:h-md md:h-md sm:h-sm cellphone bg-black relative">
         <img :src="slide" alt="" class="xl:h-md md:h-md sm:h-sm cellphone w-a m-a"  @click="bigScale(slide)">
         </div>
     </div>
