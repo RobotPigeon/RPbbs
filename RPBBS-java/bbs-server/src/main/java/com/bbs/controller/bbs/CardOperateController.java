@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.UnknownHostException;
+
 /**
  * 帖子发布之类的功能接口
  */
@@ -51,7 +53,7 @@ public class CardOperateController {
      * @return
      */
     @GetMapping("/page")
-    public AjaxResult cardList(@RequestParam Long current, @RequestParam Long size) {
+    public AjaxResult cardList(@RequestParam Long current, @RequestParam Long size) throws UnknownHostException {
         Page page = new Page<>(current, size);
         IPage<CardVo> cardVoPage = cardOperateService.cardTotalList(page);
 

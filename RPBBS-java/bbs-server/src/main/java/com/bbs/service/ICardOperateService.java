@@ -6,6 +6,7 @@ import com.bbs.domain.dto.CardDto;
 import com.bbs.domain.vo.CardVo;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public interface ICardOperateService {
@@ -21,5 +22,5 @@ public interface ICardOperateService {
      * @param
      * @return
      */
-    public IPage<CardVo> cardTotalList(Page page);
+    public IPage<CardVo> cardTotalList(Page page) throws UnknownHostException;
 }

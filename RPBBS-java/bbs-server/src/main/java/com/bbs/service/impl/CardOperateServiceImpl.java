@@ -13,9 +13,12 @@ import com.bbs.service.ICardOperateService;
 import com.bbs.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +34,9 @@ public class CardOperateServiceImpl implements ICardOperateService {
 
     @Autowired
     private ICardReplyService cardReplyService;
+
+    @Autowired
+    private ServerProperties serverProperties;
 
     @Override
     public int addTotalCard(CardDto cardDto) {
@@ -71,7 +77,7 @@ public class CardOperateServiceImpl implements ICardOperateService {
     }
 
     @Override
-    public IPage<CardVo> cardTotalList(Page page) {
+    public IPage<CardVo> cardTotalList(Page page) throws UnknownHostException {
         IPage<Card> cardList = cardService.page(page);
 
         // get cardId
@@ -101,6 +107,11 @@ public class CardOperateServiceImpl implements ICardOperateService {
             cardVoToGetCommitNum.setCommentNum(commitNum);
         }
 
+        //
+        for (int i=0;i<cardVoList.size();i++) {
+            CardVo cv = cardVoList.get(i);
+            cv.setSourcePath(InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort()+cv.getSourcePath());
+        }
         // create return Page<CardVo>
         Page<CardVo> cardVoPage = new Page<>(page.getCurrent(),page.getSize());
         cardVoPage.setRecords(cardVoList);
@@ -109,10 +120,6 @@ public class CardOperateServiceImpl implements ICardOperateService {
 //        CardInfo cardInfo = new CardInfo();
 //        List cardList = cardService.selectCardList(card);
 //        List cardInfoList = cardInfoService.selectCardInfoList(cardInfo);
-
-        /*
-        帖子具体信息查询方案
-         */
 
         return cardVoPage;
     }
