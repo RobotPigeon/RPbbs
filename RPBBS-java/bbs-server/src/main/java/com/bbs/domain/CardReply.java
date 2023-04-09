@@ -44,4 +44,16 @@ public class CardReply
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    public CardReply() {}
+
+    public CardReply(Long id, String message, String createById, String cardId, Long rank, Long status, Date createTime, Date updateTime) {
+        this.id = id;
+        this.message = message;
+        this.createById = createById;
+        this.cardId = cardId;
+        this.rank = rank;
+        this.status = status;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 }

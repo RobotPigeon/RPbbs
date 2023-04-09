@@ -3,6 +3,7 @@ package com.bbs.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.dto.CardDto;
+import com.bbs.domain.vo.CardReplyVo;
 import com.bbs.domain.vo.CardVo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,5 +23,7 @@ public interface ICardOperateService {
      * @param
      * @return
      */
-    public IPage<CardVo> cardTotalList(Page page) throws UnknownHostException;
+    public IPage<CardVo> cardTotalPage(Page page) throws UnknownHostException;
+
+    public IPage<CardReplyVo> cardReplyPage(Page page, String cardId);
 }

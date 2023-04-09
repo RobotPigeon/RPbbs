@@ -1,18 +1,27 @@
 package com.bbs.controller.bbs;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bbs.domain.CardReply;
+import com.bbs.domain.CardReplyReply;
 import com.bbs.domain.dto.CardDto;
 import com.bbs.domain.msg.AjaxResult;
+import com.bbs.domain.vo.CardReplyVo;
 import com.bbs.domain.vo.CardVo;
 import com.bbs.service.ICardOperateService;
+import com.bbs.service.ICardReplyReplyService;
+import com.bbs.service.ICardReplyService;
 import com.bbs.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.UnknownHostException;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 帖子发布之类的功能接口
@@ -24,6 +33,12 @@ public class CardOperateController {
 
     @Autowired
     private ICardOperateService cardOperateService;
+
+    @Autowired
+    private ICardReplyService cardReplyService;
+
+    @Autowired
+    private ICardReplyReplyService cardReplyReplyService;
 
     /**
      * 帖子发布
@@ -55,10 +70,42 @@ public class CardOperateController {
     @GetMapping("/page")
     public AjaxResult cardList(@RequestParam Long current, @RequestParam Long size) throws UnknownHostException {
         Page page = new Page<>(current, size);
-        IPage<CardVo> cardVoPage = cardOperateService.cardTotalList(page);
+        IPage<CardVo> cardVoPage = cardOperateService.cardTotalPage(page);
 
         if (cardVoPage != null) {
             return AjaxResult.success(cardVoPage);
+        }
+        return AjaxResult.error();
+    }
+
+    @GetMapping("/reply/page")
+    public AjaxResult replyPage(@RequestParam Long current, @RequestParam Long size, @RequestParam String cardId) {
+        Page page = new Page(current,size);
+        IPage<CardReplyVo> cardReplyVoPage = cardOperateService.cardReplyPage(page, cardId);
+        if (cardReplyVoPage != null) {
+            return AjaxResult.success(cardReplyVoPage);
+        }
+        return AjaxResult.error();
+    }
+
+    @PostMapping("/reply")
+    public AjaxResult cardReply(@RequestBody CardReply cardReply) {
+        Long current = System.currentTimeMillis();
+        cardReply.setCreateTime(new Date(current));
+        cardReply.setUpdateTime(new Date(current));
+        if (cardReplyService.insertCardReply(cardReply)>0) {
+            return AjaxResult.success();
+        }
+        return AjaxResult.error();
+    }
+
+    @PostMapping("/reply/reply")
+    public AjaxResult replyReply(@RequestBody CardReplyReply cardReplyReply) {
+        Long current = System.currentTimeMillis();
+        cardReplyReply.setCreateTime(new Date(current));
+        cardReplyReply.setUpdateTime(new Date(current));
+        if (cardReplyReplyService.insertCardReplyReply(cardReplyReply)>0) {
+            return AjaxResult.success();
         }
         return AjaxResult.error();
     }

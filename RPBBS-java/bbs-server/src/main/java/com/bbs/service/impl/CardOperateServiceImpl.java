@@ -1,15 +1,16 @@
 package com.bbs.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.Card;
 import com.bbs.domain.CardInfo;
+import com.bbs.domain.CardReply;
+import com.bbs.domain.CardReplyReply;
 import com.bbs.domain.dto.CardDto;
+import com.bbs.domain.vo.CardReplyVo;
 import com.bbs.domain.vo.CardVo;
-import com.bbs.service.ICardInfoService;
-import com.bbs.service.ICardReplyService;
-import com.bbs.service.ICardService;
-import com.bbs.service.ICardOperateService;
+import com.bbs.service.*;
 import com.bbs.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class CardOperateServiceImpl implements ICardOperateService {
 
     @Autowired
     private ICardReplyService cardReplyService;
+
+    @Autowired
+    private ICardReplyReplyService cardReplyReplyService;
 
     @Autowired
     private ServerProperties serverProperties;
@@ -77,7 +81,7 @@ public class CardOperateServiceImpl implements ICardOperateService {
     }
 
     @Override
-    public IPage<CardVo> cardTotalList(Page page) throws UnknownHostException {
+    public IPage<CardVo> cardTotalPage(Page page) throws UnknownHostException {
         IPage<Card> cardList = cardService.page(page);
 
         // get cardId
@@ -122,5 +126,35 @@ public class CardOperateServiceImpl implements ICardOperateService {
 //        List cardInfoList = cardInfoService.selectCardInfoList(cardInfo);
 
         return cardVoPage;
+    }
+
+    @Override
+    public IPage<CardReplyVo> cardReplyPage(Page page, String cardId) {
+        QueryWrapper<CardReply> cardReplyQueryWrapper = new QueryWrapper<>();
+        cardReplyQueryWrapper.eq("card_id", cardId);
+        IPage<CardReply> replyPage = cardReplyService.page(page, cardReplyQueryWrapper);
+
+        CardReplyReply cardReplyReply = new CardReplyReply();
+        cardReplyReply.setCardId(cardId);
+        List<CardReplyReply> cardReplyReplyList = cardReplyReplyService.selectCardReplyReplyList(cardReplyReply);
+
+        List<CardReplyVo> cardReplyVoList = new ArrayList<>();
+
+        for (CardReply cr:replyPage.getRecords()) {
+            CardReplyVo cardReplyVo = new CardReplyVo(cr);
+            List<CardReplyReply> cardReplyVoInnerList = new ArrayList<>();
+            for (CardReplyReply crr:cardReplyReplyList) {
+                if (crr.getReplyId().equals(cr.getId().toString())) {
+                    cardReplyVoInnerList.add(crr);
+                }
+            }
+            cardReplyVo.setCardReplyReplyList(cardReplyVoInnerList);
+            cardReplyVoList.add(cardReplyVo);
+        }
+
+        Page<CardReplyVo> cardReplyVoIPage = new Page(page.getCurrent(), page.getSize());
+        cardReplyVoIPage.setRecords(cardReplyVoList);
+
+        return cardReplyVoIPage;
     }
 }
