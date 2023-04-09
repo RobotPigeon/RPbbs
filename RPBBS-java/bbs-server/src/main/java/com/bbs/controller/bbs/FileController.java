@@ -3,12 +3,15 @@ package com.bbs.controller.bbs;
 import com.bbs.domain.msg.AjaxResult;
 import com.bbs.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.InetAddress;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -20,10 +23,13 @@ public class FileController {
     //  D:\workspace_oneself\test_\files    File.separator等同于分隔符"\"
     public static Path filePath = Paths.get("D:"+File.separator+"workspace_oneself"+File.separator+"test_"+File.separator+"files");
 
+    @Autowired
+    private ServerProperties serverProperties;
 
     @PostMapping("/upload")
     public AjaxResult upload(@RequestParam("file") MultipartFile file) throws RuntimeException, IOException {
-        String filePath = FileUtils.upload(file);
+        InetAddress localHost = InetAddress.getLocalHost();
+        String filePath = localHost.getHostAddress()+":"+ serverProperties.getPort() + FileUtils.upload(file);
         return filePath == null ? AjaxResult.error("上传失败") : AjaxResult.success(filePath);
     }
 
