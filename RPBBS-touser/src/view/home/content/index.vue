@@ -6,7 +6,7 @@
       </div>
       <div class="card-body">
         <h2 class="card-title">{{ block }}</h2>
-        <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg" @click="toEditor()">发帖</button>
+        <!-- <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg" @click="toEditor()">发帖</button> -->
       </div>
     </div>
     <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-100vh">
