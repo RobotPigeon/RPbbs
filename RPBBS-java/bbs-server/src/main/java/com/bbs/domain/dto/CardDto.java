@@ -53,9 +53,6 @@ public class CardDto {
     /** 资源路径 */
     private String sourcePath;
 
-    /** 资源文件 */
-    private MultipartFile sourceFile;
-
     public CardDto() {}
 
     public CardDto(Card card, CardInfo cardInfo) {

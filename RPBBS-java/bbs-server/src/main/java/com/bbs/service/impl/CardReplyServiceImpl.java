@@ -2,6 +2,7 @@ package com.bbs.service.impl;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,16 @@ public class CardReplyServiceImpl extends ServiceImpl<CardReplyMapper, CardReply
         return cardReplyMapper.selectCardReplyList(cardReply);
     }
 
+    @Override
+    public Long countCardReplyByCardId(String cardId) {
+        QueryWrapper<CardReply> wrapper = new QueryWrapper<>();
+        wrapper.eq("card_id", cardId);
+        return cardReplyMapper.selectCount(wrapper);
+    }
+
     /**
      * 新增回复帖子
-     * 
+     *
      * @param cardReply 回复帖子
      * @return 结果
      */

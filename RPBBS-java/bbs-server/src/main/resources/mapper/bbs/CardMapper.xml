@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="title != null  and title != ''"> and title = #{title}</if>
             <if test="message != null  and message != ''"> and message = #{message}</if>
             <if test="createById != null  and createById != ''"> and create_by_id = #{createById}</if>
+            <if test="createTime != null"> and create_time = Date(#{createTime,javaType=Date})</if>
             <if test="blockId != null  and blockId != ''"> and block_id = #{blockId}</if>
             <if test="status != null "> and status = #{status}</if>
         </where>

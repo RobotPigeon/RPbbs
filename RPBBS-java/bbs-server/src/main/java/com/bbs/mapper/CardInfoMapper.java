@@ -31,6 +31,8 @@ public interface CardInfoMapper extends BaseMapper<CardInfo>
      */
     public List<CardInfo> selectCardInfoList(CardInfo cardInfo);
 
+    public List<CardInfo> selectCardInfoByCardIds(Long[] ids);
+
     /**
      * 新增帖子信息
      * 

@@ -30,6 +30,13 @@ public interface ICardReplyService extends IService<CardReply>
     public List<CardReply> selectCardReplyList(CardReply cardReply);
 
     /**
+     * 统计回复数量
+     * @param cardId
+     * @return
+     */
+    public Long countCardReplyByCardId(String cardId);
+
+    /**
      * 新增回复帖子
      * 
      * @param cardReply 回复帖子

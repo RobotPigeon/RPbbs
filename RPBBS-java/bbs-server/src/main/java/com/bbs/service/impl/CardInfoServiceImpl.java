@@ -45,6 +45,11 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
         return cardInfoMapper.selectCardInfoList(cardInfo);
     }
 
+    @Override
+    public List<CardInfo> selectCardInfoByCardIds(Long[] ids) {
+        return cardInfoMapper.selectCardInfoByCardIds(ids);
+    }
+
     /**
      * 新增帖子信息
      * 

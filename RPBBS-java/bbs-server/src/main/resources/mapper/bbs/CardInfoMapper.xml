@@ -73,4 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectCardInfoByCardIds" resultType="CardInfo">
+        <include refid="selectCardInfoVo" />
+        <where>
+            <foreach collection="array" item="id" separator="or">
+                card_id = #{id}
+            </foreach>
+        </where>
+    </select>
 </mapper>
