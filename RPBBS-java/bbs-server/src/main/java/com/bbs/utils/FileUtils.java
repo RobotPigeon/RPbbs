@@ -24,7 +24,7 @@ public class FileUtils {
         // 获取文件名
         String fileName = file.getOriginalFilename();
         // 获取文件后缀
-//        String fileSuffix = fileName.substring(fileName.lastIndexOf(".")).replace(".","");
+        String fileSuffix = fileName.substring(fileName.lastIndexOf(".")).replace(".","");
 
         // 上传文件夹路径
         // D:\workspace_oneself\test_
@@ -40,7 +40,7 @@ public class FileUtils {
         }
 
         // 上传文件路径
-        Path path = Paths.get(rootPath + File.separator + fileName);
+        Path path = Paths.get(rootPath + File.separator + System.currentTimeMillis() + "." + fileSuffix);
 
         try {
             file.transferTo(path);
