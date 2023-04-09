@@ -57,7 +57,8 @@
                         <img :src="avatar" />
                     </div>
                 </label>
-                <ul tabindex="0" v-if="useuserStore().getUser==''" class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
+                <ul tabindex="0" v-if="useuserStore().getUser == ''"
+                    class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
                     <li>
                         <a class="justify-between" href="/login">
                             登录/注册账号
@@ -65,10 +66,11 @@
                         </a>
                     </li>
                 </ul>
-                <ul tabindex="0" v-else class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
+                <ul tabindex="0" v-else
+                    class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
                     <li>
-                        <a class="justify-between" href="/login">
-                            用户中心
+                        <a class="justify-between" href="/home/posteditor">
+                            帖子发布
                             <!-- <span class="badge">New</span> -->
                         </a>
                     </li>

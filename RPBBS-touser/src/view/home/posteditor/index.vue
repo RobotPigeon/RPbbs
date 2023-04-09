@@ -7,16 +7,19 @@
                         <span class="card-title">贴文编辑</span>
                     </div>
                 </div>
-                <div class="card bg-base-100 shadow-2xl w-full mt2 p2">
+                <div class="card bg-base-100 w-full h-a mt2 p2">
                     <label class="label">选择分区</label>
                     <rp-select :options="blocklist.list" v-model="blockName"></rp-select>
                     <!-- <label class="label">帖子类型</label>
                     <rp-select :options="options" v-model="PostType"></rp-select> -->
                     <rp-editor class="min-h-sm mt-2" @contentChanged="handleContentChange"></rp-editor>
                     <rp-upload ref="refupload"/>
-
-                    <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg mt10" @click="postPost()">发帖</button>
+                    <div class="fixed bottom-0 right-0 mb-4 mr-4">
+                        <button class="btn btn-3xl h-10" @click="postPost()">发帖</button>
+                    </div>
+                    
                 </div>
+
             </div>
         </div>
 
@@ -53,13 +56,13 @@ const PostType = ref('')
 const handleContentChange = (newContent: string) => {
     // do something with the new content here
     console.log(newContent)
-    
+
 }
 function postPost() {
     console.log('发帖');
     //vue3中获取upload组件中defineExpose中的images
     const refupload = ref();
     console.log(refupload);
-    
+
 }
 </script>

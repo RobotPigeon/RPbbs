@@ -23,6 +23,7 @@
                 <img :src="image.indexOf('http://') == -1 ? 'http://'+image : image" class="w-full h-48 object-cover">
             </li>
         </ul>
+        <div class="h-20"></div>
     </div>
 </template>
 
