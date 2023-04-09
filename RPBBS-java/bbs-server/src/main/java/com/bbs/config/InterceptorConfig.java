@@ -24,6 +24,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/bbs/login/**"
                                     , "/bbs/register/**"
+                                    , "/bbs/file/**"
                                     , "/img/**"
                                     , "/swagger-ui/**"
                                     , "/v3/**"
