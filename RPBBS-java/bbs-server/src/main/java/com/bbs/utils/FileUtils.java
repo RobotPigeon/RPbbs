@@ -12,7 +12,8 @@ import java.nio.file.Paths;
 @Slf4j
 public class FileUtils {
 
-    private static Path filePath = Paths.get("D:"+File.separator+"workspace_oneself"+File.separator+"test_"+File.separator+"files");
+    public static Path filePath = Paths.get("D:"+File.separator+"workspace_oneself"+File.separator+"test_"+File.separator+"files");
+//    public static Path filePath = Paths.get(System.getProperty("user.dir")+File.separator+"files");
 
     public static String upload(MultipartFile file) {
         // 文件是否为空
@@ -22,10 +23,12 @@ public class FileUtils {
 
         // 获取文件名
         String fileName = file.getOriginalFilename();
+        // 获取文件后缀
+//        String fileSuffix = fileName.substring(fileName.lastIndexOf(".")).replace(".","");
 
         // 上传文件夹路径
         // D:\workspace_oneself\test_
-        Path rootPath = filePath;
+        Path rootPath = Paths.get(filePath + File.separator);
 
         // 路径存在判断
         if (!Files.exists(rootPath)) {
@@ -37,7 +40,7 @@ public class FileUtils {
         }
 
         // 上传文件路径
-        Path path = Paths.get(rootPath+ File.separator+fileName);
+        Path path = Paths.get(rootPath + File.separator + fileName);
 
         try {
             file.transferTo(path);

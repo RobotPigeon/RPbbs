@@ -18,17 +18,18 @@ public class InterceptorConfig implements WebMvcConfigurer {
      * 拦截器设置
      * @param registry
      */
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(jwtInterceptor)
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/bbs/login/**"
-//                                    , "/bbs/register/**"
-//                                    , "/swagger-ui/**"
-//                                    , "/v3/**"
-//                                    , "/swagger-resources/**"
-//                                    , "/webjars/**");
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwtInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/bbs/login/**"
+                                    , "/bbs/register/**"
+                                    , "/img/**"
+                                    , "/swagger-ui/**"
+                                    , "/v3/**"
+                                    , "/swagger-resources/**"
+                                    , "/webjars/**");
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
