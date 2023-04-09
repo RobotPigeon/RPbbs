@@ -26,6 +26,8 @@ public class FileUtils {
         // 获取文件后缀
         String fileSuffix = fileName.substring(fileName.lastIndexOf(".")).replace(".","");
 
+        fileName = System.currentTimeMillis() + "." + fileSuffix;
+
         // 上传文件夹路径
         // D:\workspace_oneself\test_
         Path rootPath = Paths.get(filePath + File.separator);
@@ -40,7 +42,7 @@ public class FileUtils {
         }
 
         // 上传文件路径
-        Path path = Paths.get(rootPath + File.separator + System.currentTimeMillis() + "." + fileSuffix);
+        Path path = Paths.get(rootPath + File.separator + fileName);
 
         try {
             file.transferTo(path);
