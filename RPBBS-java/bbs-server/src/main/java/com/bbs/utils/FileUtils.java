@@ -44,8 +44,11 @@ public class FileUtils {
 
         try {
             file.transferTo(path);
-            log.info("上传成功后的文件路径为：" + path);
-            return String.valueOf(path);
+            log.info("上传成功后的服务器本地文件路径为：" + path);
+            Path urlPath = Paths.get(File.separator+"img"+File.separator+fileName);
+            log.info("映射网址路径："+urlPath);
+
+            return String.valueOf(urlPath);
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }  catch (IOException e) {
