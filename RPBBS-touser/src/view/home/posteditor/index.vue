@@ -13,7 +13,7 @@
                     <!-- <label class="label">帖子类型</label>
                     <rp-select :options="options" v-model="PostType"></rp-select> -->
                     <rp-editor class="min-h-sm mt-2" @contentChanged="handleContentChange"></rp-editor>
-                    <rp-upload></rp-upload>
+                    <rp-upload ref="refupload"/>
 
                     <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg mt10" @click="postPost()">发帖</button>
                 </div>
@@ -22,7 +22,7 @@
 
     </main>
 </template>
-  
+
 <script setup lang='ts'>
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue';
@@ -38,7 +38,7 @@ const blocklist = reactive({
 }) as any;
 onMounted(() => {
     getBlocklist().then((res: any) => {
-//遍历板块列表，将板块id和板块名称放入数组中
+        //遍历板块列表，将板块id和板块名称放入数组中
         blocklist.list = res.data.records.map((item: any) => {
             return {
                 value: item.id,
@@ -53,11 +53,13 @@ const PostType = ref('')
 const handleContentChange = (newContent: string) => {
     // do something with the new content here
     console.log(newContent)
+    
 }
 function postPost() {
     console.log('发帖');
-
+    //vue3中获取upload组件中defineExpose中的images
+    const refupload = ref();
+    console.log(refupload);
+    
 }
 </script>
-  
-<style scoped lang='less'></style>

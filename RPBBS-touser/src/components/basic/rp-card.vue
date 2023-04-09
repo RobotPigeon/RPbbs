@@ -43,7 +43,7 @@
                     <div class=" text-center flex justify-around items-center">
                         <label class="swap">
                             <!-- this hidden checkbox controls the state -->
-                            <input type="checkbox" @click="cardDetail()" />
+                            <input type="checkbox" @click="cardDetail(props.id)" />
                             <svg t="1676885015492" class="swap-off fill-current" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="4240" width="36" height="36">
                                 <path
@@ -125,9 +125,9 @@ function handleclog() {
 function handlelike() {
     console.log('like');
 }
-function cardDetail() {
-    //跳转帖子详情，携带帖子id
-    router.push({ name: 'postDetail', params: { id: props.id } })
+function cardDetail(id: number) {
+    //跳转帖子详情，传入帖子id
+    router.push({ path: '/home/postDetail', query: { postid: id } });
 }
 </script>
 <style lang="less">

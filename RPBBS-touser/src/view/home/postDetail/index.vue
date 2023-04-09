@@ -1,10 +1,10 @@
 <template>
-        <div class="flex b-1 shadow-xl  w-full rounded-box flex-col flex">
-            <div class="alert shadow-2xl  bg-base-100">
-                <div>
-                    <span class="card-title h-2vh">贴文详情</span>
-                </div>
+    <div class="flex b-1 shadow-xl  w-full rounded-box flex-col flex">
+        <div class="alert shadow-2xl  bg-base-100">
+            <div>
+                <span class="card-title h-2vh">贴文详情</span>
             </div>
+        </div>
         <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-90vh">
             <div class="flex w-full mx-auto px-0 py-0">
                 <div class="flex flex-col w-full h-full">
@@ -101,8 +101,14 @@ const comments = [ // 父组件的评论数据
         ]
     },
 ]
+
 function toEditor() {
     router.push({ path: "/home/posteditor" });
+}
+//跳转进入该页面时，获取路由参数
+function getParams() {
+    const params = router.currentRoute.value.query;
+    console.log(params.postid);
 }
 
 //监听滚动方法
@@ -119,6 +125,7 @@ function scrollHandle() {
 }
 
 onMounted(() => {
+    getParams();
     //组件挂载时，添加scroll监听
     const postcontent = document.getElementsByClassName('postcontent')[0];
     postcontent.addEventListener("scroll", scrollHandle, true);

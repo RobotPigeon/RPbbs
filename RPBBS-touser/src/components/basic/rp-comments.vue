@@ -67,7 +67,8 @@
         </div>
     </div>
 </template>
-<script setup lang="ts">
+<script setup lang="ts">import type { PropType } from 'vue';
+
 interface Comment {
     id: number; // 评论id
     avatar: string; // 评论者头像
@@ -78,7 +79,8 @@ interface Comment {
     replyperson?: Array<{ id: string; username: string }>[0] | undefined;
     replies: Comment[]; // 楼中楼回复列表
 }
-const props = defineProps({
-    comments: Array<Comment> // 定义一个数组类型的prop，用于传入评论数据
-});
+
+const props = defineProps<{
+    comments: any;
+}>();
 </script>

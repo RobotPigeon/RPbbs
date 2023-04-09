@@ -59,6 +59,8 @@ class RequestHttp {
                     config.headers.set('Authorization', token)
                     console.log(config);
                 }
+                //如果请求是传送文件给后端config.headers.set('Content-Type', 'multipart/form-data')
+
 
                 return config
             },
@@ -78,7 +80,7 @@ class RequestHttp {
                 if (data.code === RequestEnums.OVERDUE) {
                     // 登录信息失效，应跳转到登录页面，并清空本地的token和id
                     localStorage.setItem('token', '');
-                    localStorage.setItem('id','');
+                    localStorage.setItem('id', '');
                     //跳转登录页面
                     router.push('/login');
                     return Promise.reject(data);
