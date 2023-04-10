@@ -12,10 +12,10 @@
     <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-100vh">
       <div class="flex w-full mx-auto px-0 py-0">
         <div class="flex flex-col w-full h-full">
-          <rp-card :useravatar="item.userInfo.avatarPath" username="kzyzz" :liked="false" :rank="item.userInfo.level"
-            :id="item.cardId" :block="item.blockInfo.blockName" :title="item.title" :richtext="item.richtext"
-            v-for="item in postlist" :key="item.cardId" :piclist="item.sourcePath" :comment-num="item.commentNum"
-            :like-num="item.likeNum" :post="item"></rp-card>
+          <rp-card :useravatar="item.userInfo.avatarPath" :username="item.userInfo.nickname" :liked="false"
+            :rank="item.userInfo.level" :id="item.cardId" :block="item.blockInfo.blockName" :title="item.title"
+            :richtext="item.richtext" v-for="item in postlist" :key="item.cardId" :piclist="item.sourcePath"
+            :comment-num="item.commentNum" :like-num="item.likeNum" :post="item"></rp-card>
         </div>
       </div>
     </div>
@@ -64,9 +64,9 @@ function getPostList() {
 
 //获取帖子列表使用@api中post的getArticle方法
 function getArticleList() {
-  if(router.currentRoute.value.query.block){
+  if (router.currentRoute.value.query.block) {
     block.value = router.currentRoute.value.query.block;
-  }else{
+  } else {
     block.value = '';
   }
   getArticle(page.value, 3, block.value).then((res: any) => {

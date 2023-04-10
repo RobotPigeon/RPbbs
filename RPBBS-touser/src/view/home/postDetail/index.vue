@@ -97,8 +97,11 @@ function getComments(page: number) {
     const params: any = router.currentRoute.value.query;
     //根据取得的params.postid，调用评论接口，获取评论数据
     getReply(page, 10, params.postid).then(res => {
+        //如果上次获取的数据为空，则不再获取
+        //将获取到的数据赋值给comments
         console.log(res.data.records);
-        comments.value = res.data.records;
+        // comments.value = res.data.records;
+        comments.value = comments.value.concat(res.data.records);
         //根据res.data.records.createById，调用用户接口，获取用户信息
         for (const element of comments.value) {
             getUserInfo(element.createById).then(res => {
@@ -106,6 +109,24 @@ function getComments(page: number) {
                 element.useravatar = res.data[0].avatarPath;
                 element.rank = res.data[0].level;
             })
+        }
+        //根据res.data.records.cardReplyReplyList.replyToId，调用用户接口，获取被回复用户信息
+        for (const element of comments.value) {
+            for (const item of element.cardReplyReplyList) {
+                getUserInfo(item.replyToId).then(res => {
+                    item.replyusername = res.data[0].nickname;
+                })
+            }
+        }
+
+        for (const element of comments.value) {
+            for (const item of element.cardReplyReplyList) {
+                getUserInfo(item.createById).then(res => {
+                    item.username = res.data[0].nickname;
+                    item.useravatar = res.data[0].avatarPath;
+                    item.rank = res.data[0].level;
+                })
+            }
         }
     })
 }
