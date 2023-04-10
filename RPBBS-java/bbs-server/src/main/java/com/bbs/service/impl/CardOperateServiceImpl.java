@@ -96,8 +96,12 @@ public class CardOperateServiceImpl implements ICardOperateService {
     }
 
     @Override
-    public IPage<CardVo> cardTotalPage(Page page) throws UnknownHostException {
-        IPage<Card> cardList = cardService.page(page);
+    public IPage<CardVo> cardTotalPage(Page page, String blockId) throws UnknownHostException {
+        QueryWrapper<Card> wrapper = new QueryWrapper<>();
+        if (!blockId.equals("") && blockId != null) {
+            wrapper.eq("block_id", blockId);
+        }
+        IPage<Card> cardList = cardService.page(page, wrapper);
 
         // get cardId
         List<Long> cardIdList = new ArrayList<>();

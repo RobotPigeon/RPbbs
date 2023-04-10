@@ -23,7 +23,7 @@ public interface ICardOperateService {
      * @param
      * @return
      */
-    public IPage<CardVo> cardTotalPage(Page page) throws UnknownHostException;
+    public IPage<CardVo> cardTotalPage(Page page, String blockId) throws UnknownHostException;
 
     public IPage<CardReplyVo> cardReplyPage(Page page, String cardId);
 }

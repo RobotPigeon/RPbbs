@@ -70,9 +70,9 @@ public class CardOperateController {
      * @return
      */
     @GetMapping("/page")
-    public AjaxResult cardList(@RequestParam Long current, @RequestParam Long size) throws UnknownHostException {
+    public AjaxResult cardList(@RequestParam Long current, @RequestParam Long size, @RequestParam String blockId) throws UnknownHostException {
         Page page = new Page<>(current, size);
-        IPage<CardVo> cardVoPage = cardOperateService.cardTotalPage(page);
+        IPage<CardVo> cardVoPage = cardOperateService.cardTotalPage(page, blockId);
 
         if (cardVoPage != null) {
             return AjaxResult.success(cardVoPage);
