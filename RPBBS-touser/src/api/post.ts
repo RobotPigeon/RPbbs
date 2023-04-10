@@ -2,7 +2,7 @@ import axios from './'
 //发布贴文
 
 export function postArticle(data: any) {
-    return axios.post<any>('/article', data)
+    return axios.post<any>('/card_center/submit', data)
 }
 //帖子文件上传
 export function postArticleFile(data: FormData) {

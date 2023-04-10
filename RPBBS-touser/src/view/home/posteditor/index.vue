@@ -8,16 +8,20 @@
                     </div>
                 </div>
                 <div class="card bg-base-100 w-full h-a mt2 p2">
+                    <label class="label">贴文标题</label>
+                    <rp-input type="text" v-model="post.title" required errorValue="请输入标题"></rp-input>
                     <label class="label">选择分区</label>
-                    <rp-select :options="blocklist.list" v-model="blockName"></rp-select>
+                    <rp-select :options="blocklist.list" v-model="post.blockId"></rp-select>
                     <!-- <label class="label">帖子类型</label>
                     <rp-select :options="options" v-model="PostType"></rp-select> -->
+                    <label class="label">贴文编辑</label>
                     <rp-editor class="min-h-sm mt-2" @contentChanged="handleContentChange"></rp-editor>
-                    <rp-upload ref="refupload"/>
+                    <label class="label">贴文图片</label>
+                    <rp-upload @upload="handleUpload"></rp-upload>
                     <div class="fixed bottom-0 right-0 mb-4 mr-4">
                         <button class="btn btn-3xl h-10" @click="postPost()">发帖</button>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -27,12 +31,17 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import type { Ref } from 'vue';
 import rpEditor from '@/components/basic/rp-editor.vue';
 import rpUpload from '@/components/basic/rp-upload.vue';
 import rpSelect from '@/components/basic/rp-select.vue';
+import useAlertStore from '@/stores/alert';
+import useUserStore from "@/stores/user";
+import rpInput from '@/components/basic/rp-input.vue';
 import { getBlocklist } from '@/api/block';
+import { postArticle } from '@/api/post';
+import router from '@/router';
 
 //进入编辑器后，获取板块列表/bbs/block/list
 //获取板块列表
@@ -49,20 +58,62 @@ onMounted(() => {
             }
         });
     })
+    //获取当前用户信息从pinia中获取
+    const user = useUserStore().getUser;
+    //将用户信息放入帖子中
+    post.createById = user;
+    //帖子类型默认为1
+    post.cardTypeId = 1;
+
 })
-const blockName = ref('')
-const PostType = ref('')
+//创建帖子类
+const post = reactive({
+    title: '',
+    message: '',
+    createById: '',
+    blockId: '',
+    status: '',
+    cardTypeId: '',
+    likeNum: '',
+    richtext: '',
+    sourcePath: '',
+    sourceFile: ''
+}) as any;
+
+
+//handleUpload接收upload的emit事件
+const handleUpload = (url: string) => {
+    //将images放入帖子图片数组中
+    post.sourcePath = url;
+}
 
 const handleContentChange = (newContent: string) => {
-    // do something with the new content here
-    console.log(newContent)
+    post.richtext = newContent;
 
 }
-function postPost() {
-    console.log('发帖');
-    //vue3中获取upload组件中defineExpose中的images
-    const refupload = ref();
-    console.log(refupload);
+const postPost = () => {
+    //发帖前检查是否该填的填了，同时富文本不带标签的字数实际字数是否大于50字
+    if (post.title == '' || post.richtext == '' || post.blockId == '') {
+        //使用showalert组件
+        useAlertStore().setAlert({ message: "请填写完整内容", type: "error" });
+        return;
+    }
+    if (post.richtext.replace(/<[^>]+>/g, "").length < 50) {
+        useAlertStore().setAlert({ message: "请填写至少50字的内容", type: "error" });
+        return;
+    }
+    //帖子类型默认为1
+    post.cardTypeId = 1;
+    console.log(post);
+    //调用发帖接口,@/api中的post.ts
+    postArticle(post).then((res: any) => {
+        console.log(res);
+        if (res.code == 200) {
+            useAlertStore().setAlert({ message: "发帖成功", type: "success" });
+            //跳转到首页
+            router.push({ name: "home" });
+        }
+    })
 
 }
 </script>

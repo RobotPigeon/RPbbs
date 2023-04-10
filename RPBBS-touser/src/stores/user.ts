@@ -37,6 +37,7 @@ export default defineStore('user', {
     getters: {
         getToken(): string | null {
             // 在返回token之前调用loadToken action
+            //loadToken action会从localStorage中获取token并赋值给state中的token
             this.loadToken()
             return this.token
         },

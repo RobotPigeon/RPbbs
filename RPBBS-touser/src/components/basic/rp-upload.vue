@@ -35,6 +35,8 @@ const uploadFiles: any = ref([]);
 const uploading = ref(false);
 const message = ref("");
 const images: any = ref([]);
+//设置emit事件
+const emit = defineEmits(["upload"]);
 // 上传文件
 const handleUpload = (event: any) => {
     let selectedFiles = event.target.files;
@@ -68,6 +70,8 @@ const handleUpload = (event: any) => {
                 message.value = "";
             }, 500);
         })
+        //上传完毕后触发upload事件
+        emit("upload", images.value);
     }
 };
 </script>
