@@ -10,7 +10,8 @@
                 <div class="flex flex-col w-full h-full">
                     <rp-detailcard :username="postDetail.username" :liked="true" :like-num="10000" :comment-num="10000"
                         :richtext="postDetail.text" :useravatar="postDetail.useravatar" :rank="postDetail.rank"
-                        :piclist="postDetail.piclist" :title="postDetail.title" :block="postDetail.blockName"></rp-detailcard>
+                        :piclist="postDetail.piclist" :title="postDetail.title"
+                        :block="postDetail.blockName"></rp-detailcard>
                     <div class="alert shadow-2xl  b-1 bg-base-100">
                         <div>
                             <span class="card-title">回复</span>
@@ -34,14 +35,8 @@ import router from '@/router';
 import { getArticleDetail, getArticleBaseInfo } from '@/api/post';
 import { getUserInfo } from '@/api/user';
 import { getBlockDetail } from '@/api/block';
+import { getReply } from '@/api/reply';
 const loadflag: Ref<boolean> = ref(false);
-// const piclist: Array<string> = ['https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg', 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg']
-// const username: string = '猪逼巴巴'
-// const title: string = '如何评价首先是然后再是'
-// const useravatar: string = 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg'
-// const rank: number = 99
-// const text: string = '<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p><p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>'
-// const block: string = '逆天板块'
 //根据上方数据结构，创建帖子详情变数
 const postDetail = reactive({
     username: '',
@@ -53,75 +48,11 @@ const postDetail = reactive({
     blockName: '',
     piclist: [],
 });
-const comments = [ // 父组件的评论数据
-    {
-        id: 1,
-        rank: 1,
-        avatar: "https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg",
-        author: "User1",
-        date: "2023-02-28",
-        content: "This is a comment.",
-        replies: [
-            {
-                id: 2,
-                avatar: "https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg",
-                author: "User2",
-                rank: 1,
-                date: "2023-02-28",
-                content: "This is a reply.",
-                replyperson: {
-                    username: 'user1',
-                    id: '1111111'
-                },
-                replies: []
-            }, {
-                id: 5,
-                rank: 1,
-                avatar: "https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg",
-                author: "User2",
-                date: "2023-02-28",
-                content: "This is a reply.",
-                replyperson: {
-                    username: 'user1',
-                    id: '1111111'
-                },
-                replies: []
-            }
-        ]
-    },
-    {
-        id: 3,
-        rank: 1,
-        avatar: "https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg",
-        author: "User3",
-        date: "2023-02-28",
-        content:
-            "This is another comment with a long text to test the layout and style of the component.",
-        replies: [
-            {
-                id: 4,
-                rank: 1,
-                avatar: "https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg",
-                author: "User4",
-                date: "2023-02-28",
-                content:
-                    "This is another reply with a long text to test the layout and style of the component.",
-                replyperson: {
-                    username: 'user1',
-                    id: '1111111'
-                },
-                replies: []
-
-            }
-        ]
-    },
-]
+//创建评论变量
+const comments: any = ref([]);
 //创建贴文创建者id变量
 const createById: any = ref('');
 
-function toEditor() {
-    router.push({ path: "/home/posteditor" });
-}
 //跳转进入该页面时，获取路由参数
 function getParams() {
     const params = router.currentRoute.value.query;
@@ -139,27 +70,45 @@ function getPostDetail() {
         //res.data.sourcePath按分号分割成数组，去除最后一个空元素
         postDetail.piclist = res.data.sourcePath.split(';').slice(0, -1);
         console.log(postDetail.piclist);
-        
+
     })
+
     getArticleBaseInfo(params.postid).then(res => {
         console.log(res);
         postDetail.title = res.data.title;
-            getUserInfo(res.data.createById).then(res => {
-                console.log(createById.value);
-                postDetail.username = res.data[0].nickname;
-                postDetail.useravatar = res.data[0].avatarPath
-                    ;
-                postDetail.rank = res.data[0].level;
-            })
-            getBlockDetail(res.data.blockId).then(res => {
-                console.log(res);
-                postDetail.blockName = res.data.blockName;
-            })
+        getUserInfo(res.data.createById).then(res => {
+            console.log(createById.value);
+            postDetail.username = res.data[0].nickname;
+            postDetail.useravatar = res.data[0].avatarPath
+                ;
+            postDetail.rank = res.data[0].level;
+        })
+        getBlockDetail(res.data.blockId).then(res => {
+            console.log(res);
+            postDetail.blockName = res.data.blockName;
+        })
     })
-    //根据取得的板块id，获取板块信息
-
+    //创建page变量，用于分页
+    getComments(1);
 }
 
+//根据postid获取评论
+function getComments(page: number) {
+    const params: any = router.currentRoute.value.query;
+    //根据取得的params.postid，调用评论接口，获取评论数据
+    getReply(page, 10, params.postid).then(res => {
+        console.log(res.data.records);
+        comments.value = res.data.records;
+        //根据res.data.records.createById，调用用户接口，获取用户信息
+        for (const element of comments.value) {
+            getUserInfo(element.createById).then(res => {
+                element.username = res.data[0].nickname;
+                element.useravatar = res.data[0].avatarPath;
+                element.rank = res.data[0].level;
+            })
+        }
+    })
+}
 
 //监听滚动方法
 function scrollHandle() {
@@ -168,8 +117,16 @@ function scrollHandle() {
     const scrollTop = postcontent.scrollTop
     const clientHeight = postcontent.clientHeight;
     const distance = scrollHeight - scrollTop - clientHeight;
-    if (distance <= 200) {
-        console.log(distance);
+    const page = ref(2);
+    if (distance == 0) {
+        //滚动到底部，加载更多
+        if (!loadflag.value) {
+            loadflag.value = true;
+            //调用分页接口，获取下一页数据
+            getComments(page.value);
+            loadflag.value = false;
+            page.value++;
+        }
 
     }
 }
