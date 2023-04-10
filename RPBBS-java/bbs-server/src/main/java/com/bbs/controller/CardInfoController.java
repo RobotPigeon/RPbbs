@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.Card;
 import com.bbs.domain.msg.AjaxResult;
+import com.bbs.domain.vo.CardInfoVo;
+import com.bbs.service.ICardInfoVoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +28,14 @@ public class CardInfoController
     @Autowired
     private ICardInfoService cardInfoService;
 
+    @Autowired
+    private ICardInfoVoService cardInfoVoService;
+
     /**
      * 查询帖子信息列表
      */
     @GetMapping("/list")
-    public List list(CardInfo cardInfo)
+    public List listOri(CardInfo cardInfo)
     {
         List<CardInfo> list = cardInfoService.selectCardInfoList(cardInfo);
         return  list;
@@ -40,15 +45,33 @@ public class CardInfoController
      * 获取帖子信息详细信息
      */
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    public AjaxResult getInfoOri(@PathVariable("id") Long id)
     {
         return AjaxResult.success(cardInfoService.selectCardInfoById(id));
     }
 
     @GetMapping(value = "/page")
-    public AjaxResult page(@RequestParam Long current, @RequestParam Long size) {
+    public AjaxResult pageOri(@RequestParam Long current, @RequestParam Long size) {
         Page page = new Page<>(current,size);
         IPage<CardInfo> data = cardInfoService.page(page);
+        return AjaxResult.success(data);
+    }
+
+    @GetMapping("/vo/list")
+    public AjaxResult list(CardInfo cardInfo) {
+        List<CardInfoVo> list = cardInfoVoService.selectCardInfoVoList(cardInfo);
+        return AjaxResult.success(list);
+    }
+
+    @GetMapping(value = "/vo/{id}")
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
+        return AjaxResult.success(cardInfoVoService.selectCardInfoVoById(id));
+    }
+
+    @GetMapping(value = "/vo/page")
+    public AjaxResult page(@RequestParam Long current, @RequestParam Long size) {
+        Page page = new Page<>(current,size);
+        IPage<CardInfoVo> data = cardInfoVoService.page(page);
         return AjaxResult.success(data);
     }
 
