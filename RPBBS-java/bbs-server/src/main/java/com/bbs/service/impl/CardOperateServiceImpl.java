@@ -67,12 +67,26 @@ public class CardOperateServiceImpl implements ICardOperateService {
         }
         Long cardId = cardService.selectCardList(card).get(0).getId();
 
+        // get address
+        String address = null;
+        try {
+            address = "http://"+InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort();
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
         // add CardInfo
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardId(String.valueOf(cardId));
         cardInfo.setCardTypeId(cardDto.getCardTypeId());
         cardInfo.setRichtext(cardDto.getRichtext());
-        cardInfo.setSourcePath(cardDto.getSourcePath());
+        for (int i=0;i<cardDto.getSourcePath().size();i++) {
+//            log.info(cardDto.getSourcePath().get(i));
+            cardDto.getSourcePath().set(i, cardDto.getSourcePath().get(i).replaceFirst(address, ""));
+//            log.info(cardDto.getSourcePath().get(i));
+        }
+
+        String sourcePath = String.join(";",cardDto.getSourcePath());
+        cardInfo.setSourcePath(sourcePath);
         if (cardInfoService.insertCardInfo(cardInfo)<=0) {
             return -1;
         }
@@ -111,10 +125,16 @@ public class CardOperateServiceImpl implements ICardOperateService {
             cardVoToGetCommitNum.setCommentNum(commitNum);
         }
 
-        //
+        String address = InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort();
+        // 修改sourcePath
         for (int i=0;i<cardVoList.size();i++) {
             CardVo cv = cardVoList.get(i);
-            cv.setSourcePath(InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort()+cv.getSourcePath());
+            List<String> sourcePaths = cv.getSourcePath();
+            for (int j=0;j<sourcePaths.size();i++) {
+                sourcePaths.set(j, address+"/"+sourcePaths.get(j));
+//                cv.setSourcePath(InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort()+cv.getSourcePath());
+            }
+
         }
         // create return Page<CardVo>
         Page<CardVo> cardVoPage = new Page<>(page.getCurrent(),page.getSize());

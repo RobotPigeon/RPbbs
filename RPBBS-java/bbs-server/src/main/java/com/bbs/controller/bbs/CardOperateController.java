@@ -46,15 +46,17 @@ public class CardOperateController {
      * @return
      */
     @PostMapping("/submit")
-    @ResponseBody
-    public AjaxResult submit(CardDto cardDto, @RequestParam("sourceFile") MultipartFile file) {
-        // save source
-        String sourcePath = FileUtils.upload(file);
-        if (sourcePath==null){
-            return AjaxResult.error("资源文件上传失败");
-        }
-
-        cardDto.setSourcePath(sourcePath);
+    public AjaxResult submit(@RequestBody CardDto cardDto
+//                            , @RequestParam("sourceFile") MultipartFile file
+    ) {
+//        // save source
+//        if (file != null && !file.equals("")) {
+//            String sourcePath = FileUtils.upload(file);
+//            if (sourcePath==null){
+//                return AjaxResult.error("资源文件上传失败");
+//            }
+//            cardDto.setSourcePath(sourcePath);
+//        }
 
         if (cardOperateService.addTotalCard(cardDto)>=0) {
             log.info("帖子发布: "+cardDto.getTitle());

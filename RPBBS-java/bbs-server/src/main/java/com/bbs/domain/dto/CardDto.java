@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * 帖子的全部信息数据
@@ -51,7 +51,7 @@ public class CardDto {
     private String richtext;
 
     /** 资源路径 */
-    private String sourcePath;
+    private List<String> sourcePath;
 
     public CardDto() {}
 
@@ -67,6 +67,11 @@ public class CardDto {
         this.cardTypeId = cardInfo.getCardTypeId();
         this.likeNum = cardInfo.getLikeNum();
         this.richtext = cardInfo.getRichtext();
-        this.sourcePath = cardInfo.getSourcePath();
+        this.sourcePath = new ArrayList<>();
+        if (cardInfo.getSourcePath() == null) {
+
+        }else {
+            this.sourcePath.addAll(Arrays.asList(cardInfo.getSourcePath().split(";")));
+        }
     }
 }
