@@ -18,8 +18,7 @@ import com.bbs.service.ICardInfoService;
  * @date 2023-02-27
  */
 @Service
-public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> implements ICardInfoService
-{
+public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> implements ICardInfoService {
     @Autowired
     private CardInfoMapper cardInfoMapper;
 
@@ -30,12 +29,18 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
      * @return 帖子信息
      */
     @Override
-    public CardInfo selectCardInfoById(Long id)
-    {
+    public CardInfo selectCardInfoById(Long id) {
         CardInfo cardInfo = cardInfoMapper.selectCardInfoById(id);
-//        if (cardInfo.getSourcePath() != null && !cardInfo.getSourcePath().equals("")) {
-//            cardInfo.setSourcePath(AdressConst.httpAdress+cardInfo.getSourcePath());
-//        }
+        if (cardInfo.getSourcePath() != null && !cardInfo.getSourcePath().equals("")) {
+            String[] split = cardInfo.getSourcePath().split(";");
+            String sourcePath = "";
+            for (int i = 0; i < split.length; i++) {
+                sourcePath += AdressConst.httpAdress + split[i] + ";";
+            }
+            cardInfo.setSourcePath(sourcePath);
+        }
+        // cardInfo.getSourcePath()是以；间隔的多个图片的路径，拆分并且拼接成完整的路径
+
         return cardInfo;
     }
 
@@ -46,25 +51,26 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
      * @return 帖子信息
      */
     @Override
-    public List<CardInfo> selectCardInfoList(CardInfo cardInfo)
-    {
+    public List<CardInfo> selectCardInfoList(CardInfo cardInfo) {
         List<CardInfo> list = cardInfoMapper.selectCardInfoList(cardInfo);
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
-//                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
-//            }
-//        }
+        // for (int i = 0; i < list.size(); i++) {
+        // if (list.get(i).getSourcePath() != null &&
+        // !list.get(i).getSourcePath().equals("")) {
+        // list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+        // }
+        // }
         return list;
     }
 
     @Override
     public List<CardInfo> selectCardInfoByCardIds(Long[] ids) {
         List<CardInfo> list = cardInfoMapper.selectCardInfoByCardIds(ids);
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
-//                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
-//            }
-//        }
+        // for (int i = 0; i < list.size(); i++) {
+        // if (list.get(i).getSourcePath() != null &&
+        // !list.get(i).getSourcePath().equals("")) {
+        // list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+        // }
+        // }
         return list;
     }
 
@@ -75,8 +81,7 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
      * @return 结果
      */
     @Override
-    public int insertCardInfo(CardInfo cardInfo)
-    {
+    public int insertCardInfo(CardInfo cardInfo) {
         return cardInfoMapper.insertCardInfo(cardInfo);
     }
 
@@ -87,8 +92,7 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
      * @return 结果
      */
     @Override
-    public int updateCardInfo(CardInfo cardInfo)
-    {
+    public int updateCardInfo(CardInfo cardInfo) {
         return cardInfoMapper.updateCardInfo(cardInfo);
     }
 
@@ -99,8 +103,7 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
      * @return 结果
      */
     @Override
-    public int deleteCardInfoByIds(Long[] ids)
-    {
+    public int deleteCardInfoByIds(Long[] ids) {
         return cardInfoMapper.deleteCardInfoByIds(ids);
     }
 
@@ -111,8 +114,7 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
      * @return 结果
      */
     @Override
-    public int deleteCardInfoById(Long id)
-    {
+    public int deleteCardInfoById(Long id) {
         return cardInfoMapper.deleteCardInfoById(id);
     }
 }

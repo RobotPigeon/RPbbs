@@ -136,7 +136,10 @@ function getPostDetail() {
         console.log(res);
         //将获取到的数据赋值给postDetail
         postDetail.text = res.data.richtext;
-        postDetail.piclist = res.data.sourcePath;
+        //res.data.sourcePath按分号分割成数组，去除最后一个空元素
+        postDetail.piclist = res.data.sourcePath.split(';').slice(0, -1);
+        console.log(postDetail.piclist);
+        
     })
     getArticleBaseInfo(params.postid).then(res => {
         console.log(res);
