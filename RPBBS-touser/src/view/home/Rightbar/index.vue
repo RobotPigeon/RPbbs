@@ -1,9 +1,12 @@
 <template>
     <nav class="flex w-1/3 h-full">
-        <div class="w-full flex mx-auto px-6 py-8">
-            <div class="w-full h-full flex justify-center">
+        <div class="w-full flex mx-auto px-6 py-18">
+            <div class="w-1/2 h-full flex flex-col-reverse">
+                <img class=" w" src="@/assets/images/yada.gif" alt="">
                 <rpfooter></rpfooter>
+
             </div>
+            
         </div>
     </nav>
 </template>

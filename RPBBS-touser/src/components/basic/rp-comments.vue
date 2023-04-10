@@ -7,8 +7,8 @@
 
             <textarea class="textarea w-full" placeholder="输入回复" v-model="reply.message"></textarea>
             <div class="modal-action">
-                <label for="rp-modal" class="btn avatar" @click="sendReply()">发送</label>
-                <label for="rp-modal" class="btn mx2 avatar" @click="closeReply()">
+                <label for="rp-modal" class="btn  avatar" @click="sendReply()">发送</label>
+                <label for="rp-modal" class="btn  mx2 avatar" @click="closeReply()">
                     关闭
                 </label>
             </div>
@@ -16,26 +16,26 @@
         </div>
     </div>
     <div class="card w-full h-100% bg-base-100 b-1 p2 ">
-        <label for="rp-modal" class="btn" @click="startreply()">
+        <label for="rp-modal" class="btn  btn-primary" @click="startreply()">
             发布回复
         </label>
         <div v-for="comment in comments" :key="comment.id" class="flex justify-start card w-full h-100% bg-base-100  mt2">
             <!-- 遍历评论数据 -->
             <div class=" flex justify-start">
-                <label class="btn btn-ghost btn-circle avatar mt2" href="/">
-                    <div class="w-12 rounded-full">
+                <label class="btn  btn -ghost avatar mt2" href="/">
+                    <div class="w-12 rounded-box">
                         <img :src="comment.useravatar" alt='avatar' />
                     </div>
                 </label>
                 <div class=" ml-2">
-                    <span class="badge badge-accent badge-outline">lv-{{ comment.rank }}</span>
+                    <span class="badge badge-primary">lv-{{ comment.rank }}</span>
                     <span class="card-title">{{ comment.username }}</span>
                 </div>
             </div>
             <div class="content">
                 <p class="content m4">{{ comment.message }}</p> <!-- 显示评论内容 -->
                 <span class="date justify-end ml4">{{ comment.createTime }}</span>
-                <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl"
+                <label for="rp-modal" class="justify-end btn   btn -xs btn -outline ml-xl"
                     @click="replycomment(comment)">回复</label>
                 <div v-if="comment.cardReplyReplyList.length > 0" class="comments ">
                     <div class="collapse">
@@ -46,26 +46,26 @@
                         <div class="collapse-content">
                             <!-- 如果有楼中楼回复，显示嵌套的评论组件 -->
                             <div v-for="reply in comment.cardReplyReplyList" :key="reply.id"
-                                class="comment card bg-base-200 ml-10 p2 b-1">
+                                class="comment card bg-base-200 p2 b-1">
                                 <!-- 遍历楼中楼回复数据 -->
                                 <!-- <div class="divider"></div>  -->
                                 <div class=" flex justify-start">
-                                    <label class="btn btn-ghost btn-circle avatar">
-                                        <div class="w-12 rounded-full">
+                                    <label class="btn  btn -ghost avatar">
+                                        <div class="w-12 rounded-box">
                                             <img :src="reply.useravatar" alt='avatar' />
                                         </div>
                                     </label>
                                     <div class=" ml-2">
-                                        <span class="badge badge-accent badge-outline">lv-{{ reply.rank }}</span>
+                                        <span class="badge badge-primary">lv-{{ reply.rank }}</span>
                                         <span class="card-title">{{ reply.username }}</span>
                                     </div>
                                 </div>
                                 <div class="content">
-                                    <p class="content m4"><a class="badge" v-if="reply.replyusername != undefined">@{{
+                                    <p class="content m4"><a class="badge badge-primary" v-if="reply.replyusername != undefined">@{{
                                         reply.replyusername }}</a> {{reply.message}}
                                     </p> <!-- 显示评论内容 -->
-                                    <span class="date justify-end ml4">{{ reply.date }}</span>
-                                    <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl"
+                                    <span class="date justify-end ml4">{{ reply.createTime }}</span>
+                                    <label for="rp-modal" class="justify-end btn   btn -xs btn -outline ml-xl"
                                         @click="replycomment(comment)">回复</label>
                                 </div>
                             </div>

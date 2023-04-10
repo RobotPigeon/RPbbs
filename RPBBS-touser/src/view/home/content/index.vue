@@ -5,17 +5,17 @@
         <img :src="blockimg" />
       </div>
       <div class="card-body">
-        <h2 class="card-title">{{ blockName }}</h2>
-        <!-- <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg" @click="toEditor()">发帖</button> -->
+        <h2 class="card-title text-3xl">{{ blockName }}</h2>
+        <!-- <button class="btn  btn -xs h-10 sm:btn -sm md:btn -md lg:btn -lg" @click="toEditor()">发帖</button> -->
       </div>
     </div>
     <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-100vh">
       <div class="flex w-full mx-auto px-0 py-0">
         <div class="flex flex-col w-full h-full">
-          <rp-card :useravatar="item.userInfo.avatarPath" username="kzyzz" :liked="false" :rank="item.userInfo.level"
-            :id="item.cardId" :block="item.blockInfo.blockName" :title="item.title" :richtext="item.richtext"
-            v-for="item in postlist" :key="item.cardId" :piclist="item.sourcePath" :comment-num="item.commentNum"
-            :like-num="item.likeNum" :post="item"></rp-card>
+          <rp-card :useravatar="item.userInfo.avatarPath" :username="item.userInfo.nickname" :liked="false"
+            :rank="item.userInfo.level" :id="item.cardId" :block="item.blockInfo.blockName" :title="item.title"
+            :richtext="item.richtext" v-for="item in postlist" :key="item.cardId" :piclist="item.sourcePath"
+            :comment-num="item.commentNum" :like-num="item.likeNum" :post="item"></rp-card>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@ const page: Ref<number> = ref(1);
 //声明分区头图变数，分区名称变数
 const blockimg: Ref<string> = ref('https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg');
 const block: any = ref(1);
-const blockName: any = ref('默认分区');
+const blockName: any = ref('玩家论坛');
 //页面加载时执行
 onMounted(() => {
   getPostList();
@@ -58,15 +58,15 @@ function getPostList() {
       blockName.value = res.data.blockName;
     })
   } else {
-    console.log('默认分区');
+    console.log('玩家论坛');
   }
 }
 
 //获取帖子列表使用@api中post的getArticle方法
 function getArticleList() {
-  if(router.currentRoute.value.query.block){
+  if (router.currentRoute.value.query.block) {
     block.value = router.currentRoute.value.query.block;
-  }else{
+  } else {
     block.value = '';
   }
   getArticle(page.value, 3, block.value).then((res: any) => {

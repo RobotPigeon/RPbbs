@@ -2,8 +2,9 @@
 <div class="hero login min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row-reverse bg-base-100 card">
         <div class="text-center lg:text-left">
-        <h1 class="text-5xl font-bold">让我们开始吧!</h1>
-        <p class="py-6">登录我们的网站，欣赏更多内容，在RPBBS探索一切新鲜事物吧！Log in to our website, enjoy more content, and explore all new things in rpbbs!</p>
+        <h1 class="text-5xl font-bold">放心玩！开心玩!</h1>
+        <p class="py-6">游戏地带游戏wiki，你的游戏百科全书
+Game Zone Game Wiki, your game encyclopedia</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl" v-if="logOreg">
         <div class="card-body">
@@ -41,8 +42,8 @@
             </label>
             </div>
             <div class="form-control mt-6">
-            <button v-if="!loading" class="btn btn-primary" @click="Login()">登录</button>
-            <button v-else class="btn">登录中...</button>
+            <button v-if="!loading" class="btn  btn -primary" @click="Login()">登录</button>
+            <button v-else class="btn ">登录中...</button>
             </div>
         </div>
     </div>
@@ -82,8 +83,8 @@
             </label>
             </div>
             <div class="form-control mt-6">
-            <button v-if="!loading" class="btn btn-primary" @click="handleregister()">注册</button>
-            <button v-else class="btn">注册中...</button>
+            <button v-if="!loading" class="btn  btn -primary" @click="handleregister()">注册</button>
+            <button v-else class="btn ">注册中...</button>
             </div>
         </div>
     </div>

@@ -3,13 +3,13 @@
         <div class="card w-full h-100% bg-base-100 b-1">
             <div class="card-body h-a">
                 <div class=" flex justify-start">
-                    <label class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
+                    <label class="btn  btn -ghost avatar">
+                        <div class="w-12 rounded-box">
                             <img :src="props.useravatar" alt='avatar' />
                         </div>
                     </label>
                     <div class="mt--2 ml-2">
-                        <span class="badge badge-accent badge-outline">lv-{{ props.rank }}</span>
+                        <span class="badge badge-primary">lv-{{ props.rank }}</span>
                         <span class="card-title">{{ props.username }}</span>
                     </div>
                 </div>

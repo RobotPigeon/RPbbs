@@ -1,40 +1,56 @@
 <template>
-  <nav class="flex max-w-1/2 h-full ml-8xl p-l-80">
+  <nav class="flex  h-full  p-l-30">
     <div class="w-full mx-auto px-6 py-1 flex flex-col">
-      <rpmenu :tablist="maintablist"></rpmenu>
-      <rpmenu  class="mt-2" :tablist="nexttablist"></rpmenu>
-      <rpmenu class="mt-2" :tablist="areatablist" v-if="!areatablist"></rpmenu>
+      <div class="card w-56 bg-base-100 shadow-xl">
+        <figure class="px-10 pt-10">
+          <img :src="user.useravatar" alt="头像" class="rounded-xl" />
+        </figure>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">{{user.username}}</h2>
+          <p>快点发帖加入进来?</p>
+          <div class="card-actions">
+            <button class="btn btn-primary" @click="toedtior()">发布贴文</button>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive ,onMounted} from "vue";
 import rpmenu from "@/components/basic/rp-menu.vue";
-const maintablist = reactive([
-  {
-    icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
-    text: "主页",
-    path: "/home"
-  },
-  {
-    icon: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
-    text: "热门板块",
-    path: "/home/Partition"
-  },
-]);
-const nexttablist = reactive([
-  {
-    icon: "",
-    text: "一夫一妻",
-    path: ""
-  },
-  {
-    icon: "",
-    text: "一夫多妻",
-    path: ""
-  },
-]);
+import {getUserInfo} from "@/api/user";
+import useUserStore   from "@/stores/user";
+import router from "@/router";
+//页面加载时获取用户信息
+onMounted(getuserinfo)
+//创建用户信息变数
+const user = reactive({
+  username: "admin",
+  useravatar: "",
+  rank: 1,
+});
+//获取用户信息@api/user/getuserinfo
+function getuserinfo() {
+  //TODO
+  //获取当前用户id使用pinia
+    let id = useUserStore().getUser
+
+  getUserInfo(id).then((res) => {
+    console.log("获取用户信息");
+    
+    console.log(res);
+    user.username = res.data[0].nickname;
+    user.useravatar = res.data[0].avatarPath;
+    user.rank = res.data[0].level;
+  });
+}
+//跳转到编辑器
+function toedtior() {
+  router.push("/home/posteditor");
+}
+
 const areatablist = reactive([
 ]);
 </script>

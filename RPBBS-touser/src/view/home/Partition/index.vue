@@ -7,7 +7,7 @@
                         <span class="card-title">全部分区</span>
                     </div>
                 </div>
-                <div v-for="item in blocklist.list" class="card card-side bg-base-100 shadow-xl w-49% ml0.5% my1">
+                <div v-for="item in blocklist.list" class="card card-side bg-base-100 shadow-xl w-100% mt2">
                     <figure>
                         <div class="avatar items-center">
                             <div class="w-24  rounded ml1">
@@ -18,9 +18,9 @@
                     <div class="card-body w-80%">
                         <h2 class="card-title">{{ item.blockName }}</h2>
                         <!-- <p>{{ text }}</p> -->
-                        <!-- <span class="stat-desc">发帖:1000/回复:10000</span> -->
+                        <span class="stat-desc">发帖:xxxxxx/回复:xxxxxxx</span>
                         <div class="flex justify-end">
-                            <button class="btn btn-primary" @click="toPartition(item.id)">进入分区</button>
+                            <button class="btn  btn -primary" @click="toPartition(item.id)">进入分区</button>
                         </div>
                     </div>
                 </div>
