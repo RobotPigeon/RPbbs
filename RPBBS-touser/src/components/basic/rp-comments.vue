@@ -24,28 +24,28 @@
             <div class=" flex justify-start">
                 <label class="btn btn-ghost btn-circle avatar mt2" href="/">
                     <div class="w-12 rounded-full">
-                        <img :src="comment.avatar" alt='avatar' />
+                        <img :src="comment.useravatar" alt='avatar' />
                     </div>
                 </label>
                 <div class=" ml-2">
                     <span class="badge badge-accent badge-outline">lv-{{ comment.rank }}</span>
-                    <span class="card-title">{{ comment.author }}</span>
+                    <span class="card-title">{{ comment.username}}</span>
                 </div>
             </div>
             <div class="content">
-                <p class="content m4">{{ comment.content }}</p> <!-- 显示评论内容 -->
-                <span class="date justify-end ml4">{{ comment.date }}</span>
+                <p class="content m4">{{ comment.message }}</p> <!-- 显示评论内容 -->
+                <span class="date justify-end ml4">{{ comment.createTime }}</span>
                 <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl"
                     @click="replycomment(comment)">回复</label>
-                <div v-if="comment.replies.length > 0" class="comments ">
+                <div v-if="comment.cardReplyReplyList.length > 0" class="comments ">
                     <div class="collapse">
                         <input type="checkbox" />
                         <div class="collapse-title color-info justify-end font-medium">
-                            展开/收起{{ comment.replies.length }}条回复
+                            展开/收起{{ comment.cardReplyReplyList.length }}条回复
                         </div>
                         <div class="collapse-content">
                             <!-- 如果有楼中楼回复，显示嵌套的评论组件 -->
-                            <div v-for="reply in comment.replies" :key="reply.id"
+                            <div v-for="reply in comment.cardReplyReplyList" :key="reply.id"
                                 class="comment card bg-base-200 ml-10 p2 b-1">
                                 <!-- 遍历楼中楼回复数据 -->
                                 <!-- <div class="divider"></div>  -->
@@ -84,16 +84,7 @@ import useUsersStore from '@/stores/user';
 //引入api
 import { postReply, postReplyReply } from '@/api/reply';
 
-interface Comment {
-    id: number; // 评论id
-    avatar: string; // 评论者头像
-    author: string; // 评论者昵称
-    date: string; // 评论日期
-    rank: string;
-    content: string; // 评论内容
-    replyperson?: Array<{ id: string; username: string }>[0] | undefined;
-    replies: Comment[]; // 楼中楼回复列表
-}
+
 
 
 //创建一级回复标志，如果是一级回复，reply.replyToId为空，如果是楼中楼回复，reply.replyToId为一级回复的id
@@ -115,7 +106,7 @@ function startreply() {
     console.log(reply);
 }
 //二级回复方法
-function replycomment(comment: Comment) {
+function replycomment(comment: any) {
     reply.replyToId = comment.id;
     startreply()
 }
