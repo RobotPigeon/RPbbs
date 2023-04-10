@@ -30,6 +30,9 @@ public class UserInfo
     /** 用户头像资源路径 */
     private String avatarPath;
 
+    /** 昵称 */
+    private String nickname;
+
     public UserInfo(Long id, String userId, Long level, String message) {
         this.id = id;
         this.userId = userId;

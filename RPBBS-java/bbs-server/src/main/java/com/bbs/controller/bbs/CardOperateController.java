@@ -91,7 +91,11 @@ public class CardOperateController {
     }
 
     @PostMapping("/reply")
-    public AjaxResult cardReply(@RequestBody CardReply cardReply) {
+    @ResponseBody
+    public AjaxResult cardReply(CardReply cardReply) {
+        if (cardReply.getCardId().isEmpty()) {
+            return AjaxResult.error("没有cardId");
+        }
         Long current = System.currentTimeMillis();
         cardReply.setCreateTime(new Date(current));
         cardReply.setUpdateTime(new Date(current));
@@ -102,7 +106,12 @@ public class CardOperateController {
     }
 
     @PostMapping("/reply/reply")
-    public AjaxResult replyReply(@RequestBody CardReplyReply cardReplyReply) {
+    @ResponseBody
+    public AjaxResult replyReply(CardReplyReply cardReplyReply) {
+        if (cardReplyReply.getCardId().isEmpty()) {
+            return AjaxResult.error("没有cardId");
+        }
+
         Long current = System.currentTimeMillis();
         cardReplyReply.setCreateTime(new Date(current));
         cardReplyReply.setUpdateTime(new Date(current));
