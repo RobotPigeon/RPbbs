@@ -14,7 +14,7 @@ public class CardReplyVo extends CardReply {
 
     public CardReplyVo(CardReply cardReply) {
         super(cardReply.getId()
-                ,cardReply.getCardId()
+                ,cardReply.getMessage()
                 ,cardReply.getCreateById()
                 ,cardReply.getCardId()
                 ,cardReply.getRank()
