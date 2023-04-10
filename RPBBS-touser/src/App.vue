@@ -11,13 +11,13 @@ import { createPinia } from 'pinia';
 import { provide } from "vue";
 import rpAlert from './components/basic/rp-alert.vue';
 import useAlertStore from './stores/alert';
-onMounted(() => {
-    setTimeout(() => {
-        themeChange(false)
-    }, 1)
-    themeChange(true)
+// onMounted(() => {
+//     setTimeout(() => {
+//         themeChange(false)
+//     }, 1)
+//     themeChange(true)
 
-})
+// })
 
 const pinia = createPinia();
 // 使用pinia
@@ -64,5 +64,8 @@ console.log(import.meta.env.VITE_API)
     background: #ffffff;
     border-radius: 10px;
     box-shadow: inset 7px 10px 12px #f0f0f0;
+}
+.body{
+    color:  bg-primary-500;
 }
 </style>

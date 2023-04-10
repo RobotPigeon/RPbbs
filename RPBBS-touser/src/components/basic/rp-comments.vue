@@ -29,7 +29,7 @@
                 </label>
                 <div class=" ml-2">
                     <span class="badge badge-accent badge-outline">lv-{{ comment.rank }}</span>
-                    <span class="card-title">{{ comment.username}}</span>
+                    <span class="card-title">{{ comment.username }}</span>
                 </div>
             </div>
             <div class="content">
@@ -52,18 +52,17 @@
                                 <div class=" flex justify-start">
                                     <label class="btn btn-ghost btn-circle avatar">
                                         <div class="w-12 rounded-full">
-                                            <img :src="reply.avatar" alt='avatar' />
+                                            <img :src="reply.useravatar" alt='avatar' />
                                         </div>
                                     </label>
                                     <div class=" ml-2">
                                         <span class="badge badge-accent badge-outline">lv-{{ reply.rank }}</span>
-                                        <span class="card-title">{{ reply.author }}</span>
+                                        <span class="card-title">{{ reply.username }}</span>
                                     </div>
                                 </div>
                                 <div class="content">
-                                    <p class="content m4"><a class="badge" v-if="reply.replyperson != undefined"
-                                            :href="reply.replyperson.id">@{{ reply.replyperson.username }}</a> {{
-                                                reply.content }}
+                                    <p class="content m4"><a class="badge" v-if="reply.replyusername != undefined">@{{
+                                        reply.replyusername }}</a> {{reply.message}}
                                     </p> <!-- 显示评论内容 -->
                                     <span class="date justify-end ml4">{{ reply.date }}</span>
                                     <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl"
@@ -107,7 +106,8 @@ function startreply() {
 }
 //二级回复方法
 function replycomment(comment: any) {
-    reply.replyToId = comment.id;
+    reply.replyToId = comment.createById;
+    reply.replyId = comment.id;
     startreply()
 }
 
@@ -133,6 +133,8 @@ function sendReply() {
     }
     //关闭回复框
     closeReply();
+    //刷新页面
+    router.go(0);
 }
 
 const props = defineProps<{

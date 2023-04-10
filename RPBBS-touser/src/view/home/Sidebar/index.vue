@@ -26,13 +26,13 @@ const maintablist = reactive([
 const nexttablist = reactive([
   {
     icon: "",
-    text: "绿茵圣地",
-    path: "/home/content?block=1"
+    text: "一夫一妻",
+    path: ""
   },
   {
     icon: "",
-    text: "球迷天堂",
-    path: "/home/content?block=2"
+    text: "一夫多妻",
+    path: ""
   },
 ]);
 const areatablist = reactive([

@@ -98,7 +98,7 @@ function getComments(page: number) {
     //根据取得的params.postid，调用评论接口，获取评论数据
     getReply(page, 10, params.postid).then(res => {
         console.log(res.data.records);
-        comments.value = res.data.records;
+        comments.value = comments.value.concat(res.data.records);
         //根据res.data.records.createById，调用用户接口，获取用户信息
         for (const element of comments.value) {
             getUserInfo(element.createById).then(res => {
