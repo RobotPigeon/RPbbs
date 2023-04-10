@@ -136,7 +136,7 @@ public class CardOperateServiceImpl implements ICardOperateService {
             CardVo cv = cardVoList.get(i);
             List<String> sourcePaths = cv.getSourcePath();
             for (int j=0;j<sourcePaths.size();j++) {
-                sourcePaths.set(j, address+sourcePaths.get(j));
+                sourcePaths.set(j, "http://"+address+sourcePaths.get(j));
 //                cv.setSourcePath(InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort()+cv.getSourcePath());
             }
 
