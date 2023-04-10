@@ -61,6 +61,10 @@ const handleUpload = (event: any) => {
             console.log(res);
             //将上传成功的图片地址的斜杠替换为反方向斜杠然后放入images数组中
             res.msg = res.msg.replace(/\\/g, "/");
+            //msg前没有http://，则添加
+            if (res.msg.indexOf("http://") == -1) {
+                res.msg = "http://" + res.msg;
+            }
             images.value.push(res.msg);
             message.value = "上传成功";
             uploading.value = false;
