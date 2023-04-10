@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCardReplyVo">
-        select id, message, create_by_id, card_id, rank, create_time, update_time, status from bbs_card_reply
+        select id, message, create_by_id, card_id, `rank`, create_time, update_time, status from bbs_card_reply
     </sql>
 
     <select id="selectCardReplyList" parameterType="CardReply" resultMap="CardReplyResult">

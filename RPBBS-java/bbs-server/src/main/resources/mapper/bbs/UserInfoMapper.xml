@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectUserInfoVo">
-        select id, user_id, level, message, avatar_path from bbs_user_info
+        select id, user_id, level, nickname, message, avatar_path from bbs_user_info
     </sql>
 
     <select id="selectUserInfoList" parameterType="UserInfo" resultMap="UserInfoResult">
