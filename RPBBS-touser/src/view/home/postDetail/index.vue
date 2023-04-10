@@ -8,9 +8,9 @@
         <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-90vh">
             <div class="flex w-full mx-auto px-0 py-0">
                 <div class="flex flex-col w-full h-full">
-                    <rp-detailcard :username="username" :liked="true" :like-num="10000" :comment-num="10000"
-                        :richtext="text" :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title"
-                        :block="block"></rp-detailcard>
+                    <rp-detailcard :username="postDetail.username" :liked="true" :like-num="10000" :comment-num="10000"
+                        :richtext="postDetail.text" :useravatar="postDetail.useravatar" :rank="postDetail.rank"
+                        :piclist="postDetail.piclist" :title="postDetail.title" :block="postDetail.blockName"></rp-detailcard>
                     <div class="alert shadow-2xl  b-1 bg-base-100">
                         <div>
                             <span class="card-title">回复</span>
@@ -30,14 +30,29 @@ import type { Ref } from 'vue';
 import rpDetailcard from '@/components/basic/rp-detailcard.vue';
 import rpComments from '@/components/basic/rp-comments.vue';
 import router from '@/router';
+//调用api
+import { getArticleDetail, getArticleBaseInfo } from '@/api/post';
+import { getUserInfo } from '@/api/user';
+import { getBlockDetail } from '@/api/block';
 const loadflag: Ref<boolean> = ref(false);
-const piclist: Array<string> = ['https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg', 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg']
-const username: string = '猪逼巴巴'
-const title: string = '如何评价首先是然后再是'
-const useravatar: string = 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg'
-const rank: number = 99
-const text: string = '<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p><p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>'
-const block: string = '逆天板块'
+// const piclist: Array<string> = ['https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg', 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg']
+// const username: string = '猪逼巴巴'
+// const title: string = '如何评价首先是然后再是'
+// const useravatar: string = 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg'
+// const rank: number = 99
+// const text: string = '<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p><p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>'
+// const block: string = '逆天板块'
+//根据上方数据结构，创建帖子详情变数
+const postDetail = reactive({
+    username: '',
+    title: '',
+    useravatar: '',
+    rank: 0,
+    text: '',
+    blockId: '',
+    blockName: '',
+    piclist: [],
+});
 const comments = [ // 父组件的评论数据
     {
         id: 1,
@@ -101,6 +116,8 @@ const comments = [ // 父组件的评论数据
         ]
     },
 ]
+//创建贴文创建者id变量
+const createById: any = ref('');
 
 function toEditor() {
     router.push({ path: "/home/posteditor" });
@@ -110,6 +127,36 @@ function getParams() {
     const params = router.currentRoute.value.query;
     console.log(params.postid);
 }
+
+//根据postid获取帖子详情和基本信息
+function getPostDetail() {
+    const params: any = router.currentRoute.value.query;
+    //调用@api中的两个接口getArticleDetail,getArticleBaseInfo
+    getArticleDetail(params.postid).then(res => {
+        console.log(res);
+        //将获取到的数据赋值给postDetail
+        postDetail.text = res.data.richtext;
+        postDetail.piclist = res.data.sourcePath;
+    })
+    getArticleBaseInfo(params.postid).then(res => {
+        console.log(res);
+        postDetail.title = res.data.title;
+            getUserInfo(res.data.createById).then(res => {
+                console.log(createById.value);
+                postDetail.username = res.data[0].nickname;
+                postDetail.useravatar = res.data[0].avatarPath
+                    ;
+                postDetail.rank = res.data[0].level;
+            })
+            getBlockDetail(res.data.blockId).then(res => {
+                console.log(res);
+                postDetail.blockName = res.data.blockName;
+            })
+    })
+    //根据取得的板块id，获取板块信息
+
+}
+
 
 //监听滚动方法
 function scrollHandle() {
@@ -126,6 +173,7 @@ function scrollHandle() {
 
 onMounted(() => {
     getParams();
+    getPostDetail();
     //组件挂载时，添加scroll监听
     const postcontent = document.getElementsByClassName('postcontent')[0];
     postcontent.addEventListener("scroll", scrollHandle, true);

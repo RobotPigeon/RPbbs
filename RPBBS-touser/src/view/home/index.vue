@@ -1,7 +1,7 @@
 <template>
     <div class="flex h-full">
         <Sidebar class="hidden-sider"></Sidebar>
-        <router-view class="max-w-4xl min-w-sm"></router-view>
+        <router-view class="min-w-sm content"></router-view>
         <Rightbar class="hidden-Rightbar"></Rightbar>
     </div>
 </template>
@@ -22,6 +22,14 @@ import Rightbar from './Rightbar/index.vue'
 
     }
 
+
+}
+@media  (min-width: 960px) {
+    .content {
+
+width: 56rem;
+
+}
 }
 @media (max-width: 1280px) {
 

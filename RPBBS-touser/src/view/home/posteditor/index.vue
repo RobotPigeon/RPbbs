@@ -105,9 +105,9 @@ const postPost = () => {
     //帖子类型默认为1
     post.cardTypeId = 1;
     //发帖前遍历帖子图片数组，将图片数组每条数据只保留/img/xxxx.jpg,不保留/img/之前的内容
-    post.sourcePath = post.sourcePath.map((item: any) => {
-        return item.replace(/.*\/img\//, "/img/");
-    })
+    // post.sourcePath = post.sourcePath.map((item: any) => {
+    //     return item.replace(/.*\/img\//, "/img/");
+    // })
     console.log(post);
     //调用发帖接口,@/api中的post.ts
     postArticle(post).then((res: any) => {
@@ -115,7 +115,7 @@ const postPost = () => {
         if (res.code == 200) {
             useAlertStore().setAlert({ message: "发帖成功", type: "success" });
             //跳转到首页
-            router.push({ name: "home" });
+            router.push({ name: "content" });
         }
     })
 

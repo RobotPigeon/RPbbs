@@ -2,7 +2,7 @@
   <nav class="flex max-w-1/2 h-full ml-8xl p-l-80">
     <div class="w-full mx-auto px-6 py-1 flex flex-col">
       <rpmenu :tablist="maintablist"></rpmenu>
-      <rpmenu  class="mt-2" :tablist="maintablist"></rpmenu>
+      <rpmenu  class="mt-2" :tablist="nexttablist"></rpmenu>
       <rpmenu class="mt-2" :tablist="areatablist" v-if="!areatablist"></rpmenu>
     </div>
   </nav>
@@ -21,6 +21,18 @@ const maintablist = reactive([
     icon: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     text: "热门板块",
     path: "/home/Partition"
+  },
+]);
+const nexttablist = reactive([
+  {
+    icon: "",
+    text: "绿茵圣地",
+    path: "/home/content?block=1"
+  },
+  {
+    icon: "",
+    text: "球迷天堂",
+    path: "/home/content?block=2"
   },
 ]);
 const areatablist = reactive([

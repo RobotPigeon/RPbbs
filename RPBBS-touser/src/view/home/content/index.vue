@@ -5,21 +5,17 @@
         <img :src="blockimg" />
       </div>
       <div class="card-body">
-        <h2 class="card-title">{{ block }}</h2>
+        <h2 class="card-title">{{ blockName }}</h2>
         <!-- <button class="btn btn-xs h-10 sm:btn-sm md:btn-md lg:btn-lg" @click="toEditor()">发帖</button> -->
       </div>
     </div>
     <div class="flex flex-col w-full overflow-y-auto mb-18 mt-1 b-1 rounded-box postcontent h-100vh">
       <div class="flex w-full mx-auto px-0 py-0">
         <div class="flex flex-col w-full h-full">
-          <rpCard :id="1" :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-            :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
-          <rpCard :id="1" :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-            :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
-          <rpCard :id="1" :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-            :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
-          <rpCard :id="1" :username="username" :liked="true" :like-num="10000" :comment-num="10000" :richtext="text"
-            :useravatar="useravatar" :rank="rank" :piclist="piclist" :title="title" :block="block"></rpCard>
+          <rp-card :useravatar="item.userInfo.avatarPath" username="kzyzz" :liked="false" :rank="item.userInfo.level"
+            :id="item.cardId" :block="item.blockInfo.blockName" :title="item.title" :richtext="item.richtext"
+            v-for="item in postlist" :key="item.cardId" :piclist="item.sourcePath" :comment-num="item.commentNum"
+            :like-num="item.likeNum" :post="item"></rp-card>
         </div>
       </div>
     </div>
@@ -33,20 +29,21 @@ import rpCard from '@/components/basic/rp-card.vue';
 import rpEditor from '@/components/basic/rp-editor.vue';
 import router from '@/router';
 import { getBlockDetail } from '@/api/block';
-const loadflag: Ref<boolean> = ref(false);
-const piclist: Array<string> = ['https://lain.bgm.tv/r/400/pic/cover/l/a4/16/296739_71dLe.jpg', 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg', 'https://lain.bgm.tv/pic/cover/l/64/f0/420030_R3z00.jpg']
-const username: string = '猪逼巴巴'
-const title: string = '如何评价首先是首先是首先是'
-const useravatar: string = 'https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg'
-const rank: number = 99
-const text: string = '<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p><p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>'
+import { getArticle } from '@/api/post';
+import { getUserInfo } from '@/api/user';
 
+//声明帖子列表变数
+const postlist: Ref<any> = ref([]);
+//声明当前页变数
+const page: Ref<number> = ref(1);
 //声明分区头图变数，分区名称变数
 const blockimg: Ref<string> = ref('https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg');
-const block: Ref<string> = ref('默认分区');
+const block: any = ref(1);
+const blockName: any = ref('默认分区');
 //页面加载时执行
 onMounted(() => {
   getPostList();
+  getArticleList();
 });
 
 //进入页面后，获取链接参数，有参数获取分区帖子数据，无参数获取默认帖子分页
@@ -58,14 +55,62 @@ function getPostList() {
     getBlockDetail(query.block).then((res: any) => {
       console.log(res.data);
       blockimg.value = res.data.picPath;
-      block.value = res.data.blockName;
+      blockName.value = res.data.blockName;
     })
   } else {
     console.log('默认分区');
   }
 }
 
+//获取帖子列表使用@api中post的getArticle方法
+function getArticleList() {
+  if(router.currentRoute.value.query.block){
+    block.value = router.currentRoute.value.query.block;
+  }else{
+    block.value = '';
+  }
+  getArticle(page.value, 3, block.value).then((res: any) => {
+    console.log(res.data.records);
+    //向帖子列表的底部增加帖子数据
+    postlist.value = postlist.value.concat(res.data.records);
 
+    //如果图片地址是相对路径，需要拼接上服务器地址
+    postlist.value.forEach((item: any) => {
+      item.sourcePath = item.sourcePath.map((item: any) => {
+        if (item.indexOf('http') == -1) {
+          return 'http://' + item;
+        } else {
+          return item;
+        }
+      })
+    })
+    //每条帖子的富文本内容，展示40字纯字数，超出部分后续添加省略号，如果不足40字，添加占位空格字符至40字
+    postlist.value.forEach((item: any) => {
+      item.richtext = item.richtext.replace(/<[^>]+>/g, "");
+      if (item.richtext.length > 40) {
+        item.richtext = item.richtext.substring(0, 40) + '...';
+      } else {
+        item.richtext = item.richtext + '                                        ';
+      }
+    })
+    //每条帖子的createById是用户id，需要根据用户id获取用户信息
+    postlist.value.forEach((item: any) => {
+      getUserInfo(item.createById).then((res: any) => {
+
+        item.userInfo = res.data[0];
+        console.log(item.userInfo);
+      })
+    })
+    //每条帖子的blockid是分区id，需要根据分区id获取分区信息
+    postlist.value.forEach((item: any) => {
+      getBlockDetail(item.blockId).then((res: any) => {
+        console.log(res.data);
+        item.blockInfo = res.data;
+      })
+    })
+  })
+}
+//跳转到发帖页面
 function toEditor() {
   router.push({ path: "/home/posteditor" });
 }
@@ -77,9 +122,11 @@ function scrollHandle() {
   const scrollTop = postcontent.scrollTop
   const clientHeight = postcontent.clientHeight;
   const distance = scrollHeight - scrollTop - clientHeight;
-  if (distance <= 200) {
+  if (distance == 0) {
     console.log(distance);
-
+    //滚动到底部，加载下一页
+    page.value = page.value + 1;
+    getArticleList();
   }
 }
 

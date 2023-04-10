@@ -17,7 +17,7 @@
                 <div v-html="props.richtext"></div>
                 <div class="badge badge-lg">{{ props.block }}</div>
             </div>
-            <rpPicgroup v-if="props.piclist!=undefined" :list="props.piclist"></rpPicgroup>
+            <rpPicgroup v-if="props.piclist != undefined" :list="props.piclist"></rpPicgroup>
             <div class="divider px-8"></div>
             <div class="stats stats-vertical lg:stats-horizontal px-8 pb-4">
                 <div class="flex justify-around">
@@ -63,7 +63,7 @@
                                     p-id="4242"></path>
                             </svg>
                         </label>
-                        <div class="text-xl">{{ props.likeNum }}</div>
+                        <div class="text-xl">{{ props.commentNum}}</div>
                     </div>
 
 
@@ -101,7 +101,6 @@ const emit = defineEmits(['clickit'])
 const bigImg = () => {
     emit('clickit')
 }
-
 
 interface Props {
     id: number
