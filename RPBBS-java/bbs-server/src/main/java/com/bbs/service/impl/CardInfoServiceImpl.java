@@ -33,9 +33,9 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
     public CardInfo selectCardInfoById(Long id)
     {
         CardInfo cardInfo = cardInfoMapper.selectCardInfoById(id);
-        if (cardInfo.getSourcePath() != null && !cardInfo.getSourcePath().equals("")) {
-            cardInfo.setSourcePath(AdressConst.httpAdress+cardInfo.getSourcePath());
-        }
+//        if (cardInfo.getSourcePath() != null && !cardInfo.getSourcePath().equals("")) {
+//            cardInfo.setSourcePath(AdressConst.httpAdress+cardInfo.getSourcePath());
+//        }
         return cardInfo;
     }
 
@@ -49,22 +49,22 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
     public List<CardInfo> selectCardInfoList(CardInfo cardInfo)
     {
         List<CardInfo> list = cardInfoMapper.selectCardInfoList(cardInfo);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
-                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
-            }
-        }
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
+//                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+//            }
+//        }
         return list;
     }
 
     @Override
     public List<CardInfo> selectCardInfoByCardIds(Long[] ids) {
         List<CardInfo> list = cardInfoMapper.selectCardInfoByCardIds(ids);
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
-                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
-            }
-        }
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
+//                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+//            }
+//        }
         return list;
     }
 
