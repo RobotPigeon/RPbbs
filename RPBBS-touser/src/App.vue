@@ -14,7 +14,6 @@ import useAlertStore from './stores/alert';
 onMounted(() => {
     setTimeout(() => {
         themeChange(false)
-        console.log(alert);
     }, 1)
     themeChange(true)
 

@@ -57,7 +57,6 @@ class RequestHttp {
                 const token = localStorage.getItem('token') || '' || userStore.getToken;
                 if (token) {
                     config.headers.set('Authorization', token)
-                    console.log(config);
                 }
                 //如果请求是传送文件给后端config.headers.set('Content-Type', 'multipart/form-data')
 
