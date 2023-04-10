@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.CardReply;
 import com.bbs.domain.CardReplyReply;
 import com.bbs.domain.dto.CardDto;
+import com.bbs.domain.dto.ReplyDto;
 import com.bbs.domain.msg.AjaxResult;
 import com.bbs.domain.vo.CardReplyVo;
 import com.bbs.domain.vo.CardVo;
@@ -95,10 +96,11 @@ public class CardOperateController {
 
     @PostMapping("/reply")
     @ResponseBody
-    public AjaxResult cardReply(CardReply cardReply) {
-        if (cardReply.getCardId().isEmpty()) {
+    public AjaxResult cardReply(ReplyDto replyDto) {
+        if (replyDto.getCardId().isEmpty()) {
             return AjaxResult.error("没有cardId");
         }
+        CardReply cardReply = replyDto;
         Long current = System.currentTimeMillis();
         cardReply.setCreateTime(new Date(current));
         cardReply.setUpdateTime(new Date(current));
