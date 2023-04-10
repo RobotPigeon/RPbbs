@@ -7,19 +7,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class AdressConst {
+    public static String adress = "";
 
-    @Autowired
-    private static ServerProperties serverProperties;
-
-    public static String adress;
-
-    static {
-        try {
-            adress = InetAddress.getLocalHost().getHostAddress()+":"+serverProperties.getPort();
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static String httpAdress = "http://" + adress;
+    public static String httpAdress = "http://";
 }

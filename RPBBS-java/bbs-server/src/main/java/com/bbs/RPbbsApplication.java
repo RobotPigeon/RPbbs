@@ -1,5 +1,6 @@
 package com.bbs;
 
+import com.bbs.constant.AdressConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,8 @@ public class RPbbsApplication {
         String ip = InetAddress.getLocalHost().getHostAddress();
         String port = env.getProperty("server.port");
         String path = env.getProperty("server.servlet.context-path");
+        AdressConst.httpAdress = AdressConst.httpAdress + ip + ":" + port;
+        log.info(AdressConst.httpAdress);
         log.info("\t\n----------------------------------------------------------\n\t" +
                 "swagger-ui: \thttp://" + ip + ":" + port + path + "/swagger-ui/index.html\n\t" +
                 "----------------------------------------------------------");

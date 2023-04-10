@@ -5,6 +5,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bbs.constant.AdressConst;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 import com.bbs.mapper.CardInfoMapper;
 import com.bbs.domain.CardInfo;
@@ -32,7 +33,9 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
     public CardInfo selectCardInfoById(Long id)
     {
         CardInfo cardInfo = cardInfoMapper.selectCardInfoById(id);
-        cardInfo.setSourcePath(AdressConst.httpAdress+cardInfo.getSourcePath());
+        if (cardInfo.getSourcePath() != null && !cardInfo.getSourcePath().equals("")) {
+            cardInfo.setSourcePath(AdressConst.httpAdress+cardInfo.getSourcePath());
+        }
         return cardInfo;
     }
 
@@ -47,7 +50,9 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
     {
         List<CardInfo> list = cardInfoMapper.selectCardInfoList(cardInfo);
         for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
+                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+            }
         }
         return list;
     }
@@ -56,7 +61,9 @@ public class CardInfoServiceImpl extends ServiceImpl<CardInfoMapper, CardInfo> i
     public List<CardInfo> selectCardInfoByCardIds(Long[] ids) {
         List<CardInfo> list = cardInfoMapper.selectCardInfoByCardIds(ids);
         for (int i = 0; i < list.size(); i++) {
-            list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+            if (list.get(i).getSourcePath() != null && !list.get(i).getSourcePath().equals("")) {
+                list.get(i).setSourcePath(AdressConst.httpAdress+list.get(i).getSourcePath());
+            }
         }
         return list;
     }
