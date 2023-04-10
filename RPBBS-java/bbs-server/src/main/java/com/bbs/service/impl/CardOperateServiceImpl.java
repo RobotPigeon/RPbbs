@@ -1,5 +1,6 @@
 package com.bbs.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -150,9 +151,9 @@ public class CardOperateServiceImpl implements ICardOperateService {
 
     @Override
     public IPage<CardReplyVo> cardReplyPage(Page page, String cardId) {
-        QueryWrapper<CardReply> cardReplyQueryWrapper = new QueryWrapper<>();
-        cardReplyQueryWrapper.eq("card_id", cardId);
-        IPage<CardReply> replyPage = cardReplyService.page(page, cardReplyQueryWrapper);
+        QueryWrapper wrapper = new QueryWrapper<CardReply>();
+        wrapper.eq("card_id", cardId);
+        IPage<CardReply> replyPage = cardReplyService.page(page, wrapper);
 
         CardReplyReply cardReplyReply = new CardReplyReply();
         cardReplyReply.setCardId(cardId);
@@ -173,7 +174,15 @@ public class CardOperateServiceImpl implements ICardOperateService {
         }
 
         Page<CardReplyVo> cardReplyVoIPage = new Page(page.getCurrent(), page.getSize());
+        // setting page
         cardReplyVoIPage.setRecords(cardReplyVoList);
+        cardReplyVoIPage.setTotal(replyPage.getTotal());
+        cardReplyVoIPage.setOrders(replyPage.orders());
+        cardReplyVoIPage.setOptimizeCountSql(replyPage.optimizeCountSql());
+        cardReplyVoIPage.setSearchCount(replyPage.searchCount());
+        cardReplyVoIPage.setMaxLimit(replyPage.maxLimit());
+        cardReplyVoIPage.setCountId(replyPage.countId());
+        cardReplyVoIPage.setPages(replyPage.getPages());
 
         return cardReplyVoIPage;
     }

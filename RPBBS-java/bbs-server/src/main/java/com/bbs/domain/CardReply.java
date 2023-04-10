@@ -1,5 +1,6 @@
 package com.bbs.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class CardReply
     private String cardId;
 
     /** 所在楼层 */
+    @TableField("`rank`")
     private Long rank;
 
     /** 状态 */

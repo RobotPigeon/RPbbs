@@ -82,6 +82,9 @@ public class CardOperateController {
 
     @GetMapping("/reply/page")
     public AjaxResult replyPage(@RequestParam Long current, @RequestParam Long size, @RequestParam String cardId) {
+        if (cardId.equals("") || cardId == null) {
+            return AjaxResult.error("没有帖子id(cardId)");
+        }
         Page page = new Page(current,size);
         IPage<CardReplyVo> cardReplyVoPage = cardOperateService.cardReplyPage(page, cardId);
         if (cardReplyVoPage != null) {
