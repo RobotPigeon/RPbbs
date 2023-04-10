@@ -98,10 +98,10 @@ const postPost = () => {
         useAlertStore().setAlert({ message: "请填写完整内容", type: "error" });
         return;
     }
-    if (post.richtext.replace(/<[^>]+>/g, "").length < 50) {
-        useAlertStore().setAlert({ message: "请填写至少50字的内容", type: "error" });
-        return;
-    }
+    // if (post.richtext.replace(/<[^>]+>/g, "").length < 50) {
+    //     useAlertStore().setAlert({ message: "请填写至少50字的内容", type: "error" });
+    //     return;
+    // }
     //帖子类型默认为1
     post.cardTypeId = 1;
     console.log(post);
