@@ -2,7 +2,7 @@
   <div class=" flex flex-col">
     <div class="flex  bg-base-100 b-4 ha shadow-xl  w-full my1 px2  rounded-box">
       <div class="avatar p--10 h-30 overflow-hidden items-center rounded">
-        <img :src="blockimg" />
+        <img  v-if="blockimg!=''" :src="blockimg" />
       </div>
       <div class="card-body">
         <h2 class="card-title">{{ blockName }}</h2>
@@ -37,9 +37,9 @@ const postlist: Ref<any> = ref([]);
 //声明当前页变数
 const page: Ref<number> = ref(1);
 //声明分区头图变数，分区名称变数
-const blockimg: Ref<string> = ref('https://lain.bgm.tv/pic/cover/l/2b/03/406604_iYYvi.jpg');
+const blockimg: Ref<string> = ref('');
 const block: any = ref(1);
-const blockName: any = ref('默认分区');
+const blockName: any = ref('全部贴文');
 //页面加载时执行
 onMounted(() => {
   getPostList();

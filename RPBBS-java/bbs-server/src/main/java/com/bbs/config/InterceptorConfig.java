@@ -20,16 +20,15 @@ public class InterceptorConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/bbs/login/**"
-                                    , "/bbs/register/**"
-                                    , "/bbs/file/**"
-                                    , "/img/**"
-                                    , "/swagger-ui/**"
-                                    , "/v3/**"
-                                    , "/swagger-resources/**"
-                                    , "/webjars/**");
+//        registry.addInterceptor(jwtInterceptor)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/bbs/login/**"
+//                                    , "/bbs/register/**"
+//                                    , "/img/**"
+//                                    , "/swagger-ui/**"
+//                                    , "/v3/**"
+//                                    , "/swagger-resources/**"
+//                                    , "/webjars/**");
     }
 
     @Override

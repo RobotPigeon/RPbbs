@@ -1,7 +1,7 @@
 <template>
     <div class="navbar bg-base-100">
         <div class="navbar-start">
-            <a class="btn btn-ghost normal-case text-xl" href="/">RPBBS</a>
+            <a class="btn btn-ghost normal-case text-xl" href="/">战术平台</a>
             <!-- 图标 -->
             <div class="flex justify-center my-10">
                 <label class="swap swap-rotate">

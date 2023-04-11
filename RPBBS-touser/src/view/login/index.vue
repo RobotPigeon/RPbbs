@@ -2,8 +2,8 @@
 <div class="hero login min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row-reverse bg-base-100 card">
         <div class="text-center lg:text-left">
-        <h1 class="text-5xl font-bold">让我们开始吧!</h1>
-        <p class="py-6">登录我们的网站，欣赏更多内容，在RPBBS探索一切新鲜事物吧！Log in to our website, enjoy more content, and explore all new things in rpbbs!</p>
+        <h1 class="text-5xl font-bold">这里有足球和热爱足球的人</h1>
+        <p class="py-6"> 欢迎来到足球讨论平台，这里是你分享你对足球的热情和见解的地方。Welcome to the soccer discussion platform, where you can share your passion and insights about soccer.</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl" v-if="logOreg">
         <div class="card-body">
@@ -67,16 +67,6 @@
                 <rp-input v-else type="password" errorValue='请输入正确的密码' v-model="registerForm.password" :required="true" :pattern='/^\S*(?=\S{6,})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/' @change="handleInputChange"></rp-input>
                 <!-- 点击眼睛图标切换showPwd变量 -->
                 <i class="eye-icon" @click="toggleShowPwd"></i>
-            <!-- <label class="label">
-                <span>
-                验证码
-                </span>
-            </label>
-                <div class="login-code flex flex-1">      
-                <rp-input class="w-50%" type="text" errorValue='请输入验证码' v-model="loginForm.code" :required="true"></rp-input>
-
-                <img alt="验证码" :src="codeUrl" @click="getCode" class="login-code-img w-50%"/>
-                </div> -->
             <label class="label">
                 <a class="label-text-alt link link-hover" @click="logOreg=true">已有账号?登录</a>
             </label>

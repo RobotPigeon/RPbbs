@@ -64,7 +64,7 @@
                                     <p class="content m4"><a class="badge" v-if="reply.replyusername != undefined">@{{
                                         reply.replyusername }}</a> {{reply.message}}
                                     </p> <!-- 显示评论内容 -->
-                                    <span class="date justify-end ml4">{{ reply.date }}</span>
+                                    <span class="date justify-end ml4">{{ reply.createTime }}</span>
                                     <label for="rp-modal" class="justify-end btn  btn-xs btn-outline ml-xl"
                                         @click="replycomment(comment)">回复</label>
                                 </div>
