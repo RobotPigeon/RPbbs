@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmPlayerBasicMapper">
+    
+    <resultMap type="FmPlayerBasic" id="FmPlayerBasicResult">
+        <result property="id"    column="id"    />
+        <result property="Player"    column="Player"    />
+        <result property="Pos"    column="Pos"    />
+        <result property="Squad"    column="Squad"    />
+        <result property="Age"    column="Age"    />
+        <result property="Club"    column="Club"    />
+        <result property="Born"    column="Born"    />
+        <result property="MP"    column="MP"    />
+        <result property="Starts"    column="Starts"    />
+        <result property="Min"    column="Min"    />
+        <result property="_90s"    column="90s"    />
+        <result property="Gls"    column="Gls"    />
+        <result property="Ast"    column="Ast"    />
+        <result property="PK"    column="PK"    />
+        <result property="Pkatt"    column="Pkatt"    />
+        <result property="xG"    column="xG"    />
+        <result property="npxG"    column="npxG"    />
+        <result property="xAG"    column="xAG"    />
+        <result property="PrgC"    column="PrgC"    />
+        <result property="PrgP"    column="PrgP"    />
+        <result property="PrgR"    column="PrgR"    />
+        <result property="gA"    column="G_A"    />
+        <result property="gPk"    column="G_PK"    />
+        <result property="npxgXag"    column="npxG_xAG"    />
+        <result property="EventsID"    column="EventsID"    />
+    </resultMap>
+
+    <sql id="selectFmPlayerBasicVo">
+        select id, Player, Pos, Squad, Age, Club, Born, MP, Starts, Min, 90s, Gls, Ast, PK, Pkatt, xG, npxG, xAG, PrgC, PrgP, PrgR, G_A, G_PK, npxG_xAG, EventsID from fm_player_basic
+    </sql>
+
+    <select id="selectFmPlayerBasicList" parameterType="FmPlayerBasic" resultMap="FmPlayerBasicResult">
+        <include refid="selectFmPlayerBasicVo"/>
+        <where>  
+            <if test="Player != null  and Player != ''"> and Player = #{Player}</if>
+            <if test="Pos != null  and Pos != ''"> and Pos = #{Pos}</if>
+            <if test="Squad != null  and Squad != ''"> and Squad = #{Squad}</if>
+            <if test="Age != null "> and Age = #{Age}</if>
+            <if test="Club != null  and Club != ''"> and Club = #{Club}</if>
+            <if test="Born != null "> and Born = #{Born}</if>
+            <if test="MP != null "> and MP = #{MP}</if>
+            <if test="Starts != null "> and Starts = #{Starts}</if>
+            <if test="Min != null "> and Min = #{Min}</if>
+            <if test="_90s != null "> and 90s = #{_90s,javaType=long}</if>
+            <if test="Gls != null "> and Gls = #{Gls}</if>
+            <if test="Ast != null "> and Ast = #{Ast}</if>
+            <if test="PK != null "> and PK = #{PK}</if>
+            <if test="Pkatt != null "> and Pkatt = #{Pkatt}</if>
+            <if test="xG != null "> and xG = #{xG}</if>
+            <if test="npxG != null "> and npxG = #{npxG}</if>
+            <if test="xAG != null "> and xAG = #{xAG}</if>
+            <if test="PrgC != null "> and PrgC = #{PrgC}</if>
+            <if test="PrgP != null "> and PrgP = #{PrgP}</if>
+            <if test="PrgR != null "> and PrgR = #{PrgR}</if>
+            <if test="gA != null "> and G_A = #{gA}</if>
+            <if test="gPk != null "> and G_PK = #{gPk}</if>
+            <if test="npxgXag != null "> and npxG_xAG = #{npxgXag}</if>
+            <if test="EventsID != null "> and EventsID = #{EventsID}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmPlayerBasicById" parameterType="Long" resultMap="FmPlayerBasicResult">
+        <include refid="selectFmPlayerBasicVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmPlayerBasic" parameterType="FmPlayerBasic" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_player_basic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Player != null">Player,</if>
+            <if test="Pos != null">Pos,</if>
+            <if test="Squad != null">Squad,</if>
+            <if test="Age != null">Age,</if>
+            <if test="Club != null">Club,</if>
+            <if test="Born != null">Born,</if>
+            <if test="MP != null">MP,</if>
+            <if test="Starts != null">Starts,</if>
+            <if test="Min != null">Min,</if>
+            <if test="_90s != null">90s,</if>
+            <if test="Gls != null">Gls,</if>
+            <if test="Ast != null">Ast,</if>
+            <if test="PK != null">PK,</if>
+            <if test="Pkatt != null">Pkatt,</if>
+            <if test="xG != null">xG,</if>
+            <if test="npxG != null">npxG,</if>
+            <if test="xAG != null">xAG,</if>
+            <if test="PrgC != null">PrgC,</if>
+            <if test="PrgP != null">PrgP,</if>
+            <if test="PrgR != null">PrgR,</if>
+            <if test="gA != null">G_A,</if>
+            <if test="gPk != null">G_PK,</if>
+            <if test="npxgXag != null">npxG_xAG,</if>
+            <if test="EventsID != null">EventsID,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Player != null">#{Player},</if>
+            <if test="Pos != null">#{Pos},</if>
+            <if test="Squad != null">#{Squad},</if>
+            <if test="Age != null">#{Age},</if>
+            <if test="Club != null">#{Club},</if>
+            <if test="Born != null">#{Born},</if>
+            <if test="MP != null">#{MP},</if>
+            <if test="Starts != null">#{Starts},</if>
+            <if test="Min != null">#{Min},</if>
+            <if test="_90s != null">#{_90s},</if>
+            <if test="Gls != null">#{Gls},</if>
+            <if test="Ast != null">#{Ast},</if>
+            <if test="PK != null">#{PK},</if>
+            <if test="Pkatt != null">#{Pkatt},</if>
+            <if test="xG != null">#{xG},</if>
+            <if test="npxG != null">#{npxG},</if>
+            <if test="xAG != null">#{xAG},</if>
+            <if test="PrgC != null">#{PrgC},</if>
+            <if test="PrgP != null">#{PrgP},</if>
+            <if test="PrgR != null">#{PrgR},</if>
+            <if test="gA != null">#{gA},</if>
+            <if test="gPk != null">#{gPk},</if>
+            <if test="npxgXag != null">#{npxgXag},</if>
+            <if test="EventsID != null">#{EventsID},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmPlayerBasic" parameterType="FmPlayerBasic">
+        update fm_player_basic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Player != null">Player = #{Player},</if>
+            <if test="Pos != null">Pos = #{Pos},</if>
+            <if test="Squad != null">Squad = #{Squad},</if>
+            <if test="Age != null">Age = #{Age},</if>
+            <if test="Club != null">Club = #{Club},</if>
+            <if test="Born != null">Born = #{Born},</if>
+            <if test="MP != null">MP = #{MP},</if>
+            <if test="Starts != null">Starts = #{Starts},</if>
+            <if test="Min != null">Min = #{Min},</if>
+            <if test="_90s != null">90s = #{_90s},</if>
+            <if test="Gls != null">Gls = #{Gls},</if>
+            <if test="Ast != null">Ast = #{Ast},</if>
+            <if test="PK != null">PK = #{PK},</if>
+            <if test="Pkatt != null">Pkatt = #{Pkatt},</if>
+            <if test="xG != null">xG = #{xG},</if>
+            <if test="npxG != null">npxG = #{npxG},</if>
+            <if test="xAG != null">xAG = #{xAG},</if>
+            <if test="PrgC != null">PrgC = #{PrgC},</if>
+            <if test="PrgP != null">PrgP = #{PrgP},</if>
+            <if test="PrgR != null">PrgR = #{PrgR},</if>
+            <if test="gA != null">G_A = #{gA},</if>
+            <if test="gPk != null">G_PK = #{gPk},</if>
+            <if test="npxgXag != null">npxG_xAG = #{npxgXag},</if>
+            <if test="EventsID != null">EventsID = #{EventsID},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmPlayerBasicById" parameterType="Long">
+        delete from fm_player_basic where id = #{id}
+    </delete>
+
+    <delete id="deleteFmPlayerBasicByIds" parameterType="String">
+        delete from fm_player_basic where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

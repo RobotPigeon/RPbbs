@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmEventsMapper">
+    
+    <resultMap type="FmEvents" id="FmEventsResult">
+        <result property="id"    column="id"    />
+        <result property="eventName"    column="event_name"    />
+        <result property="eventChampion"    column="event_champion"    />
+        <result property="eventStartTime"    column="event_start_time"    />
+        <result property="eventEndTime"    column="event_end_time"    />
+        <result property="eventLocation"    column="event_location"    />
+    </resultMap>
+
+    <sql id="selectFmEventsVo">
+        select id, event_name, event_champion, event_start_time, event_end_time, event_location from fm_events
+    </sql>
+
+    <select id="selectFmEventsList" parameterType="FmEvents" resultMap="FmEventsResult">
+        <include refid="selectFmEventsVo"/>
+        <where>  
+            <if test="eventName != null  and eventName != ''"> and event_name like concat('%', #{eventName}, '%')</if>
+            <if test="eventChampion != null  and eventChampion != ''"> and event_champion = #{eventChampion}</if>
+            <if test="eventStartTime != null "> and event_start_time = #{eventStartTime}</if>
+            <if test="eventEndTime != null "> and event_end_time = #{eventEndTime}</if>
+            <if test="eventLocation != null  and eventLocation != ''"> and event_location = #{eventLocation}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmEventsById" parameterType="Long" resultMap="FmEventsResult">
+        <include refid="selectFmEventsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmEvents" parameterType="FmEvents" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_events
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="eventName != null">event_name,</if>
+            <if test="eventChampion != null">event_champion,</if>
+            <if test="eventStartTime != null">event_start_time,</if>
+            <if test="eventEndTime != null">event_end_time,</if>
+            <if test="eventLocation != null">event_location,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="eventName != null">#{eventName},</if>
+            <if test="eventChampion != null">#{eventChampion},</if>
+            <if test="eventStartTime != null">#{eventStartTime},</if>
+            <if test="eventEndTime != null">#{eventEndTime},</if>
+            <if test="eventLocation != null">#{eventLocation},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmEvents" parameterType="FmEvents">
+        update fm_events
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eventName != null">event_name = #{eventName},</if>
+            <if test="eventChampion != null">event_champion = #{eventChampion},</if>
+            <if test="eventStartTime != null">event_start_time = #{eventStartTime},</if>
+            <if test="eventEndTime != null">event_end_time = #{eventEndTime},</if>
+            <if test="eventLocation != null">event_location = #{eventLocation},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmEventsById" parameterType="Long">
+        delete from fm_events where id = #{id}
+    </delete>
+
+    <delete id="deleteFmEventsByIds" parameterType="String">
+        delete from fm_events where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmTeamDefenseMapper">
+    
+    <resultMap type="FmTeamDefense" id="FmTeamDefenseResult">
+        <result property="id"    column="id"    />
+        <result property="Tkl"    column="Tkl"    />
+        <result property="TklW"    column="TklW"    />
+        <result property="def3rd"    column="Def_3rd"    />
+        <result property="mid3rd"    column="Mid_3rd"    />
+        <result property="att3rd"    column="Att_3rd"    />
+        <result property="CTkl"    column="CTkl"    />
+        <result property="Catt"    column="Catt"    />
+        <result property="CTklP"    column="CTklP"    />
+        <result property="CTklL"    column="CTklL"    />
+        <result property="Blocks"    column="Blocks"    />
+        <result property="ShotBlock"    column="ShotBlock"    />
+        <result property="PassBlock"    column="PassBlock"    />
+        <result property="nOInt"    column="nOInt"    />
+        <result property="tklInt"    column="Tkl_Int"    />
+        <result property="Clear"    column="Clear"    />
+        <result property="Err"    column="Err"    />
+    </resultMap>
+
+    <sql id="selectFmTeamDefenseVo">
+        select id, Tkl, TklW, Def_3rd, Mid_3rd, Att_3rd, CTkl, Catt, CTklP, CTklL, Blocks, ShotBlock, PassBlock, nOInt, Tkl_Int, Clear, Err from fm_team_defense
+    </sql>
+
+    <select id="selectFmTeamDefenseList" parameterType="FmTeamDefense" resultMap="FmTeamDefenseResult">
+        <include refid="selectFmTeamDefenseVo"/>
+        <where>  
+            <if test="Tkl != null "> and Tkl = #{Tkl}</if>
+            <if test="TklW != null "> and TklW = #{TklW}</if>
+            <if test="def3rd != null "> and Def_3rd = #{def3rd}</if>
+            <if test="mid3rd != null "> and Mid_3rd = #{mid3rd}</if>
+            <if test="att3rd != null "> and Att_3rd = #{att3rd}</if>
+            <if test="CTkl != null "> and CTkl = #{CTkl}</if>
+            <if test="Catt != null "> and Catt = #{Catt}</if>
+            <if test="CTklP != null "> and CTklP = #{CTklP}</if>
+            <if test="CTklL != null "> and CTklL = #{CTklL}</if>
+            <if test="Blocks != null "> and Blocks = #{Blocks}</if>
+            <if test="ShotBlock != null "> and ShotBlock = #{ShotBlock}</if>
+            <if test="PassBlock != null "> and PassBlock = #{PassBlock}</if>
+            <if test="nOInt != null "> and nOInt = #{nOInt}</if>
+            <if test="tklInt != null "> and Tkl_Int = #{tklInt}</if>
+            <if test="Clear != null "> and Clear = #{Clear}</if>
+            <if test="Err != null "> and Err = #{Err}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmTeamDefenseById" parameterType="Long" resultMap="FmTeamDefenseResult">
+        <include refid="selectFmTeamDefenseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmTeamDefense" parameterType="FmTeamDefense" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_team_defense
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Tkl != null">Tkl,</if>
+            <if test="TklW != null">TklW,</if>
+            <if test="def3rd != null">Def_3rd,</if>
+            <if test="mid3rd != null">Mid_3rd,</if>
+            <if test="att3rd != null">Att_3rd,</if>
+            <if test="CTkl != null">CTkl,</if>
+            <if test="Catt != null">Catt,</if>
+            <if test="CTklP != null">CTklP,</if>
+            <if test="CTklL != null">CTklL,</if>
+            <if test="Blocks != null">Blocks,</if>
+            <if test="ShotBlock != null">ShotBlock,</if>
+            <if test="PassBlock != null">PassBlock,</if>
+            <if test="nOInt != null">nOInt,</if>
+            <if test="tklInt != null">Tkl_Int,</if>
+            <if test="Clear != null">Clear,</if>
+            <if test="Err != null">Err,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Tkl != null">#{Tkl},</if>
+            <if test="TklW != null">#{TklW},</if>
+            <if test="def3rd != null">#{def3rd},</if>
+            <if test="mid3rd != null">#{mid3rd},</if>
+            <if test="att3rd != null">#{att3rd},</if>
+            <if test="CTkl != null">#{CTkl},</if>
+            <if test="Catt != null">#{Catt},</if>
+            <if test="CTklP != null">#{CTklP},</if>
+            <if test="CTklL != null">#{CTklL},</if>
+            <if test="Blocks != null">#{Blocks},</if>
+            <if test="ShotBlock != null">#{ShotBlock},</if>
+            <if test="PassBlock != null">#{PassBlock},</if>
+            <if test="nOInt != null">#{nOInt},</if>
+            <if test="tklInt != null">#{tklInt},</if>
+            <if test="Clear != null">#{Clear},</if>
+            <if test="Err != null">#{Err},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmTeamDefense" parameterType="FmTeamDefense">
+        update fm_team_defense
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Tkl != null">Tkl = #{Tkl},</if>
+            <if test="TklW != null">TklW = #{TklW},</if>
+            <if test="def3rd != null">Def_3rd = #{def3rd},</if>
+            <if test="mid3rd != null">Mid_3rd = #{mid3rd},</if>
+            <if test="att3rd != null">Att_3rd = #{att3rd},</if>
+            <if test="CTkl != null">CTkl = #{CTkl},</if>
+            <if test="Catt != null">Catt = #{Catt},</if>
+            <if test="CTklP != null">CTklP = #{CTklP},</if>
+            <if test="CTklL != null">CTklL = #{CTklL},</if>
+            <if test="Blocks != null">Blocks = #{Blocks},</if>
+            <if test="ShotBlock != null">ShotBlock = #{ShotBlock},</if>
+            <if test="PassBlock != null">PassBlock = #{PassBlock},</if>
+            <if test="nOInt != null">nOInt = #{nOInt},</if>
+            <if test="tklInt != null">Tkl_Int = #{tklInt},</if>
+            <if test="Clear != null">Clear = #{Clear},</if>
+            <if test="Err != null">Err = #{Err},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmTeamDefenseById" parameterType="Long">
+        delete from fm_team_defense where id = #{id}
+    </delete>
+
+    <delete id="deleteFmTeamDefenseByIds" parameterType="String">
+        delete from fm_team_defense where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

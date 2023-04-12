@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmPlayerOthersMapper">
+    
+    <resultMap type="FmPlayerOthers" id="FmPlayerOthersResult">
+        <result property="id"    column="id"    />
+        <result property="CrdY"    column="CrdY"    />
+        <result property="CrdR"    column="CrdR"    />
+        <result property="_2CrdY"    column="2CrdY"    />
+        <result property="Fls"    column="Fls"    />
+        <result property="Fld"    column="Fld"    />
+        <result property="Off"    column="Off"    />
+        <result property="Crs"    column="Crs"    />
+        <result property="TklW"    column="TklW"    />
+        <result property="Pkwon"    column="Pkwon"    />
+        <result property="Pkcon"    column="Pkcon"    />
+        <result property="OG"    column="OG"    />
+        <result property="Recov"    column="Recov"    />
+        <result property="ADWon"    column="ADWon"    />
+        <result property="ADLost"    column="ADLost"    />
+        <result property="nOInt"    column="nOInt"    />
+        <result property="ADWP"    column="ADWP"    />
+    </resultMap>
+
+    <sql id="selectFmPlayerOthersVo">
+        select id, CrdY, CrdR, 2CrdY, Fls, Fld, Off, Crs, TklW, Pkwon, Pkcon, OG, Recov, ADWon, ADLost, nOInt, ADWP from fm_player_others
+    </sql>
+
+    <select id="selectFmPlayerOthersList" parameterType="FmPlayerOthers" resultMap="FmPlayerOthersResult">
+        <include refid="selectFmPlayerOthersVo"/>
+        <where>  
+            <if test="CrdY != null "> and CrdY = #{CrdY}</if>
+            <if test="CrdR != null "> and CrdR = #{CrdR}</if>
+            <if test="_2CrdY != null "> and 2CrdY = #{_2CrdY}</if>
+            <if test="Fls != null "> and Fls = #{Fls}</if>
+            <if test="Fld != null "> and Fld = #{Fld}</if>
+            <if test="Off != null "> and Off = #{Off}</if>
+            <if test="Crs != null "> and Crs = #{Crs}</if>
+            <if test="TklW != null "> and TklW = #{TklW}</if>
+            <if test="Pkwon != null "> and Pkwon = #{Pkwon}</if>
+            <if test="Pkcon != null "> and Pkcon = #{Pkcon}</if>
+            <if test="OG != null "> and OG = #{OG}</if>
+            <if test="Recov != null "> and Recov = #{Recov}</if>
+            <if test="ADWon != null "> and ADWon = #{ADWon}</if>
+            <if test="ADLost != null "> and ADLost = #{ADLost}</if>
+            <if test="nOInt != null "> and nOInt = #{nOInt}</if>
+            <if test="ADWP != null "> and ADWP = #{ADWP}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmPlayerOthersById" parameterType="Long" resultMap="FmPlayerOthersResult">
+        <include refid="selectFmPlayerOthersVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmPlayerOthers" parameterType="FmPlayerOthers" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_player_others
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="CrdY != null">CrdY,</if>
+            <if test="CrdR != null">CrdR,</if>
+            <if test="_2CrdY != null">2CrdY,</if>
+            <if test="Fls != null">Fls,</if>
+            <if test="Fld != null">Fld,</if>
+            <if test="Off != null">Off,</if>
+            <if test="Crs != null">Crs,</if>
+            <if test="TklW != null">TklW,</if>
+            <if test="Pkwon != null">Pkwon,</if>
+            <if test="Pkcon != null">Pkcon,</if>
+            <if test="OG != null">OG,</if>
+            <if test="Recov != null">Recov,</if>
+            <if test="ADWon != null">ADWon,</if>
+            <if test="ADLost != null">ADLost,</if>
+            <if test="nOInt != null">nOInt,</if>
+            <if test="ADWP != null">ADWP,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="CrdY != null">#{CrdY},</if>
+            <if test="CrdR != null">#{CrdR},</if>
+            <if test="_2CrdY != null">#{2CrdY},</if>
+            <if test="Fls != null">#{Fls},</if>
+            <if test="Fld != null">#{Fld},</if>
+            <if test="Off != null">#{Off},</if>
+            <if test="Crs != null">#{Crs},</if>
+            <if test="TklW != null">#{TklW},</if>
+            <if test="Pkwon != null">#{Pkwon},</if>
+            <if test="Pkcon != null">#{Pkcon},</if>
+            <if test="OG != null">#{OG},</if>
+            <if test="Recov != null">#{Recov},</if>
+            <if test="ADWon != null">#{ADWon},</if>
+            <if test="ADLost != null">#{ADLost},</if>
+            <if test="nOInt != null">#{nOInt},</if>
+            <if test="ADWP != null">#{ADWP},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmPlayerOthers" parameterType="FmPlayerOthers">
+        update fm_player_others
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="CrdY != null">CrdY = #{CrdY},</if>
+            <if test="CrdR != null">CrdR = #{CrdR},</if>
+            <if test="_2CrdY != null">2CrdY = #{_2CrdY},</if>
+            <if test="Fls != null">Fls = #{Fls},</if>
+            <if test="Fld != null">Fld = #{Fld},</if>
+            <if test="Off != null">Off = #{Off},</if>
+            <if test="Crs != null">Crs = #{Crs},</if>
+            <if test="TklW != null">TklW = #{TklW},</if>
+            <if test="Pkwon != null">Pkwon = #{Pkwon},</if>
+            <if test="Pkcon != null">Pkcon = #{Pkcon},</if>
+            <if test="OG != null">OG = #{OG},</if>
+            <if test="Recov != null">Recov = #{Recov},</if>
+            <if test="ADWon != null">ADWon = #{ADWon},</if>
+            <if test="ADLost != null">ADLost = #{ADLost},</if>
+            <if test="nOInt != null">nOInt = #{nOInt},</if>
+            <if test="ADWP != null">ADWP = #{ADWP},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmPlayerOthersById" parameterType="Long">
+        delete from fm_player_others where id = #{id}
+    </delete>
+
+    <delete id="deleteFmPlayerOthersByIds" parameterType="String">
+        delete from fm_player_others where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

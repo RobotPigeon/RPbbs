@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmMatchMapper">
+    
+    <resultMap type="FmMatch" id="FmMatchResult">
+        <result property="id"    column="id"    />
+        <result property="Round"    column="Round"    />
+        <result property="Date"    column="Date"    />
+        <result property="Time"    column="Time"    />
+        <result property="Home"    column="Home"    />
+        <result property="homeXg"    column="home_xG"    />
+        <result property="Score"    column="Score"    />
+        <result property="awayXg"    column="away_xG"    />
+        <result property="Away"    column="Away"    />
+        <result property="Attendance"    column="Attendance"    />
+        <result property="Venue"    column="Venue"    />
+        <result property="Referee"    column="Referee"    />
+        <result property="Notes"    column="Notes"    />
+        <result property="EventsID"    column="EventsID"    />
+    </resultMap>
+
+    <sql id="selectFmMatchVo">
+        select id, Round, Date, Time, Home, home_xG, Score, away_xG, Away, Attendance, Venue, Referee, Notes, EventsID from fm_match
+    </sql>
+
+    <select id="selectFmMatchList" parameterType="FmMatch" resultMap="FmMatchResult">
+        <include refid="selectFmMatchVo"/>
+        <where>  
+            <if test="Round != null  and Round != ''"> and Round = #{Round}</if>
+            <if test="Date != null "> and Date = #{Date}</if>
+            <if test="Time != null  and Time != ''"> and Time = #{Time}</if>
+            <if test="Home != null  and Home != ''"> and Home = #{Home}</if>
+            <if test="homeXg != null "> and home_xG = #{homeXg}</if>
+            <if test="Score != null  and Score != ''"> and Score = #{Score}</if>
+            <if test="awayXg != null "> and away_xG = #{awayXg}</if>
+            <if test="Away != null  and Away != ''"> and Away = #{Away}</if>
+            <if test="Attendance != null "> and Attendance = #{Attendance}</if>
+            <if test="Venue != null  and Venue != ''"> and Venue = #{Venue}</if>
+            <if test="Referee != null  and Referee != ''"> and Referee = #{Referee}</if>
+            <if test="Notes != null  and Notes != ''"> and Notes = #{Notes}</if>
+            <if test="EventsID != null "> and EventsID = #{EventsID}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmMatchById" parameterType="String" resultMap="FmMatchResult">
+        <include refid="selectFmMatchVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmMatch" parameterType="FmMatch" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_match
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Round != null">Round,</if>
+            <if test="Date != null">Date,</if>
+            <if test="Time != null">Time,</if>
+            <if test="Home != null">Home,</if>
+            <if test="homeXg != null">home_xG,</if>
+            <if test="Score != null">Score,</if>
+            <if test="awayXg != null">away_xG,</if>
+            <if test="Away != null">Away,</if>
+            <if test="Attendance != null">Attendance,</if>
+            <if test="Venue != null">Venue,</if>
+            <if test="Referee != null">Referee,</if>
+            <if test="Notes != null">Notes,</if>
+            <if test="EventsID != null">EventsID,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Round != null">#{Round},</if>
+            <if test="Date != null">#{Date},</if>
+            <if test="Time != null">#{Time},</if>
+            <if test="Home != null">#{Home},</if>
+            <if test="homeXg != null">#{homeXg},</if>
+            <if test="Score != null">#{Score},</if>
+            <if test="awayXg != null">#{awayXg},</if>
+            <if test="Away != null">#{Away},</if>
+            <if test="Attendance != null">#{Attendance},</if>
+            <if test="Venue != null">#{Venue},</if>
+            <if test="Referee != null">#{Referee},</if>
+            <if test="Notes != null">#{Notes},</if>
+            <if test="EventsID != null">#{EventsID},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmMatch" parameterType="FmMatch">
+        update fm_match
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Round != null">Round = #{Round},</if>
+            <if test="Date != null">Date = #{Date},</if>
+            <if test="Time != null">Time = #{Time},</if>
+            <if test="Home != null">Home = #{Home},</if>
+            <if test="homeXg != null">home_xG = #{homeXg},</if>
+            <if test="Score != null">Score = #{Score},</if>
+            <if test="awayXg != null">away_xG = #{awayXg},</if>
+            <if test="Away != null">Away = #{Away},</if>
+            <if test="Attendance != null">Attendance = #{Attendance},</if>
+            <if test="Venue != null">Venue = #{Venue},</if>
+            <if test="Referee != null">Referee = #{Referee},</if>
+            <if test="Notes != null">Notes = #{Notes},</if>
+            <if test="EventsID != null">EventsID = #{EventsID},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmMatchById" parameterType="String">
+        delete from fm_match where id = #{id}
+    </delete>
+
+    <delete id="deleteFmMatchByIds" parameterType="String">
+        delete from fm_match where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

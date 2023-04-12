@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmTeamShootingMapper">
+    
+    <resultMap type="FmTeamShooting" id="FmTeamShootingResult">
+        <result property="id"    column="id"    />
+        <result property="Gls"    column="Gls"    />
+        <result property="Sh"    column="Sh"    />
+        <result property="SoT"    column="SoT"    />
+        <result property="sotP"    column="SoT_P"    />
+        <result property="sh90"    column="Sh_90"    />
+        <result property="sot90"    column="SoT_90"    />
+        <result property="gSh"    column="G_Sh"    />
+        <result property="gSot"    column="G_SoT"    />
+        <result property="Dist"    column="Dist"    />
+        <result property="FK"    column="FK"    />
+        <result property="PK"    column="PK"    />
+        <result property="Pkatt"    column="Pkatt"    />
+        <result property="xG"    column="xG"    />
+        <result property="npxG"    column="npxG"    />
+        <result property="npxgSh"    column="npxG_Sh"    />
+        <result property="gXg"    column="G_xG"    />
+        <result property="npGXg"    column="np_G_xG"    />
+    </resultMap>
+
+    <sql id="selectFmTeamShootingVo">
+        select id, Gls, Sh, SoT, SoT_P, Sh_90, SoT_90, G_Sh, G_SoT, Dist, FK, PK, Pkatt, xG, npxG, npxG_Sh, G_xG, np_G_xG from fm_team_shooting
+    </sql>
+
+    <select id="selectFmTeamShootingList" parameterType="FmTeamShooting" resultMap="FmTeamShootingResult">
+        <include refid="selectFmTeamShootingVo"/>
+        <where>  
+            <if test="Gls != null "> and Gls = #{Gls}</if>
+            <if test="Sh != null "> and Sh = #{Sh}</if>
+            <if test="SoT != null "> and SoT = #{SoT}</if>
+            <if test="sotP != null "> and SoT_P = #{sotP}</if>
+            <if test="sh90 != null "> and Sh_90 = #{sh90}</if>
+            <if test="sot90 != null "> and SoT_90 = #{sot90}</if>
+            <if test="gSh != null "> and G_Sh = #{gSh}</if>
+            <if test="gSot != null "> and G_SoT = #{gSot}</if>
+            <if test="Dist != null "> and Dist = #{Dist}</if>
+            <if test="FK != null "> and FK = #{FK}</if>
+            <if test="PK != null "> and PK = #{PK}</if>
+            <if test="Pkatt != null "> and Pkatt = #{Pkatt}</if>
+            <if test="xG != null "> and xG = #{xG}</if>
+            <if test="npxG != null "> and npxG = #{npxG}</if>
+            <if test="npxgSh != null "> and npxG_Sh = #{npxgSh}</if>
+            <if test="gXg != null "> and G_xG = #{gXg}</if>
+            <if test="npGXg != null "> and np_G_xG = #{npGXg}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmTeamShootingById" parameterType="Long" resultMap="FmTeamShootingResult">
+        <include refid="selectFmTeamShootingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmTeamShooting" parameterType="FmTeamShooting" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_team_shooting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Gls != null">Gls,</if>
+            <if test="Sh != null">Sh,</if>
+            <if test="SoT != null">SoT,</if>
+            <if test="sotP != null">SoT_P,</if>
+            <if test="sh90 != null">Sh_90,</if>
+            <if test="sot90 != null">SoT_90,</if>
+            <if test="gSh != null">G_Sh,</if>
+            <if test="gSot != null">G_SoT,</if>
+            <if test="Dist != null">Dist,</if>
+            <if test="FK != null">FK,</if>
+            <if test="PK != null">PK,</if>
+            <if test="Pkatt != null">Pkatt,</if>
+            <if test="xG != null">xG,</if>
+            <if test="npxG != null">npxG,</if>
+            <if test="npxgSh != null">npxG_Sh,</if>
+            <if test="gXg != null">G_xG,</if>
+            <if test="npGXg != null">np_G_xG,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Gls != null">#{Gls},</if>
+            <if test="Sh != null">#{Sh},</if>
+            <if test="SoT != null">#{SoT},</if>
+            <if test="sotP != null">#{sotP},</if>
+            <if test="sh90 != null">#{sh90},</if>
+            <if test="sot90 != null">#{sot90},</if>
+            <if test="gSh != null">#{gSh},</if>
+            <if test="gSot != null">#{gSot},</if>
+            <if test="Dist != null">#{Dist},</if>
+            <if test="FK != null">#{FK},</if>
+            <if test="PK != null">#{PK},</if>
+            <if test="Pkatt != null">#{Pkatt},</if>
+            <if test="xG != null">#{xG},</if>
+            <if test="npxG != null">#{npxG},</if>
+            <if test="npxgSh != null">#{npxgSh},</if>
+            <if test="gXg != null">#{gXg},</if>
+            <if test="npGXg != null">#{npGXg},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmTeamShooting" parameterType="FmTeamShooting">
+        update fm_team_shooting
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Gls != null">Gls = #{Gls},</if>
+            <if test="Sh != null">Sh = #{Sh},</if>
+            <if test="SoT != null">SoT = #{SoT},</if>
+            <if test="sotP != null">SoT_P = #{sotP},</if>
+            <if test="sh90 != null">Sh_90 = #{sh90},</if>
+            <if test="sot90 != null">SoT_90 = #{sot90},</if>
+            <if test="gSh != null">G_Sh = #{gSh},</if>
+            <if test="gSot != null">G_SoT = #{gSot},</if>
+            <if test="Dist != null">Dist = #{Dist},</if>
+            <if test="FK != null">FK = #{FK},</if>
+            <if test="PK != null">PK = #{PK},</if>
+            <if test="Pkatt != null">Pkatt = #{Pkatt},</if>
+            <if test="xG != null">xG = #{xG},</if>
+            <if test="npxG != null">npxG = #{npxG},</if>
+            <if test="npxgSh != null">npxG_Sh = #{npxgSh},</if>
+            <if test="gXg != null">G_xG = #{gXg},</if>
+            <if test="npGXg != null">np_G_xG = #{npGXg},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmTeamShootingById" parameterType="Long">
+        delete from fm_team_shooting where id = #{id}
+    </delete>
+
+    <delete id="deleteFmTeamShootingByIds" parameterType="String">
+        delete from fm_team_shooting where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

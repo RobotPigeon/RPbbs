@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmTeamGoalkeepingMapper">
+    
+    <resultMap type="FmTeamGoalkeeping" id="FmTeamGoalkeepingResult">
+        <result property="id"    column="id"    />
+        <result property="starts"    column="starts"    />
+        <result property="min"    column="min"    />
+        <result property="GA"    column="GA"    />
+        <result property="GA90"    column="GA90"    />
+        <result property="SoTa"    column="SoTa"    />
+        <result property="Saves"    column="Saves"    />
+        <result property="saveP"    column="Save_P"    />
+        <result property="w"    column="w"    />
+        <result property="d"    column="d"    />
+        <result property="l"    column="l"    />
+        <result property="CS"    column="CS"    />
+        <result property="csP"    column="CS_P"    />
+        <result property="pkatt"    column="pkatt"    />
+        <result property="pka"    column="pka"    />
+        <result property="pksv"    column="pksv"    />
+        <result property="pkm"    column="pkm"    />
+        <result property="pksvP"    column="PKsv_p"    />
+    </resultMap>
+
+    <sql id="selectFmTeamGoalkeepingVo">
+        select id, starts, min, GA, GA90, SoTa, Saves, Save_P, w, d, l, CS, CS_P, pkatt, pka, pksv, pkm, PKsv_p from fm_team_goalkeeping
+    </sql>
+
+    <select id="selectFmTeamGoalkeepingList" parameterType="FmTeamGoalkeeping" resultMap="FmTeamGoalkeepingResult">
+        <include refid="selectFmTeamGoalkeepingVo"/>
+        <where>  
+            <if test="starts != null "> and starts = #{starts}</if>
+            <if test="min != null "> and min = #{min}</if>
+            <if test="GA != null "> and GA = #{GA}</if>
+            <if test="GA90 != null "> and GA90 = #{GA90}</if>
+            <if test="SoTa != null "> and SoTa = #{SoTa}</if>
+            <if test="Saves != null "> and Saves = #{Saves}</if>
+            <if test="saveP != null "> and Save_P = #{saveP}</if>
+            <if test="w != null "> and w = #{w}</if>
+            <if test="d != null "> and d = #{d}</if>
+            <if test="l != null "> and l = #{l}</if>
+            <if test="CS != null "> and CS = #{CS}</if>
+            <if test="csP != null "> and CS_P = #{csP}</if>
+            <if test="pkatt != null "> and pkatt = #{pkatt}</if>
+            <if test="pka != null "> and pka = #{pka}</if>
+            <if test="pksv != null "> and pksv = #{pksv}</if>
+            <if test="pkm != null "> and pkm = #{pkm}</if>
+            <if test="pksvP != null "> and PKsv_p = #{pksvP}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmTeamGoalkeepingById" parameterType="Long" resultMap="FmTeamGoalkeepingResult">
+        <include refid="selectFmTeamGoalkeepingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmTeamGoalkeeping" parameterType="FmTeamGoalkeeping" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_team_goalkeeping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="starts != null">starts,</if>
+            <if test="min != null">min,</if>
+            <if test="GA != null">GA,</if>
+            <if test="GA90 != null">GA90,</if>
+            <if test="SoTa != null">SoTa,</if>
+            <if test="Saves != null">Saves,</if>
+            <if test="saveP != null">Save_P,</if>
+            <if test="w != null">w,</if>
+            <if test="d != null">d,</if>
+            <if test="l != null">l,</if>
+            <if test="CS != null">CS,</if>
+            <if test="csP != null">CS_P,</if>
+            <if test="pkatt != null">pkatt,</if>
+            <if test="pka != null">pka,</if>
+            <if test="pksv != null">pksv,</if>
+            <if test="pkm != null">pkm,</if>
+            <if test="pksvP != null">PKsv_p,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="starts != null">#{starts},</if>
+            <if test="min != null">#{min},</if>
+            <if test="GA != null">#{GA},</if>
+            <if test="GA90 != null">#{GA90},</if>
+            <if test="SoTa != null">#{SoTa},</if>
+            <if test="Saves != null">#{Saves},</if>
+            <if test="saveP != null">#{saveP},</if>
+            <if test="w != null">#{w},</if>
+            <if test="d != null">#{d},</if>
+            <if test="l != null">#{l},</if>
+            <if test="CS != null">#{CS},</if>
+            <if test="csP != null">#{csP},</if>
+            <if test="pkatt != null">#{pkatt},</if>
+            <if test="pka != null">#{pka},</if>
+            <if test="pksv != null">#{pksv},</if>
+            <if test="pkm != null">#{pkm},</if>
+            <if test="pksvP != null">#{pksvP},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmTeamGoalkeeping" parameterType="FmTeamGoalkeeping">
+        update fm_team_goalkeeping
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="starts != null">starts = #{starts},</if>
+            <if test="min != null">min = #{min},</if>
+            <if test="GA != null">GA = #{GA},</if>
+            <if test="GA90 != null">GA90 = #{GA90},</if>
+            <if test="SoTa != null">SoTa = #{SoTa},</if>
+            <if test="Saves != null">Saves = #{Saves},</if>
+            <if test="saveP != null">Save_P = #{saveP},</if>
+            <if test="w != null">w = #{w},</if>
+            <if test="d != null">d = #{d},</if>
+            <if test="l != null">l = #{l},</if>
+            <if test="CS != null">CS = #{CS},</if>
+            <if test="csP != null">CS_P = #{csP},</if>
+            <if test="pkatt != null">pkatt = #{pkatt},</if>
+            <if test="pka != null">pka = #{pka},</if>
+            <if test="pksv != null">pksv = #{pksv},</if>
+            <if test="pkm != null">pkm = #{pkm},</if>
+            <if test="pksvP != null">PKsv_p = #{pksvP},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmTeamGoalkeepingById" parameterType="Long">
+        delete from fm_team_goalkeeping where id = #{id}
+    </delete>
+
+    <delete id="deleteFmTeamGoalkeepingByIds" parameterType="String">
+        delete from fm_team_goalkeeping where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

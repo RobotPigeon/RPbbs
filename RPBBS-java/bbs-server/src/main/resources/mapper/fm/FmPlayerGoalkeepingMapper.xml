@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmPlayerGoalkeepingMapper">
+    
+    <resultMap type="FmPlayerGoalkeeping" id="FmPlayerGoalkeepingResult">
+        <result property="id"    column="id"    />
+        <result property="GA"    column="GA"    />
+        <result property="GA90"    column="GA90"    />
+        <result property="SoTA"    column="SoTA"    />
+        <result property="Saves"    column="Saves"    />
+        <result property="SaveP"    column="SaveP"    />
+        <result property="W"    column="W"    />
+        <result property="D"    column="D"    />
+        <result property="L"    column="L"    />
+        <result property="CS"    column="CS"    />
+        <result property="csP"    column="CS_P"    />
+        <result property="PKatt"    column="PKatt"    />
+        <result property="PKA"    column="PKA"    />
+        <result property="PKsv"    column="PKsv"    />
+        <result property="PKm"    column="PKm"    />
+        <result property="pksvP"    column="PKsv_P"    />
+    </resultMap>
+
+    <sql id="selectFmPlayerGoalkeepingVo">
+        select id, GA, GA90, SoTA, Saves, SaveP, W, D, L, CS, CS_P, PKatt, PKA, PKsv, PKm, PKsv_P from fm_player_goalkeeping
+    </sql>
+
+    <select id="selectFmPlayerGoalkeepingList" parameterType="FmPlayerGoalkeeping" resultMap="FmPlayerGoalkeepingResult">
+        <include refid="selectFmPlayerGoalkeepingVo"/>
+        <where>  
+            <if test="GA != null "> and GA = #{GA}</if>
+            <if test="GA90 != null "> and GA90 = #{GA90}</if>
+            <if test="SoTA != null "> and SoTA = #{SoTA}</if>
+            <if test="Saves != null "> and Saves = #{Saves}</if>
+            <if test="SaveP != null "> and SaveP = #{SaveP}</if>
+            <if test="W != null "> and W = #{W}</if>
+            <if test="D != null "> and D = #{D}</if>
+            <if test="L != null "> and L = #{L}</if>
+            <if test="CS != null "> and CS = #{CS}</if>
+            <if test="csP != null "> and CS_P = #{csP}</if>
+            <if test="PKatt != null "> and PKatt = #{PKatt}</if>
+            <if test="PKA != null "> and PKA = #{PKA}</if>
+            <if test="PKsv != null "> and PKsv = #{PKsv}</if>
+            <if test="PKm != null "> and PKm = #{PKm}</if>
+            <if test="pksvP != null "> and PKsv_P = #{pksvP}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmPlayerGoalkeepingById" parameterType="Long" resultMap="FmPlayerGoalkeepingResult">
+        <include refid="selectFmPlayerGoalkeepingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmPlayerGoalkeeping" parameterType="FmPlayerGoalkeeping" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_player_goalkeeping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="GA != null">GA,</if>
+            <if test="GA90 != null">GA90,</if>
+            <if test="SoTA != null">SoTA,</if>
+            <if test="Saves != null">Saves,</if>
+            <if test="SaveP != null">SaveP,</if>
+            <if test="W != null">W,</if>
+            <if test="D != null">D,</if>
+            <if test="L != null">L,</if>
+            <if test="CS != null">CS,</if>
+            <if test="csP != null">CS_P,</if>
+            <if test="PKatt != null">PKatt,</if>
+            <if test="PKA != null">PKA,</if>
+            <if test="PKsv != null">PKsv,</if>
+            <if test="PKm != null">PKm,</if>
+            <if test="pksvP != null">PKsv_P,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="GA != null">#{GA},</if>
+            <if test="GA90 != null">#{GA90},</if>
+            <if test="SoTA != null">#{SoTA},</if>
+            <if test="Saves != null">#{Saves},</if>
+            <if test="SaveP != null">#{SaveP},</if>
+            <if test="W != null">#{W},</if>
+            <if test="D != null">#{D},</if>
+            <if test="L != null">#{L},</if>
+            <if test="CS != null">#{CS},</if>
+            <if test="csP != null">#{csP},</if>
+            <if test="PKatt != null">#{PKatt},</if>
+            <if test="PKA != null">#{PKA},</if>
+            <if test="PKsv != null">#{PKsv},</if>
+            <if test="PKm != null">#{PKm},</if>
+            <if test="pksvP != null">#{pksvP},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmPlayerGoalkeeping" parameterType="FmPlayerGoalkeeping">
+        update fm_player_goalkeeping
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="GA != null">GA = #{GA},</if>
+            <if test="GA90 != null">GA90 = #{GA90},</if>
+            <if test="SoTA != null">SoTA = #{SoTA},</if>
+            <if test="Saves != null">Saves = #{Saves},</if>
+            <if test="SaveP != null">SaveP = #{SaveP},</if>
+            <if test="W != null">W = #{W},</if>
+            <if test="D != null">D = #{D},</if>
+            <if test="L != null">L = #{L},</if>
+            <if test="CS != null">CS = #{CS},</if>
+            <if test="csP != null">CS_P = #{csP},</if>
+            <if test="PKatt != null">PKatt = #{PKatt},</if>
+            <if test="PKA != null">PKA = #{PKA},</if>
+            <if test="PKsv != null">PKsv = #{PKsv},</if>
+            <if test="PKm != null">PKm = #{PKm},</if>
+            <if test="pksvP != null">PKsv_P = #{pksvP},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmPlayerGoalkeepingById" parameterType="Long">
+        delete from fm_player_goalkeeping where id = #{id}
+    </delete>
+
+    <delete id="deleteFmPlayerGoalkeepingByIds" parameterType="String">
+        delete from fm_player_goalkeeping where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

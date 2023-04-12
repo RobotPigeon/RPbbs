@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmPlayerDefenseMapper">
+    
+    <resultMap type="FmPlayerDefense" id="FmPlayerDefenseResult">
+        <result property="id"    column="id"    />
+        <result property="Tkl"    column="Tkl"    />
+        <result property="TklW"    column="TklW"    />
+        <result property="CTkl"    column="CTkl"    />
+        <result property="Catt"    column="Catt"    />
+        <result property="CTklP"    column="CTklP"    />
+        <result property="CTklL"    column="CTklL"    />
+        <result property="Blocks"    column="Blocks"    />
+        <result property="ShotBlock"    column="ShotBlock"    />
+        <result property="PassBlock"    column="PassBlock"    />
+        <result property="tklInt"    column="Tkl_Int"    />
+        <result property="Clear"    column="Clear"    />
+        <result property="Err"    column="Err"    />
+        <result property="def3rd"    column="Def_3rd"    />
+        <result property="mid3rd"    column="Mid_3rd"    />
+        <result property="att3rd"    column="Att_3rd"    />
+        <result property="nOint"    column="nOint"    />
+    </resultMap>
+
+    <sql id="selectFmPlayerDefenseVo">
+        select id, Tkl, TklW, CTkl, Catt, CTklP, CTklL, Blocks, ShotBlock, PassBlock, Tkl_Int, Clear, Err, Def_3rd, Mid_3rd, Att_3rd, nOint from fm_player_defense
+    </sql>
+
+    <select id="selectFmPlayerDefenseList" parameterType="FmPlayerDefense" resultMap="FmPlayerDefenseResult">
+        <include refid="selectFmPlayerDefenseVo"/>
+        <where>  
+            <if test="Tkl != null "> and Tkl = #{Tkl}</if>
+            <if test="TklW != null "> and TklW = #{TklW}</if>
+            <if test="CTkl != null "> and CTkl = #{CTkl}</if>
+            <if test="Catt != null "> and Catt = #{Catt}</if>
+            <if test="CTklP != null "> and CTklP = #{CTklP}</if>
+            <if test="CTklL != null "> and CTklL = #{CTklL}</if>
+            <if test="Blocks != null "> and Blocks = #{Blocks}</if>
+            <if test="ShotBlock != null "> and ShotBlock = #{ShotBlock}</if>
+            <if test="PassBlock != null "> and PassBlock = #{PassBlock}</if>
+            <if test="tklInt != null "> and Tkl_Int = #{tklInt}</if>
+            <if test="Clear != null "> and Clear = #{Clear}</if>
+            <if test="Err != null "> and Err = #{Err}</if>
+            <if test="def3rd != null "> and Def_3rd = #{def3rd}</if>
+            <if test="mid3rd != null "> and Mid_3rd = #{mid3rd}</if>
+            <if test="att3rd != null "> and Att_3rd = #{att3rd}</if>
+            <if test="nOint != null "> and nOint = #{nOint}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmPlayerDefenseById" parameterType="Long" resultMap="FmPlayerDefenseResult">
+        <include refid="selectFmPlayerDefenseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmPlayerDefense" parameterType="FmPlayerDefense" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_player_defense
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Tkl != null">Tkl,</if>
+            <if test="TklW != null">TklW,</if>
+            <if test="CTkl != null">CTkl,</if>
+            <if test="Catt != null">Catt,</if>
+            <if test="CTklP != null">CTklP,</if>
+            <if test="CTklL != null">CTklL,</if>
+            <if test="Blocks != null">Blocks,</if>
+            <if test="ShotBlock != null">ShotBlock,</if>
+            <if test="PassBlock != null">PassBlock,</if>
+            <if test="tklInt != null">Tkl_Int,</if>
+            <if test="Clear != null">Clear,</if>
+            <if test="Err != null">Err,</if>
+            <if test="def3rd != null">Def_3rd,</if>
+            <if test="mid3rd != null">Mid_3rd,</if>
+            <if test="att3rd != null">Att_3rd,</if>
+            <if test="nOint != null">nOint,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Tkl != null">#{Tkl},</if>
+            <if test="TklW != null">#{TklW},</if>
+            <if test="CTkl != null">#{CTkl},</if>
+            <if test="Catt != null">#{Catt},</if>
+            <if test="CTklP != null">#{CTklP},</if>
+            <if test="CTklL != null">#{CTklL},</if>
+            <if test="Blocks != null">#{Blocks},</if>
+            <if test="ShotBlock != null">#{ShotBlock},</if>
+            <if test="PassBlock != null">#{PassBlock},</if>
+            <if test="tklInt != null">#{tklInt},</if>
+            <if test="Clear != null">#{Clear},</if>
+            <if test="Err != null">#{Err},</if>
+            <if test="def3rd != null">#{def3rd},</if>
+            <if test="mid3rd != null">#{mid3rd},</if>
+            <if test="att3rd != null">#{att3rd},</if>
+            <if test="nOint != null">#{nOint},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmPlayerDefense" parameterType="FmPlayerDefense">
+        update fm_player_defense
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Tkl != null">Tkl = #{Tkl},</if>
+            <if test="TklW != null">TklW = #{TklW},</if>
+            <if test="CTkl != null">CTkl = #{CTkl},</if>
+            <if test="Catt != null">Catt = #{Catt},</if>
+            <if test="CTklP != null">CTklP = #{CTklP},</if>
+            <if test="CTklL != null">CTklL = #{CTklL},</if>
+            <if test="Blocks != null">Blocks = #{Blocks},</if>
+            <if test="ShotBlock != null">ShotBlock = #{ShotBlock},</if>
+            <if test="PassBlock != null">PassBlock = #{PassBlock},</if>
+            <if test="tklInt != null">Tkl_Int = #{tklInt},</if>
+            <if test="Clear != null">Clear = #{Clear},</if>
+            <if test="Err != null">Err = #{Err},</if>
+            <if test="def3rd != null">Def_3rd = #{def3rd},</if>
+            <if test="mid3rd != null">Mid_3rd = #{mid3rd},</if>
+            <if test="att3rd != null">Att_3rd = #{att3rd},</if>
+            <if test="nOint != null">nOint = #{nOint},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmPlayerDefenseById" parameterType="Long">
+        delete from fm_player_defense where id = #{id}
+    </delete>
+
+    <delete id="deleteFmPlayerDefenseByIds" parameterType="String">
+        delete from fm_player_defense where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmTeamBasicMapper">
+    
+    <resultMap type="FmTeamBasic" id="FmTeamBasicResult">
+        <result property="id"    column="id"    />
+        <result property="Squad"    column="Squad"    />
+        <result property="numPl"    column="Num_Pl"    />
+        <result property="avgAge"    column="Avg_Age"    />
+        <result property="Poss"    column="Poss"    />
+        <result property="MP"    column="MP"    />
+        <result property="Starts"    column="Starts"    />
+        <result property="Min"    column="Min"    />
+        <result property="min90s"    column="Min_90s"    />
+        <result property="Gls"    column="Gls"    />
+        <result property="Ast"    column="Ast"    />
+        <result property="gA"    column="G_A"    />
+        <result property="gPk"    column="G_Pk"    />
+        <result property="PK"    column="PK"    />
+        <result property="PkAtt"    column="PkAtt"    />
+        <result property="xG"    column="xG"    />
+        <result property="npxG"    column="npxG"    />
+        <result property="PrgDist"    column="PrgDist"    />
+        <result property="PrgPass"    column="PrgPass"    />
+        <result property="xAG"    column="xAG"    />
+        <result property="npxgXag"    column="npxG_xAG"    />
+        <result property="EventsID"    column="EventsID"    />
+    </resultMap>
+
+    <sql id="selectFmTeamBasicVo">
+        select id, Squad, Num_Pl, Avg_Age, Poss, MP, Starts, Min, Min_90s, Gls, Ast, G_A, G_Pk, PK, PkAtt, xG, npxG, PrgDist, PrgPass, xAG, npxG_xAG, EventsID from fm_team_basic
+    </sql>
+
+    <select id="selectFmTeamBasicList" parameterType="FmTeamBasic" resultMap="FmTeamBasicResult">
+        <include refid="selectFmTeamBasicVo"/>
+        <where>
+            <if test="id != null and id != ''"> and id = #{id}</if>
+            <if test="Squad != null  and Squad != ''"> and Squad = #{Squad}</if>
+            <if test="numPl != null "> and Num_Pl = #{numPl}</if>
+            <if test="avgAge != null "> and Avg_Age = #{avgAge}</if>
+            <if test="Poss != null "> and Poss = #{Poss}</if>
+            <if test="MP != null "> and MP = #{MP}</if>
+            <if test="Starts != null "> and Starts = #{Starts}</if>
+            <if test="Min != null "> and Min = #{Min}</if>
+            <if test="min90s != null "> and Min_90s = #{min90s}</if>
+            <if test="Gls != null "> and Gls = #{Gls}</if>
+            <if test="Ast != null "> and Ast = #{Ast}</if>
+            <if test="gA != null "> and G_A = #{gA}</if>
+            <if test="gPk != null "> and G_Pk = #{gPk}</if>
+            <if test="PK != null "> and PK = #{PK}</if>
+            <if test="PkAtt != null "> and PkAtt = #{PkAtt}</if>
+            <if test="xG != null "> and xG = #{xG}</if>
+            <if test="npxG != null "> and npxG = #{npxG}</if>
+            <if test="PrgDist != null "> and PrgDist = #{PrgDist}</if>
+            <if test="PrgPass != null "> and PrgPass = #{PrgPass}</if>
+            <if test="xAG != null "> and xAG = #{xAG}</if>
+            <if test="npxgXag != null "> and npxG_xAG = #{npxgXag}</if>
+            <if test="EventsID != null "> and EventsID = #{EventsID}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmTeamBasicById" parameterType="Long" resultMap="FmTeamBasicResult">
+        <include refid="selectFmTeamBasicVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmTeamBasic" parameterType="FmTeamBasic" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_team_basic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Squad != null">Squad,</if>
+            <if test="numPl != null">Num_Pl,</if>
+            <if test="avgAge != null">Avg_Age,</if>
+            <if test="Poss != null">Poss,</if>
+            <if test="MP != null">MP,</if>
+            <if test="Starts != null">Starts,</if>
+            <if test="Min != null">Min,</if>
+            <if test="min90s != null">Min_90s,</if>
+            <if test="Gls != null">Gls,</if>
+            <if test="Ast != null">Ast,</if>
+            <if test="gA != null">G_A,</if>
+            <if test="gPk != null">G_Pk,</if>
+            <if test="PK != null">PK,</if>
+            <if test="PkAtt != null">PkAtt,</if>
+            <if test="xG != null">xG,</if>
+            <if test="npxG != null">npxG,</if>
+            <if test="PrgDist != null">PrgDist,</if>
+            <if test="PrgPass != null">PrgPass,</if>
+            <if test="xAG != null">xAG,</if>
+            <if test="npxgXag != null">npxG_xAG,</if>
+            <if test="EventsID != null">EventsID,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Squad != null">#{Squad},</if>
+            <if test="numPl != null">#{numPl},</if>
+            <if test="avgAge != null">#{avgAge},</if>
+            <if test="Poss != null">#{Poss},</if>
+            <if test="MP != null">#{MP},</if>
+            <if test="Starts != null">#{Starts},</if>
+            <if test="Min != null">#{Min},</if>
+            <if test="min90s != null">#{min90s},</if>
+            <if test="Gls != null">#{Gls},</if>
+            <if test="Ast != null">#{Ast},</if>
+            <if test="gA != null">#{gA},</if>
+            <if test="gPk != null">#{gPk},</if>
+            <if test="PK != null">#{PK},</if>
+            <if test="PkAtt != null">#{PkAtt},</if>
+            <if test="xG != null">#{xG},</if>
+            <if test="npxG != null">#{npxG},</if>
+            <if test="PrgDist != null">#{PrgDist},</if>
+            <if test="PrgPass != null">#{PrgPass},</if>
+            <if test="xAG != null">#{xAG},</if>
+            <if test="npxgXag != null">#{npxgXag},</if>
+            <if test="EventsID != null">#{EventsID},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmTeamBasic" parameterType="FmTeamBasic">
+        update fm_team_basic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Squad != null">Squad = #{Squad},</if>
+            <if test="numPl != null">Num_Pl = #{numPl},</if>
+            <if test="avgAge != null">Avg_Age = #{avgAge},</if>
+            <if test="Poss != null">Poss = #{Poss},</if>
+            <if test="MP != null">MP = #{MP},</if>
+            <if test="Starts != null">Starts = #{Starts},</if>
+            <if test="Min != null">Min = #{Min},</if>
+            <if test="min90s != null">Min_90s = #{min90s},</if>
+            <if test="Gls != null">Gls = #{Gls},</if>
+            <if test="Ast != null">Ast = #{Ast},</if>
+            <if test="gA != null">G_A = #{gA},</if>
+            <if test="gPk != null">G_Pk = #{gPk},</if>
+            <if test="PK != null">PK = #{PK},</if>
+            <if test="PkAtt != null">PkAtt = #{PkAtt},</if>
+            <if test="xG != null">xG = #{xG},</if>
+            <if test="npxG != null">npxG = #{npxG},</if>
+            <if test="PrgDist != null">PrgDist = #{PrgDist},</if>
+            <if test="PrgPass != null">PrgPass = #{PrgPass},</if>
+            <if test="xAG != null">xAG = #{xAG},</if>
+            <if test="npxgXag != null">npxG_xAG = #{npxgXag},</if>
+            <if test="EventsID != null">EventsID = #{EventsID},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmTeamBasicById" parameterType="Long">
+        delete from fm_team_basic where id = #{id}
+    </delete>
+
+    <delete id="deleteFmTeamBasicByIds" parameterType="String">
+        delete from fm_team_basic where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

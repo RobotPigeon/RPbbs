@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmTeamTotalMapper">
+    <resultMap type="com.bbs.domain.fm.FmTeamBasic" id="FmTeamVoResult">
+        <result property="id"    column="id"    />
+        <result property="Squad"    column="Squad"    />
+        <result property="numPl"    column="Num_Pl"    />
+        <result property="avgAge"    column="Avg_Age"    />
+        <result property="Poss"    column="Poss"    />
+        <result property="MP"    column="MP"    />
+        <result property="Starts"    column="Starts"    />
+        <result property="Min"    column="Min"    />
+        <result property="min90s"    column="Min_90s"    />
+        <result property="Gls"    column="Gls"    />
+        <result property="Ast"    column="Ast"    />
+        <result property="gA"    column="G_A"    />
+        <result property="gPk"    column="G_Pk"    />
+        <result property="PK"    column="PK"    />
+        <result property="PkAtt"    column="PkAtt"    />
+        <result property="xG"    column="xG"    />
+        <result property="npxG"    column="npxG"    />
+        <result property="PrgDist"    column="PrgDist"    />
+        <result property="PrgPass"    column="PrgPass"    />
+        <result property="xAG"    column="xAG"    />
+        <result property="npxgXag"    column="npxG_xAG"    />
+        <result property="EventsID"    column="EventsID"    />
+        <association property="teamDefense" javaType="com.bbs.domain.fm.FmTeamDefense">
+            <result property="id"    column="id"    />
+            <result property="Tkl"    column="Tkl"    />
+            <result property="TklW"    column="TklW"    />
+            <result property="def3rd"    column="Def_3rd"    />
+            <result property="mid3rd"    column="Mid_3rd"    />
+            <result property="att3rd"    column="Att_3rd"    />
+            <result property="CTkl"    column="CTkl"    />
+            <result property="Catt"    column="Catt"    />
+            <result property="CTklP"    column="CTklP"    />
+            <result property="CTklL"    column="CTklL"    />
+            <result property="Blocks"    column="Blocks"    />
+            <result property="ShotBlock"    column="ShotBlock"    />
+            <result property="PassBlock"    column="PassBlock"    />
+            <result property="nOInt"    column="nOInt"    />
+            <result property="tklInt"    column="Tkl_Int"    />
+            <result property="Clear"    column="Clear"    />
+            <result property="Err"    column="Err"    />
+        </association>
+        <association property="teamGoalkeeping" javaType="com.bbs.domain.fm.FmTeamGoalkeeping">
+            <result property="id"    column="id"    />
+            <result property="starts"    column="starts"    />
+            <result property="min"    column="min"    />
+            <result property="GA"    column="GA"    />
+            <result property="GA90"    column="GA90"    />
+            <result property="SoTa"    column="SoTa"    />
+            <result property="Saves"    column="Saves"    />
+            <result property="saveP"    column="Save_P"    />
+            <result property="w"    column="w"    />
+            <result property="d"    column="d"    />
+            <result property="l"    column="l"    />
+            <result property="CS"    column="CS"    />
+            <result property="csP"    column="CS_P"    />
+            <result property="pkatt"    column="pkatt"    />
+            <result property="pka"    column="pka"    />
+            <result property="pksv"    column="pksv"    />
+            <result property="pkm"    column="pkm"    />
+            <result property="pksvP"    column="PKsv_p"    />
+        </association>
+        <association property="teamOthers" javaType="com.bbs.domain.fm.FmTeamOthers">
+            <result property="id"    column="id"    />
+            <result property="CrdY"    column="CrdY"    />
+            <result property="CrdR"    column="CrdR"    />
+            <result property="2CrdY"    column="2CrdY"    />
+            <result property="Fls"    column="Fls"    />
+            <result property="Fld"    column="Fld"    />
+            <result property="Off"    column="Off"    />
+            <result property="Crs"    column="Crs"    />
+            <result property="TklW"    column="TklW"    />
+            <result property="Pkwon"    column="Pkwon"    />
+            <result property="Pkcon"    column="Pkcon"    />
+            <result property="OG"    column="OG"    />
+            <result property="Recov"    column="Recov"    />
+            <result property="ADWon"    column="ADWon"    />
+            <result property="ADLost"    column="ADLost"    />
+            <result property="nOInt"    column="nOInt"    />
+            <result property="ADWP"    column="ADWP"    />
+        </association>
+        <association property="teamPassing" javaType="com.bbs.domain.fm.FmTeamPassing">
+            <result property="id"    column="id"    />
+            <result property="TotalCmp"    column="TotalCmp"    />
+            <result property="TotalAtt"    column="TotalAtt"    />
+            <result property="TotalCmpP"    column="TotalCmpP"    />
+            <result property="TotalTotDist"    column="TotalTotDist"    />
+            <result property="TotalPrgDist"    column="TotalPrgDist"    />
+            <result property="ShortCmp"    column="ShortCmp"    />
+            <result property="ShortAtt"    column="ShortAtt"    />
+            <result property="ShortCmpP"    column="ShortCmpP"    />
+            <result property="MediumCmp"    column="MediumCmp"    />
+            <result property="MediumAtt"    column="MediumAtt"    />
+            <result property="MediumCmpP"    column="MediumCmpP"    />
+            <result property="LongCmp"    column="LongCmp"    />
+            <result property="LongAtt"    column="LongAtt"    />
+            <result property="LongCmpP"    column="LongCmpP"    />
+            <result property="Ast"    column="Ast"    />
+            <result property="xAG"    column="xAG"    />
+            <result property="xA"    column="xA"    />
+            <result property="aXag"    column="A_xAG"    />
+            <result property="KP"    column="KP"    />
+            <result property="LastThird"    column="LastThird"    />
+            <result property="PPA"    column="PPA"    />
+            <result property="CrsPA"    column="CrsPA"    />
+            <result property="PrgP"    column="PrgP"    />
+        </association>
+        <association property="teamShooting" javaType="com.bbs.domain.fm.FmTeamShooting">
+            <result property="id"    column="id"    />
+            <result property="Gls"    column="Gls"    />
+            <result property="Sh"    column="Sh"    />
+            <result property="SoT"    column="SoT"    />
+            <result property="sotP"    column="SoT_P"    />
+            <result property="sh90"    column="Sh_90"    />
+            <result property="sot90"    column="SoT_90"    />
+            <result property="gSh"    column="G_Sh"    />
+            <result property="gSot"    column="G_SoT"    />
+            <result property="Dist"    column="Dist"    />
+            <result property="FK"    column="FK"    />
+            <result property="PK"    column="PK"    />
+            <result property="Pkatt"    column="Pkatt"    />
+            <result property="xG"    column="xG"    />
+            <result property="npxG"    column="npxG"    />
+            <result property="npxgSh"    column="npxG_Sh"    />
+            <result property="gXg"    column="G_xG"    />
+            <result property="npGXg"    column="np_G_xG"    />
+        </association>
+        <collection property="playerBasicList" ofType="com.bbs.domain.fm.FmPlayerBasic" javaType="com.bbs.domain.fm.FmPlayerBasic">
+            <result property="id"    column="id"    />
+            <result property="Player"    column="Player"    />
+            <result property="Pos"    column="Pos"    />
+            <result property="Squad"    column="Squad"    />
+            <result property="Age"    column="Age"    />
+            <result property="Club"    column="Club"    />
+            <result property="Born"    column="Born"    />
+            <result property="MP"    column="MP"    />
+            <result property="Starts"    column="Starts"    />
+            <result property="Min"    column="Min"    />
+            <result property="_90s"    column="90s"    />
+            <result property="Gls"    column="Gls"    />
+            <result property="Ast"    column="Ast"    />
+            <result property="PK"    column="PK"    />
+            <result property="Pkatt"    column="Pkatt"    />
+            <result property="xG"    column="xG"    />
+            <result property="npxG"    column="npxG"    />
+            <result property="xAG"    column="xAG"    />
+            <result property="PrgC"    column="PrgC"    />
+            <result property="PrgP"    column="PrgP"    />
+            <result property="PrgR"    column="PrgR"    />
+            <result property="gA"    column="G_A"    />
+            <result property="gPk"    column="G_PK"    />
+            <result property="npxgXag"    column="npxG_xAG"    />
+            <result property="EventsID"    column="EventsID"    />
+        </collection>
+    </resultMap>
+
+    <sql id="selectFmTeamVo">
+        select fm_team_basic.*,
+        Tkl, TklW, Def_3rd, Mid_3rd, Att_3rd, CTkl, Catt, CTklP, CTklL, Blocks, ShotBlock, PassBlock, nOInt, Tkl_Int, Clear, Err,
+        starts, min, GA, GA90, SoTa, Saves, Save_P, w, d, l, CS, CS_P, pkatt, pka, pksv, pkm, PKsv_p，
+        CrdY, CrdR, 2CrdY, Fls, Fld, Off, Crs, TklW, Pkwon, Pkcon, OG, Recov, ADWon, ADLost, nOInt, ADWP
+        TotalCmp, TotalAtt, TotalCmpP, TotalTotDist, TotalPrgDist, ShortCmp, ShortAtt, ShortCmpP, MediumCmp, MediumAtt, MediumCmpP, LongCmp, LongAtt, LongCmpP, Ast, xAG, xA, A_xAG, KP, LastThird, PPA, CrsPA, PrgP,
+        Gls, Sh, SoT, SoT_P, Sh_90, SoT_90, G_Sh, G_SoT, Dist, FK, PK, Pkatt, xG, npxG, npxG_Sh, G_xG, np_G_xG
+    </sql>
+
+    <select id="selectFmTeamVoListWithFmPlayerBasic" resultMap="FmTeamVoResult">
+        <include refid="selectFmTeamVo" /> from fm_team_basic
+        left join fm_team_defense on fm_team_basic.id = fm_team_defense.id
+        left join fm_team_goalkeeping on fm_team_basic.id = fm_team_goalkeeping.id
+        left join fm_team_others on fm_team_basic.id = fm_team_others.id
+        left join fm_team_passing on fm_team_basic.id = fm_team_passing.id
+        left join fm_team_shooting on fm_team_basic.id = fm_team_shooting.id
+    </select>
+</mapper>

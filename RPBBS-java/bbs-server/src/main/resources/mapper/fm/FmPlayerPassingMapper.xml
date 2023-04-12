@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.FmPlayerPassingMapper">
+    
+    <resultMap type="FmPlayerPassing" id="FmPlayerPassingResult">
+        <result property="id"    column="id"    />
+        <result property="TotalCmp"    column="TotalCmp"    />
+        <result property="TotalAtt"    column="TotalAtt"    />
+        <result property="TotalCmpP"    column="TotalCmpP"    />
+        <result property="TotalTotDist"    column="TotalTotDist"    />
+        <result property="TotalPrgDist"    column="TotalPrgDist"    />
+        <result property="ShortCmp"    column="ShortCmp"    />
+        <result property="ShortAtt"    column="ShortAtt"    />
+        <result property="ShortCmpP"    column="ShortCmpP"    />
+        <result property="MediumCmp"    column="MediumCmp"    />
+        <result property="MediumAtt"    column="MediumAtt"    />
+        <result property="MediumCmpP"    column="MediumCmpP"    />
+        <result property="LongCmp"    column="LongCmp"    />
+        <result property="LongAtt"    column="LongAtt"    />
+        <result property="LongCmpP"    column="LongCmpP"    />
+        <result property="Ast"    column="Ast"    />
+        <result property="xAG"    column="xAG"    />
+        <result property="xA"    column="xA"    />
+        <result property="aXag"    column="A_xAG"    />
+        <result property="KP"    column="KP"    />
+        <result property="LastThird"    column="LastThird"    />
+        <result property="PPA"    column="PPA"    />
+        <result property="CrsPA"    column="CrsPA"    />
+        <result property="PrgP"    column="PrgP"    />
+    </resultMap>
+
+    <sql id="selectFmPlayerPassingVo">
+        select id, TotalCmp, TotalAtt, TotalCmpP, TotalTotDist, TotalPrgDist, ShortCmp, ShortAtt, ShortCmpP, MediumCmp, MediumAtt, MediumCmpP, LongCmp, LongAtt, LongCmpP, Ast, xAG, xA, A_xAG, KP, LastThird, PPA, CrsPA, PrgP from fm_player_passing
+    </sql>
+
+    <select id="selectFmPlayerPassingList" parameterType="FmPlayerPassing" resultMap="FmPlayerPassingResult">
+        <include refid="selectFmPlayerPassingVo"/>
+        <where>  
+            <if test="TotalCmp != null "> and TotalCmp = #{TotalCmp}</if>
+            <if test="TotalAtt != null "> and TotalAtt = #{TotalAtt}</if>
+            <if test="TotalCmpP != null "> and TotalCmpP = #{TotalCmpP}</if>
+            <if test="TotalTotDist != null "> and TotalTotDist = #{TotalTotDist}</if>
+            <if test="TotalPrgDist != null "> and TotalPrgDist = #{TotalPrgDist}</if>
+            <if test="ShortCmp != null "> and ShortCmp = #{ShortCmp}</if>
+            <if test="ShortAtt != null "> and ShortAtt = #{ShortAtt}</if>
+            <if test="ShortCmpP != null "> and ShortCmpP = #{ShortCmpP}</if>
+            <if test="MediumCmp != null "> and MediumCmp = #{MediumCmp}</if>
+            <if test="MediumAtt != null "> and MediumAtt = #{MediumAtt}</if>
+            <if test="MediumCmpP != null "> and MediumCmpP = #{MediumCmpP}</if>
+            <if test="LongCmp != null "> and LongCmp = #{LongCmp}</if>
+            <if test="LongAtt != null "> and LongAtt = #{LongAtt}</if>
+            <if test="LongCmpP != null "> and LongCmpP = #{LongCmpP}</if>
+            <if test="Ast != null "> and Ast = #{Ast}</if>
+            <if test="xAG != null "> and xAG = #{xAG}</if>
+            <if test="xA != null "> and xA = #{xA}</if>
+            <if test="aXag != null "> and A_xAG = #{aXag}</if>
+            <if test="KP != null "> and KP = #{KP}</if>
+            <if test="LastThird != null "> and LastThird = #{LastThird}</if>
+            <if test="PPA != null "> and PPA = #{PPA}</if>
+            <if test="CrsPA != null "> and CrsPA = #{CrsPA}</if>
+            <if test="PrgP != null "> and PrgP = #{PrgP}</if>
+        </where>
+    </select>
+    
+    <select id="selectFmPlayerPassingById" parameterType="Long" resultMap="FmPlayerPassingResult">
+        <include refid="selectFmPlayerPassingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFmPlayerPassing" parameterType="FmPlayerPassing" useGeneratedKeys="true" keyProperty="id">
+        insert into fm_player_passing
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="TotalCmp != null">TotalCmp,</if>
+            <if test="TotalAtt != null">TotalAtt,</if>
+            <if test="TotalCmpP != null">TotalCmpP,</if>
+            <if test="TotalTotDist != null">TotalTotDist,</if>
+            <if test="TotalPrgDist != null">TotalPrgDist,</if>
+            <if test="ShortCmp != null">ShortCmp,</if>
+            <if test="ShortAtt != null">ShortAtt,</if>
+            <if test="ShortCmpP != null">ShortCmpP,</if>
+            <if test="MediumCmp != null">MediumCmp,</if>
+            <if test="MediumAtt != null">MediumAtt,</if>
+            <if test="MediumCmpP != null">MediumCmpP,</if>
+            <if test="LongCmp != null">LongCmp,</if>
+            <if test="LongAtt != null">LongAtt,</if>
+            <if test="LongCmpP != null">LongCmpP,</if>
+            <if test="Ast != null">Ast,</if>
+            <if test="xAG != null">xAG,</if>
+            <if test="xA != null">xA,</if>
+            <if test="aXag != null">A_xAG,</if>
+            <if test="KP != null">KP,</if>
+            <if test="LastThird != null">LastThird,</if>
+            <if test="PPA != null">PPA,</if>
+            <if test="CrsPA != null">CrsPA,</if>
+            <if test="PrgP != null">PrgP,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="TotalCmp != null">#{TotalCmp},</if>
+            <if test="TotalAtt != null">#{TotalAtt},</if>
+            <if test="TotalCmpP != null">#{TotalCmpP},</if>
+            <if test="TotalTotDist != null">#{TotalTotDist},</if>
+            <if test="TotalPrgDist != null">#{TotalPrgDist},</if>
+            <if test="ShortCmp != null">#{ShortCmp},</if>
+            <if test="ShortAtt != null">#{ShortAtt},</if>
+            <if test="ShortCmpP != null">#{ShortCmpP},</if>
+            <if test="MediumCmp != null">#{MediumCmp},</if>
+            <if test="MediumAtt != null">#{MediumAtt},</if>
+            <if test="MediumCmpP != null">#{MediumCmpP},</if>
+            <if test="LongCmp != null">#{LongCmp},</if>
+            <if test="LongAtt != null">#{LongAtt},</if>
+            <if test="LongCmpP != null">#{LongCmpP},</if>
+            <if test="Ast != null">#{Ast},</if>
+            <if test="xAG != null">#{xAG},</if>
+            <if test="xA != null">#{xA},</if>
+            <if test="aXag != null">#{aXag},</if>
+            <if test="KP != null">#{KP},</if>
+            <if test="LastThird != null">#{LastThird},</if>
+            <if test="PPA != null">#{PPA},</if>
+            <if test="CrsPA != null">#{CrsPA},</if>
+            <if test="PrgP != null">#{PrgP},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFmPlayerPassing" parameterType="FmPlayerPassing">
+        update fm_player_passing
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="TotalCmp != null">TotalCmp = #{TotalCmp},</if>
+            <if test="TotalAtt != null">TotalAtt = #{TotalAtt},</if>
+            <if test="TotalCmpP != null">TotalCmpP = #{TotalCmpP},</if>
+            <if test="TotalTotDist != null">TotalTotDist = #{TotalTotDist},</if>
+            <if test="TotalPrgDist != null">TotalPrgDist = #{TotalPrgDist},</if>
+            <if test="ShortCmp != null">ShortCmp = #{ShortCmp},</if>
+            <if test="ShortAtt != null">ShortAtt = #{ShortAtt},</if>
+            <if test="ShortCmpP != null">ShortCmpP = #{ShortCmpP},</if>
+            <if test="MediumCmp != null">MediumCmp = #{MediumCmp},</if>
+            <if test="MediumAtt != null">MediumAtt = #{MediumAtt},</if>
+            <if test="MediumCmpP != null">MediumCmpP = #{MediumCmpP},</if>
+            <if test="LongCmp != null">LongCmp = #{LongCmp},</if>
+            <if test="LongAtt != null">LongAtt = #{LongAtt},</if>
+            <if test="LongCmpP != null">LongCmpP = #{LongCmpP},</if>
+            <if test="Ast != null">Ast = #{Ast},</if>
+            <if test="xAG != null">xAG = #{xAG},</if>
+            <if test="xA != null">xA = #{xA},</if>
+            <if test="aXag != null">A_xAG = #{aXag},</if>
+            <if test="KP != null">KP = #{KP},</if>
+            <if test="LastThird != null">LastThird = #{LastThird},</if>
+            <if test="PPA != null">PPA = #{PPA},</if>
+            <if test="CrsPA != null">CrsPA = #{CrsPA},</if>
+            <if test="PrgP != null">PrgP = #{PrgP},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFmPlayerPassingById" parameterType="Long">
+        delete from fm_player_passing where id = #{id}
+    </delete>
+
+    <delete id="deleteFmPlayerPassingByIds" parameterType="String">
+        delete from fm_player_passing where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
