@@ -7,7 +7,8 @@ import Partition from '@/view/home/Partition/index.vue'
 import Error from '@/view/error/error.vue'
 import posteditor from '@/view/home/posteditor/index.vue'
 import postDetail from '@/view/home/postDetail/index.vue'
-import game from '@/view/home/gamearea/index.vue'
+import game from '@/view/gamearea/home/index.vue'
+import gamedetail from '@/view/gamearea/detail/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,9 @@ const router = createRouter({
           children: [
             {
               path: '/home/game', component: game, name: 'game',
+            },
+            {
+              path: '/home/gamedetail', component: gamedetail, name: 'gamedetail',
             },
             {
             path: '/home/content', component: content, name: 'content',

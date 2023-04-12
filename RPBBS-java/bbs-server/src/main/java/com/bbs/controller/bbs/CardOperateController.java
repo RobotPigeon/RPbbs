@@ -91,7 +91,7 @@ public class CardOperateController {
 
     @PostMapping("/reply")
     @ResponseBody
-    public AjaxResult cardReply(ReplyDto replyDto) {
+    public AjaxResult cardReply(@RequestBody ReplyDto replyDto) {
         if (replyDto.getCardId().isEmpty()) {
             return AjaxResult.error("没有cardId");
         }
@@ -107,7 +107,7 @@ public class CardOperateController {
 
     @PostMapping("/reply/reply")
     @ResponseBody
-    public AjaxResult cardReplyReply(CardReplyReply cardReplyReply) {
+    public AjaxResult replyReply(@RequestBody CardReplyReply cardReplyReply) {
         if (cardReplyReply.getCardId().isEmpty()) {
             return AjaxResult.error("没有cardId");
         }

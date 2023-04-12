@@ -135,12 +135,6 @@ onMounted(() => {
   const postcontent = document.getElementsByClassName('postcontent')[0];
   postcontent.addEventListener("scroll", scrollHandle, true);
 });
-// onUnmounted(() => {
-//   //组件卸载时，停止监听
-//   const postcontent = document.getElementsByClassName('postcontent')[0];
-//   postcontent.removeEventListener("scroll", scrollHandle, false);
-// });
+
 
 </script>
-
-<style scoped lang='less'></style>

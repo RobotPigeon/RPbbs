@@ -30,7 +30,7 @@
 
     </main>
 </template>
-  
+
 <script setup lang='ts'>
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue';
