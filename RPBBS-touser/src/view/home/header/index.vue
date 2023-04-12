@@ -1,7 +1,7 @@
 <template>
     <div class="navbar bg-base-100">
         <div class="dropdown navbar-start">
-            <label tabindex="0" class="btn  btn -ghost  avatar">
+            <label tabindex="0" class="btn  btn-ghost  avatar">
                 <span class="lowercase text-primary background-color-yellow ">GAME</span>
                 <span class="uppercase text-base-content">AREA</span>
             </label>
@@ -22,7 +22,7 @@
         </div>
         <div class="navbar-end">
             <div class="dropdown dropdown-end">
-                <label tabindex="0" class="btn  btn -ghost  avatar">
+                <label tabindex="0" class="btn  btn-ghost  avatar">
                     <div class="w-12 rounded-box">
                         <img :src="avatar" />
                     </div>
@@ -38,12 +38,6 @@
                 </ul>
                 <ul tabindex="0" v-else
                     class="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-base-100">
-                    <li>
-                        <a class="justify-between" href="/home/posteditor">
-                            帖子发布
-                            <!-- <span class="badge">New</span> -->
-                        </a>
-                    </li>
                     <li><a @click="log()">退出登录</a></li>
                 </ul>
             </div>

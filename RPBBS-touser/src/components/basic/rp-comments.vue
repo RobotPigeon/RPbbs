@@ -22,7 +22,7 @@
         <div v-for="comment in comments" :key="comment.id" class="flex justify-start card w-full h-100% bg-base-100  mt2">
             <!-- 遍历评论数据 -->
             <div class=" flex justify-start">
-                <label class="btn  btn -ghost avatar mt2" href="/">
+                <label class="btn  btn-ghost avatar mt2" href="/">
                     <div class="w-12 rounded-box">
                         <img :src="comment.useravatar" alt='avatar' />
                     </div>
@@ -50,7 +50,7 @@
                                 <!-- 遍历楼中楼回复数据 -->
                                 <!-- <div class="divider"></div>  -->
                                 <div class=" flex justify-start">
-                                    <label class="btn  btn -ghost avatar">
+                                    <label class="btn  btn-ghost avatar">
                                         <div class="w-12 rounded-box">
                                             <img :src="reply.useravatar" alt='avatar' />
                                         </div>

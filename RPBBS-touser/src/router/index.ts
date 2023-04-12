@@ -7,6 +7,7 @@ import Partition from '@/view/home/Partition/index.vue'
 import Error from '@/view/error/error.vue'
 import posteditor from '@/view/home/posteditor/index.vue'
 import postDetail from '@/view/home/postDetail/index.vue'
+import game from '@/view/home/gamearea/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,11 +15,11 @@ const router = createRouter({
     {
       path: '/',
       //redirect 是重新定向
-      redirect: '/home/content'
+      redirect: '/home/game'
     },
     {
       path: '/home',
-      redirect: '/home/content'
+      redirect: '/home/game'
     },
     {
       component: Layout,
@@ -26,7 +27,11 @@ const router = createRouter({
       children: [
         {
           path: '/home', component: Home, name: 'home',
-          children: [{
+          children: [
+            {
+              path: '/home/game', component: game, name: 'game',
+            },
+            {
             path: '/home/content', component: content, name: 'content',
           }, {
             path: '/home/Partition', component: Partition, name: 'Partition',

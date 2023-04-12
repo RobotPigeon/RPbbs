@@ -67,5 +67,8 @@ console.log(import.meta.env.VITE_API)
 }
 .body{
     color:  bg-primary-500;
+    //字体替换成楷体
+    font-family: 'KaiTi', 'STKaiti', 'SimKai', 'NSimSun', 'FangSong', 'FangSong_GB2312', 'STFangSong', 'STSong', 'STZhongsong', 'KaiTi_GB2312',
+
 }
 </style>

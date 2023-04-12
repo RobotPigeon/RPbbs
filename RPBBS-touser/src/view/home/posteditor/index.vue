@@ -19,7 +19,7 @@
                     <label class="label">贴文图片</label>
                     <rp-upload @upload="handleUpload"></rp-upload>
                     <div class="fixed bottom-0 right-0 mb-4 mr-4">
-                        <button class="btn btn-primary" @click="postPost()">发帖</button>
+                        <button class="btn btn-primary btn-lg h-10" @click="postPost()">点击发布帖文</button>
                     </div>
 
                 </div>
