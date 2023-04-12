@@ -22,6 +22,11 @@ const maintablist = reactive([
     text: "热门板块",
     path: "/home/Partition"
   },
+  {
+    icon: "",
+    text: "赛事大数据",
+    path: "/home/football/competition"
+  }
 ]);
 const nexttablist = reactive([
   {

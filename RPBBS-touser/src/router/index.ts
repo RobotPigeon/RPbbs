@@ -7,6 +7,9 @@ import Partition from '@/view/home/Partition/index.vue'
 import Error from '@/view/error/error.vue'
 import posteditor from '@/view/home/posteditor/index.vue'
 import postDetail from '@/view/home/postDetail/index.vue'
+import competition from '@/view/football/competition/index.vue'
+import match from '@/view/football/match/index.vue'
+import team from '@/view/football/team/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,25 +29,35 @@ const router = createRouter({
       children: [
         {
           path: '/home', component: Home, name: 'home',
-          children: [{
-            path: '/home/content', component: content, name: 'content',
-          }, {
-            path: '/home/Partition', component: Partition, name: 'Partition',
-          }, {
-            path: '/home/posteditor', component: posteditor, name: 'posteditor',
-            //守卫
-            beforeEnter: (to, from, next) => {
-              const token = localStorage.getItem("token")
-              if (token) {
-                console.log("有token");
-                next()
-              } else {
-                next("/login")
+          children: [
+            {
+              path: '/home/football/team', component: team, name: 'team',
+            },
+            {
+              path: '/home/football/match', component: match, name: 'match',
+            },
+            {
+              path: '/home/football/competition', component: competition, name: 'competition',
+            },
+            {
+              path: '/home/content', component: content, name: 'content',
+            }, {
+              path: '/home/Partition', component: Partition, name: 'Partition',
+            }, {
+              path: '/home/posteditor', component: posteditor, name: 'posteditor',
+              //守卫
+              beforeEnter: (to, from, next) => {
+                const token = localStorage.getItem("token")
+                if (token) {
+                  console.log("有token");
+                  next()
+                } else {
+                  next("/login")
+                }
               }
+            }, {
+              path: '/home/postDetail', component: postDetail, name: 'postDetail',
             }
-          },{
-            path: '/home/postDetail', component: postDetail, name: 'postDetail',
-          }
           ]
         },
         {

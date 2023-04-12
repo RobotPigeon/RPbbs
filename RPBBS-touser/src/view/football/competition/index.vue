@@ -7,20 +7,19 @@
                         <span class="card-title">全部分区</span>
                     </div>
                 </div>
-                <div v-for="item in blocklist.list" class="card card-side bg-base-100 shadow-xl w-49% ml0.5% my1">
+                <div class="card card-side bg-base-100 shadow-xl w-full">
                     <figure>
                         <div class="avatar items-center">
                             <div class="w-24  rounded ml1">
-                                <img :src="item.picPath" />
+                                <img src="http://192.168.10.5:8081/img/1681292146153.jpg" />
                             </div>
                         </div>
                     </figure>
                     <div class="card-body w-80%">
-                        <h2 class="card-title">{{ item.blockName }}</h2>
-                        <!-- <p>{{ text }}</p> -->
-                        <!-- <span class="stat-desc">发帖:1000/回复:10000</span> -->
+                        <h2 class="card-title">卡塔尔世界杯</h2>
+                        <p>2022年于卡塔尔举办的世界杯赛事</p>
                         <div class="flex justify-end">
-                            <button class="btn btn-primary" @click="toPartition(item.id)">进入分区</button>
+                            <button class="btn btn-primary" @click="toPartition()">赛事数据</button>
                         </div>
                     </div>
                 </div>
@@ -38,20 +37,10 @@ import rpCard from '@/components/basic/rp-card.vue';
 import { getBlocklist } from '@/api/block';
 import router from '@/router';
 
-//获取板块列表
-const blocklist = reactive({
-    list: []
-}) as any;
 
-//获取板块列表
-getBlocklist().then((res: any) => {
-    blocklist.list = res.data.records;
-    console.log(blocklist.list);
-})
-
-function toPartition(id:string) {
-//跳转到分区，并且传递分区id
-    router.push({ path: '/home', query: { block: id } });
+function toPartition() {
+    //跳转到分区，并且传递分区id
+    router.push({ path: '/home/football/match' });
 }
 </script>
   
