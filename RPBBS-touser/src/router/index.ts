@@ -9,6 +9,7 @@ import posteditor from '@/view/home/posteditor/index.vue'
 import postDetail from '@/view/home/postDetail/index.vue'
 import game from '@/view/gamearea/home/index.vue'
 import gamedetail from '@/view/gamearea/detail/index.vue'
+import wiki from '@/view/gamearea/wiki/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,9 @@ const router = createRouter({
             },
             {
               path: '/home/gamedetail', component: gamedetail, name: 'gamedetail',
+            },
+            {
+              path: '/home/wiki', component: wiki, name: 'wiki',
             },
             {
             path: '/home/content', component: content, name: 'content',
