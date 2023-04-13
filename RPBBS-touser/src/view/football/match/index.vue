@@ -9,51 +9,51 @@
                 </div>
                 <div class="card card-side bg-base-100 shadow-xl w-full flex flex-col mt2" v-for="item in matchList">
                     <div class="flex flex-col ml2 countdown font-mono text-xl badge">
-                        {{ item.Round }}
+                        阶段:{{ item.round }}
                     </div>
                     <div class="grid grid-cols-3 w-full h-full m2 p2">
                         <div class="flex flex-col justify-center">
                             <Label class="badge">主队</Label>
                             <div class="stat-value text-2xl">
-                                {{ item.Home }}
+                                {{ item.home }}
                             </div>
                             <div>
-                                预期进球(XG):{{ item.home_xG }}
+                                预期进球(XG):{{ item.homeXg }}
                             </div>
                         </div>
-                        <div class="countdown font-mono text-6xl justify-start">
-                            {{ item.Score }}
+                        <div class="countdown font-mono text-4xl justify-center">
+                            {{ item.score }}
                         </div>
-                        <div class="flex flex-col justify-center">
+                        <div class="flex flex-col justify-end ml4">
                             <Label class="badge">客队</Label>
                             <div class="stat-value text-2xl">
-                                {{ item.Away }}
+                                {{ item.away }}
                             </div>
                             <div>
-                                预期进球(XG):{{ item.away_xG }}
+                                预期进球(XG):{{ item.awayXg }}
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col ml2 countdown font-mono text-xl">
-                        {{ item.Date }}||{{ item.Time }}
+                        {{ item.date }}||{{ item.time }}
                     </div>
                     <div class="ml2">
                         <label class="badge" for="">举办地</label>
                         <div class="flex flex-col countdown font-mono text-xl">
-                            {{ item.Venue }}
+                            {{ item.venue }}
                         </div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="ml2">
                             <label class="badge" for="">上座人数</label>
                             <div class="flex flex-col countdown font-mono text-xl">
-                                {{ item.Attendance }}
+                                {{ item.attendance}}
                             </div>
                         </div>
                         <div class="ml2">
                             <label class="badge" for="">裁判</label>
                             <div class="flex flex-col countdown font-mono text-xl">
-                                {{ item.Referee }}
+                                {{ item.referee }}
                             </div>
                         </div>
                     </div>
@@ -74,100 +74,27 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import type { Ref } from 'vue';
 import rpCard from '@/components/basic/rp-card.vue';
 //引入板块api
-import { getBlocklist } from '@/api/block';
+import { getMatchList } from '@/api/football';
 import router from '@/router';
 
+//进入页面时，获取板块数据
+onMounted(() => {
+    getMatchListData()
+})
 
 function toPartition() {
     //跳转到分区，并且传递分区id
     router.push({ path: '/home/content' });
 }
+
 const matchList: any = reactive(
-    [{
-        "Round": "Group stage",
-        "Date": "2022/11/20",
-        "Time": "19:00 (00:00)",
-        "Home": "Qatar qa",
-        "home_xG": "0.3",
-        "Score": "0–2",
-        "away_xG": "1.2",
-        "Away": "ec Ecuador",
-        "Attendance": "67372",
-        "Venue": "Al Bayt Stadium (Neutral Site)",
-        "Referee": "Daniele Orsato",
-        "Notes": ""
-    },
-    {
-        "Round": "Group stage",
-        "Date": "2022/11/21",
-        "Time": "16:00 (21:00)",
-        "Home": "England eng",
-        "home_xG": "2.1",
-        "Score": "6–2",
-        "away_xG": "1.4",
-        "Away": "ir IR Iran",
-        "Attendance": "45334",
-        "Venue": "Khalifa International Stadium (Neutral Site)",
-        "Referee": "Raphael Claus",
-        "Notes": ""
-    },
-    {
-        "Round": "Group stage",
-        "Date": "2022/11/21",
-        "Time": "19:00 (00:00)",
-        "Home": "Senegal sn",
-        "home_xG": "0.9",
-        "Score": "0–2",
-        "away_xG": "0.7",
-        "Away": "nl Netherlands",
-        "Attendance": "41721",
-        "Venue": "Al Thumama Stadium (Neutral Site)",
-        "Referee": "Wilton Sampaio",
-        "Notes": ""
-    }, {
-        "Round": "Group stage",
-        "Date": "2022/11/20",
-        "Time": "19:00 (00:00)",
-        "Home": "Qatar qa",
-        "home_xG": "0.3",
-        "Score": "0–2",
-        "away_xG": "1.2",
-        "Away": "ec Ecuador",
-        "Attendance": "67372",
-        "Venue": "Al Bayt Stadium (Neutral Site)",
-        "Referee": "Daniele Orsato",
-        "Notes": ""
-    },
-    {
-        "Round": "Group stage",
-        "Date": "2022/11/21",
-        "Time": "16:00 (21:00)",
-        "Home": "England eng",
-        "home_xG": "2.1",
-        "Score": "6–2",
-        "away_xG": "1.4",
-        "Away": "ir IR Iran",
-        "Attendance": "45334",
-        "Venue": "Khalifa International Stadium (Neutral Site)",
-        "Referee": "Raphael Claus",
-        "Notes": ""
-    },
-    {
-        "Round": "Group stage",
-        "Date": "2022/11/21",
-        "Time": "19:00 (00:00)",
-        "Home": "Senegal sn",
-        "home_xG": "0.9",
-        "Score": "0–2",
-        "away_xG": "0.7",
-        "Away": "nl Netherlands",
-        "Attendance": "41721",
-        "Venue": "Al Thumama Stadium (Neutral Site)",
-        "Referee": "Wilton Sampaio",
-        "Notes": ""
-    },
-    ]
+    []
 )
+function getMatchListData() {
+    getMatchList().then((res: any) => {
+        matchList.push(...res.data)
+    })
+}
 
 </script>
   

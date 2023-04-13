@@ -20,9 +20,9 @@ namespace Login {
 // 用户登录
 export const login = (params: Login.LoginReqForm) => {
     // 返回的数据格式可以和服务端约定
-    return axios.post<Login.LoginResData>('/login/check', params);
+    return axios.post<Login.LoginResData>('/bbs/login/check', params);
 }
 // 获取验证码
 export function getCodeImg() {
-    return axios.get<Login.LoginCode>('/login/kaptcha/get')
+    return axios.get<Login.LoginCode>('/bbs/login/kaptcha/get')
 }

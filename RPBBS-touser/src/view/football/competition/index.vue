@@ -19,7 +19,10 @@
                         <h2 class="card-title">卡塔尔世界杯</h2>
                         <p>2022年于卡塔尔举办的世界杯赛事</p>
                         <div class="flex justify-end">
-                            <button class="btn btn-primary" @click="toPartition()">赛事数据</button>
+                            <button class="btn btn-primary" @click="toPartition()">赛程数据</button>
+                        </div>
+                        <div class="flex justify-end">
+                            <button class="btn btn-primary" @click="toTeam()">参赛队伍</button>
                         </div>
                     </div>
                 </div>
@@ -41,6 +44,10 @@ import router from '@/router';
 function toPartition() {
     //跳转到分区，并且传递分区id
     router.push({ path: '/home/football/match' });
+}
+function toTeam() {
+    //跳转到分区，并且传递分区id
+    router.push({ path: '/home/football/team' });
 }
 </script>
   
