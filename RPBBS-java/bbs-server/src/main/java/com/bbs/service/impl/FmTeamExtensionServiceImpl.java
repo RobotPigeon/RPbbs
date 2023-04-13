@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.fm.FmPlayerBasic;
 import com.bbs.domain.fm.FmTeamBasic;
+import com.bbs.domain.vo.FmPlayerVo;
 import com.bbs.domain.vo.FmTeamVo;
 import com.bbs.mapper.*;
 import com.bbs.service.*;
@@ -96,5 +97,18 @@ public class FmTeamExtensionServiceImpl implements IFmTeamExtensionService {
         fmTeamVoPage.setRecords(fmTeamVoList);
 
         return fmTeamVoPage;
+    }
+
+    @Override
+    public FmTeamVo selectFmPlayerVoById(Long id) {
+        // 效率比较低的写法
+        FmTeamBasic fmTeamBasic = fmTeamBasicService.selectFmTeamBasicById(id);
+        FmTeamVo fmTeamVo = new FmTeamVo(fmTeamBasic);
+        fmTeamVo.setTeamDefense(fmTeamDefenseService.selectFmTeamDefenseById(id));
+        fmTeamVo.setTeamGoalkeeping(fmTeamGoalkeepingService.selectFmTeamGoalkeepingById(id));
+        fmTeamVo.setTeamOthers(fmTeamOthersService.selectFmTeamOthersById(id));
+        fmTeamVo.setTeamPassing(fmTeamPassingService.selectFmTeamPassingById(id));
+        fmTeamVo.setTeamShooting(fmTeamShootingService.selectFmTeamShootingById(id));
+        return fmTeamVo;
     }
 }

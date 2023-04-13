@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbs.domain.fm.FmPlayerBasic;
 import com.bbs.domain.fm.FmTeamBasic;
+import com.bbs.domain.vo.FmPlayerVo;
 import com.bbs.domain.vo.FmTeamVo;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface IFmTeamExtensionService {
     List<FmTeamVo> selectFmTeamVoListWithFmplayerBasic();
 
     IPage<FmTeamVo> selectFmTeamVoPageWithFmplayerBasic(Page page);
+
+    FmTeamVo selectFmPlayerVoById(Long id);
 }
