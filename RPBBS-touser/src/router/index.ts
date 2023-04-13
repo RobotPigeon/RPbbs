@@ -57,16 +57,6 @@ const router = createRouter({
               path: '/home/Partition', component: Partition, name: 'Partition',
             }, {
               path: '/home/posteditor', component: posteditor, name: 'posteditor',
-              //守卫
-              beforeEnter: (to, from, next) => {
-                const token = localStorage.getItem("token")
-                if (token) {
-                  console.log("有token");
-                  next()
-                } else {
-                  next("/login")
-                }
-              }
             }, {
               path: '/home/postDetail', component: postDetail, name: 'postDetail',
             }

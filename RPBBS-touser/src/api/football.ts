@@ -14,3 +14,11 @@ export function getPlayersByTeam(Squad: any) {
 export function getTeamList() {
     return axios.get<any>('/fm/team_basic/list')
 }
+//获取球员信息，/fm/player/{id} 携带id
+export function getPlayerById(id: any) {
+    return axios.get<any>('/fm/player/' + id)
+}
+//获取球队信息，/fm/team/{id} 携带id
+export function getTeamById(id: any) {
+    return axios.get<any>('/fm/team/' + id)
+}
