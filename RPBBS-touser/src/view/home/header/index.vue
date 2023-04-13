@@ -74,7 +74,7 @@
                             <!-- <span class="badge">New</span> -->
                         </a>
                     </li>
-                    <li><a @click="log()">退出登录</a></li>
+                    <li><a @click="logout()">退出登录</a></li>
                 </ul>
             </div>
             <!-- 用户头像下拉框 -->
@@ -86,6 +86,8 @@
 import { ref, reactive, onMounted } from 'vue';
 import useuserStore from '@/stores/user'
 import { getUserInfo } from '@/api/user';
+import { useRouter } from 'vue-router'
+import router from '@/router';
 const handleChangeTheme = () => {
     const html = document.getElementsByTagName('html')[0]
     const darkTheme = html.dataset.theme
@@ -103,7 +105,6 @@ const user = reactive({
     avatar: '',
 })
 
-//navabar组件挂载时执行
 onMounted(() => {
     //获取用户信息
     let id = useuserStore().getUser
@@ -114,10 +115,28 @@ onMounted(() => {
         })
     }
 })
+
+//路由切换时触发
+router.afterEach((to, from) => {
+    //获取用户信息
+    let id = useuserStore().getUser
+    //如果id不为空则获取用户信息
+    if (id) {
+        getUserInfo(id).then(res => {
+            avatar.value = res.data[0].avatarPath
+        })
+    }
+})
+
+
 //打印hello world
-function log() {
+function logout() {
+    //清除用户信息和token，本地存储中的，pinia中的
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
     let i = useuserStore().getUser
-    console.log(i);
+    //刷新页面
+    window.location.reload()
 }
 //  头像地址
 const avatar = ref('')

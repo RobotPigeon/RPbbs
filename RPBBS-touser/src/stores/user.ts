@@ -26,8 +26,8 @@ export default defineStore('user', {
                     localStorage.setItem('id', this.id)
                     localStorage.setItem('token', this.token)
                     console.log(this.token);
-                    // 跳转到首页
-                    router.push("/");
+                    // 登录成功后跳转到首页
+                    router.replace('/')
                 }).catch(error => {
                     reject(error)
                 });
