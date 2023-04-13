@@ -83,14 +83,14 @@
                     <div class="stats stats-vertical shadow mt10">
                         <div class="stat">
                             <div class="stat-title">射门次数</div>
-                            <div class="stat-value">{{ playerShooting.sh }}</div>
+                            <div class="stat-value">{{ playerShooting.sh }}次</div>
                             <div class="stat-desc">{{ playerShooting.sh90 }}(每90分钟)</div>
                             <div class="stat-desc">平均射门距离:{{ playerShooting.adist }}m</div>
                         </div>
 
                         <div class="stat">
                             <div class="stat-title">射正次数</div>
-                            <div class="stat-value">{{ playerShooting.soT }}</div>
+                            <div class="stat-value">{{ playerShooting.soT }}次</div>
                             <div class="stat-desc">{{ playerShooting.sot90 }}(每90分钟)</div>
                         </div>
                     </div>
@@ -105,9 +105,9 @@
 
                         <div class="stat">
                             <div class="stat-title">非运动战射门(点球)</div>
-                            <div class="stat-value">{{ playerShooting.pkatt }}</div>
-                            <div class="stat-desc">任意球：{{ playerShooting.fk }}</div>
-                            <div class="stat-desc">点球命中：{{ playerShooting.pk }}</div>
+                            <div class="stat-value">{{ playerShooting.pkatt }}次</div>
+                            <div class="stat-desc">任意球：{{ playerShooting.fk }}次</div>
+                            <div class="stat-desc">点球命中：{{ playerShooting.pk }}次</div>
                         </div>
                     </div>
                 </div>
@@ -126,14 +126,14 @@
                     <div class="stats stats-vertical shadow mt10">
                         <div class="stat">
                             <div class="stat-title">三区抢断表现</div>
-                            <div class="stat-value">{{ playerDefense.tkl }}</div>
+                            <div class="stat-value">{{ playerDefense.tkl }}次</div>
                             <div class="stat-desc">前场{{ playerDefense.att3rd }}次</div>
                             <div class="stat-desc">中场{{ playerDefense.mid3rd }}次</div>
                             <div class="stat-desc">后场{{ playerDefense.def3rd }}次</div>
                         </div>
                         <div class="stat">
                             <div class="stat-title">拦截表现</div>
-                            <div class="stat-value">{{ playerDefense.blocks }}</div>
+                            <div class="stat-value">{{ playerDefense.blocks }}次</div>
                             <div class="stat-desc">射门拦截{{ playerDefense.shotBlock }}次</div>
                             <div class="stat-desc">传球拦截{{ playerDefense.passBlock }}次</div>
                         </div>
@@ -163,6 +163,46 @@
             <div class="alert shadow-2xl b-4 bg-base-100 mt2 p2">
                 <div>
                     <span class="card-title">传球表现</span>
+                </div>
+            </div>
+            <div class="card bg-base-100 mt2 flex-row ">
+                <div id="passtype" w-80 h-80></div>
+                <div>
+                    <div class="stats stats-vertical shadow mt10">
+                        <div class="stat">
+                            <div class="stat-title">传球次数</div>
+                            <div class="stat-value">{{ playerPassing.totalAtt }}次</div>
+                            <div class="stat-desc">长传{{ playerPassing.longAtt }}次</div>
+                            <div class="stat-desc">中传{{ playerPassing.mediumAtt }}次</div>
+                            <div class="stat-desc">短传{{ playerPassing.shortAtt }}次</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-title">传球成功次数</div>
+                            <div class="stat-value">{{ playerPassing.totalCmp }}次</div>
+                            <div class="stat-desc">长传{{ playerPassing.longCmp }}次</div>
+                            <div class="stat-desc">中传{{ playerPassing.mediumCmp }}次</div>
+                            <div class="stat-desc">短传{{ playerPassing.shortCmp }}次</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="passdist" w-40 h-40></div>
+                <div>
+                    <div class="stats stats-vertical shadow mt10">
+                        <div class="stat">
+                            <div class="stat-title">关键传球次数</div>
+                            <div class="stat-value">{{ playerPassing.kp }}</div>
+                            <div class="stat-desc">进攻三区直传球:{{ playerPassing.lastThird }}次</div>
+                            <div class="stat-desc">成功传中:{{ playerPassing.crsPA }}次</div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">传球距离</div>
+                            <div class="stat-title">传球总距离</div>
+                            <div class="stat-value">{{ playerPassing.totalTotDist }}m</div>
+                            <div class="stat-title">向前传球距离</div>
+                            <div class="stat-value">{{ playerPassing.totalPrgDist }}m</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -206,6 +246,20 @@ function charctkl() {
     const charECTKL: ECharts = init(charctkl);
     console.log(optionECtkl);
     charECTKL.setOption(optionECtkl);
+};
+//三类传球表现堆叠柱状图
+function charpasstype() {
+    const charpasstype = document.getElementById('passtype') as HTMLElement;
+    const charEPT: ECharts = init(charpasstype);
+    console.log(optionEpass);
+    charEPT.setOption(optionEpass);
+};
+//传球距离表现饼图
+function charpassdist() {
+    const charpassdist = document.getElementById('passdist') as HTMLElement;
+    const charEPD: ECharts = init(charpassdist);
+    console.log(optionEPassD);
+    charEPD.setOption(optionEPassD);
 };
 //声明球员信息变量
 const playerInfo: Ref<any> = ref({});
@@ -368,6 +422,62 @@ const optionECtkl: any = {
         }
     ]
 };
+const optionEPassD: any = {
+
+    title: {
+        text: '传球距离表现',
+        left: 'center'
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                show: false,
+                position: 'center'
+            },
+            labelLine: {
+                show: false
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '30',
+                    fontWeight: 'bold'
+                }
+            },
+            data: [
+                {
+                    value: 0,
+                    name: '向前传球距离'
+                },
+                {
+                    value: 0,
+                    name: '安全球传球距离'
+                },
+            ],
+        }
+    ]
+};
+const optionEpass = {
+    xAxis: {
+        data: ['长传', '中传', '短传']
+    },
+    yAxis: {},
+    series: [
+        {
+            data: [0, 0, 0,],
+            type: 'bar',
+            stack: '成功次数'
+        },
+        {
+            data: [0, 0, 0,],
+            type: 'bar',
+            stack: '失败次数'
+        }
+    ]
+};
 //获取路由参数
 const id = router.currentRoute.value.query.id;
 //页面加载时执行
@@ -398,10 +508,22 @@ function getPlayerInfo() {
         //导入对抗数据
         optionECtkl.series[0].data[0].value = res.data.playerDefense.ctkl;
         optionECtkl.series[0].data[1].value = res.data.playerDefense.ctklL
+        //导入传球数据
+        optionEpass.series[0].data[0] = res.data.playerPassing.longAtt;
+        optionEpass.series[0].data[1] = res.data.playerPassing.mediumAtt;
+        optionEpass.series[0].data[2] = res.data.playerPassing.shortAtt;
+        optionEpass.series[1].data[0] = res.data.playerPassing.longAtt - res.data.playerPassing.longCmp;
+        optionEpass.series[1].data[1] = res.data.playerPassing.mediumAtt - res.data.playerPassing.mediumCmp;
+        optionEpass.series[1].data[2] = res.data.playerPassing.shortAtt - res.data.playerPassing.shortCmp;
+        //导入传球距离数据
+        optionEPassD.series[0].data[0].value = res.data.playerPassing.totalPrgDist;
+        optionEPassD.series[0].data[1].value = res.data.playerPassing.totalTotDist - res.data.playerPassing.totalPrgDist;
         charshootandgoal();
         chardefense();
         charblock();
         charctkl();
+        charpasstype();
+        charpassdist()
     })
 }
 

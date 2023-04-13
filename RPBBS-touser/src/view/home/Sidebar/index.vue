@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex max-w-1/2 h-full ml-8xl p-l-80">
+  <nav class="flex max-w-1/2 h-full ml-8xl">
     <div class="w-full mx-auto px-6 py-1 flex flex-col">
       <rpmenu :tablist="maintablist"></rpmenu>
       <rpmenu  class="mt-2" :tablist="nexttablist"></rpmenu>
