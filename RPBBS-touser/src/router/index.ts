@@ -11,7 +11,8 @@ import competition from '@/view/football/competition/index.vue'
 import match from '@/view/football/match/index.vue'
 import team from '@/view/football/team/index.vue'
 import player from '@/view/football/player/index.vue'
-import Performance from '@/view/football/Performance/index.vue'
+import teamPerformance from '@/view/football/teamPerformance/index.vue'
+import playerPerformance from '@/view/football/playerPerformance/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,7 +34,10 @@ const router = createRouter({
           path: '/home', component: Home, name: 'home',
           children: [
             {
-              path: '/home/football/Performance', component: Performance, name: 'Performance',
+              path: '/home/football/playerPerformance', component: playerPerformance, name: 'playerPerformance',
+            },
+            {
+              path: '/home/football/teamPerformance', component: teamPerformance, name: 'teamPerformance',
             },
             {
               path: '/home/football/player', component: player, name: 'player',

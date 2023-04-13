@@ -11,7 +11,7 @@
             <div class="flex w-full mx-auto px-0 py-0">
                 <div class="grid grid-cols-3 w-full h-full m2 p2 ">
                     <div class="card w-a h-a bg-base-100 shadow-xl m2" v-for="item in playerlist.value">
-                        <figure><img src="@/assets/images/avatar.jpg" alt="player" />
+                        <figure><img src="@/assets/images/avatar.jpg" alt="player" @click="toPerformance(item)"/>
                         </figure>
                         <div class="card-body">
                             <p>{{item.player}}</p>
@@ -46,5 +46,14 @@ const getPlayerListData = async () => {
     const res = await getPlayersByTeam(squad);
     playerlist.value = res.data;
     console.log(playerlist.value);
+}
+//跳转到球员表现分析，携带球员id
+const toPerformance = (item: any) => {
+    router.push({
+        path: '/home/football/playerPerformance',
+        query: {
+            id: item.id
+        }
+    })
 }
 </script>

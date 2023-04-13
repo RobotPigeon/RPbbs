@@ -62,7 +62,7 @@ const toPlayerList = (item: any) => {
 //跳转到队伍表现分析，携带队伍id
 const toPerformance = (item: any) => {
     router.push({
-        path: '/home/football/performance',
+        path: '/home/football/teamperformance',
         query: {
             id: item.id
         }
