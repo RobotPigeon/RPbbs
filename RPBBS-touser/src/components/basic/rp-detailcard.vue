@@ -5,7 +5,8 @@
                 <div class=" flex justify-start">
                     <label class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
-                            <img :src="props.useravatar" alt='avatar' />
+                            <img v-if="props.useravatar!=''" :src="props.useravatar" alt='avatar' />
+                            <img v-else src="@/assets/images/avatar.jpg" alt="">
                         </div>
                     </label>
                     <div class="mt--2 ml-2">

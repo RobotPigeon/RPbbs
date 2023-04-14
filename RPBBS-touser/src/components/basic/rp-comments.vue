@@ -24,7 +24,8 @@
             <div class=" flex justify-start">
                 <label class="btn btn-ghost btn-circle avatar mt2" href="/">
                     <div class="w-12 rounded-full">
-                        <img :src="comment.useravatar" alt='avatar' />
+                        <img v-if="comment.useravatar!=''" :src="comment.useravatar" alt='avatar' />
+                        <img v-else src="@/assets/images/avatar.jpg" alt="">
                     </div>
                 </label>
                 <div class=" ml-2">
@@ -52,7 +53,8 @@
                                 <div class=" flex justify-start">
                                     <label class="btn btn-ghost btn-circle avatar">
                                         <div class="w-12 rounded-full">
-                                            <img :src="reply.useravatar" alt='avatar' />
+                                            <img v-if="reply.useravatar!=''" :src="reply.useravatar" alt='avatar' />
+                                            <img v-else src="@/assets/images/avatar.jpg" alt="">
                                         </div>
                                     </label>
                                     <div class=" ml-2">

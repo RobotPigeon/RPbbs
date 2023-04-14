@@ -61,7 +61,7 @@
                         <div class="stat-figure text-secondary">
                             <div class="avatar">
                                 <div class="w-16 rounded-full">
-                                    <img src="@/assets/images/avatar.jpg" />
+                                    <img src="@/assets/images/team.jpg" />
                                 </div>
                             </div>
                         </div>
