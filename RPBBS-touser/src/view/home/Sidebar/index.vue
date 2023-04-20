@@ -1,6 +1,6 @@
 <template>
   <nav class="flex max-w-1/2 h-full ml-8xl">
-    <div class="w-full mx-auto px-6 py-1 flex flex-col">
+    <div class="w-full mx-auto px-6 py-1 pl100 flex flex-col">
       <rpmenu :tablist="maintablist"></rpmenu>
       <rpmenu  class="mt-2" :tablist="nexttablist"></rpmenu>
       <rpmenu class="mt-2" :tablist="areatablist" v-if="!areatablist"></rpmenu>

@@ -57,6 +57,14 @@ const router = createRouter({
               path: '/home/Partition', component: Partition, name: 'Partition',
             }, {
               path: '/home/posteditor', component: posteditor, name: 'posteditor',
+              //没有登录的时候，点击发帖，跳转到登录页面
+              beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('token')) {
+                  next()
+                } else {
+                  next('/login')
+                }
+              }
             }, {
               path: '/home/postDetail', component: postDetail, name: 'postDetail',
             }
